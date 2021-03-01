@@ -1,9 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { Row, Col, Box } from '@qonsoll/react-design'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
+    <Box>
+      <Row>
+        <Col>Hello</Col>
+      </Row>
+    </Box>
+  )
+}
+
+/* <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -18,8 +26,6 @@ function App() {
           Learn React
         </a>
       </header>
-    </div>
-  );
-}
+    </div> */
 
-export default App;
+export default App
