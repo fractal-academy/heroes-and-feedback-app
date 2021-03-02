@@ -1,20 +1,19 @@
 import { firebase } from './Firebase'
-
 import {
+  deleteData,
+  addData,
   setData,
-  getData,
   firestore,
   getCollectionRef,
-  getDataWithFilter,
-  getOrderedData
+  getTimestamp
 } from './Firestore'
 
 export {
   firebase,
   setData,
-  getData,
   firestore,
   getCollectionRef,
-  getDataWithFilter,
-  getOrderedData
+  deleteData,
+  addData,
+  getTimestamp
 }
