@@ -1,10 +1,14 @@
-import { Row, Col } from '@qonsoll/react-design'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import { ROUTES_PATHS, ROUTES_VALUE } from 'app/constants'
 
 const App = () => {
   return (
-    <Row>
-      <Col>Hello world!</Col>
-    </Row>
+    <Switch>
+      {ROUTES_VALUE.map((route) => (
+        <Route key={route.path} {...route} />
+      ))}
+      <Redirect to={ROUTES_PATHS.LOGIN} />
+    </Switch>
   )
 }
 

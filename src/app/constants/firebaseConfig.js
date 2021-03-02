@@ -1,6 +1,3 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-
 const FIREBASE_CONFIG = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -11,8 +8,4 @@ const FIREBASE_CONFIG = {
   measurementId: process.env.REACT_APP_AUTH_MEASUREMENT_ID
 }
 
-firebase.initializeApp(FIREBASE_CONFIG)
-
-const firestore = firebase.firestore()
-
-export default firestore
+export default FIREBASE_CONFIG
