@@ -2,7 +2,7 @@ import ROUTES_PATHS from './routePaths'
 
 const ROUTES = {
   LOGIN: {
-    //component: SessionLogin,
+    // render: () => <CustomAvatar shape="avatar" />,
     path: ROUTES_PATHS.LOGIN,
     exact: true
   },
