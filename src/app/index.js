@@ -1,13 +1,15 @@
 import 'antd/dist/antd.css'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import { ROUTES_PATHS, ROUTES_VALUE } from 'app/constants'
 
 const App = () => {
   return (
-    <Row>
-      <Col>
-        <Box textAlign="center">Hello world!</Box>
-      </Col>
-    </Row>
+    <Switch>
+      {ROUTES_VALUE.map((route) => (
+        <Route key={route.path} {...route} />
+      ))}
+      <Redirect to={ROUTES_PATHS.LOGIN} />
+    </Switch>
   )
 }
 
