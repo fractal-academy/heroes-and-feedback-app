@@ -1,1 +1,1 @@
-export { default as SessionLogin } from './SessionLogin.template'
+export { default as SessionLogin } from './SessionLogin.layout'
