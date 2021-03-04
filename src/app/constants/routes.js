@@ -22,7 +22,6 @@ const ROUTES = {
     exact: true
   },
   REJECT_LOGIN: {
-    //render: () => <RejectLogin />,
     path: ROUTES_PATHS.REJECT_LOGIN,
     exact: true
   },

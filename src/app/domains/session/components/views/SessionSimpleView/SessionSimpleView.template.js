@@ -1,10 +1,13 @@
 import { Button, Typography } from 'antd'
+import { useHistory } from 'react-router-dom'
 import { GoogleOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
 
 const { Title, Text, Link } = Typography
 
 const SessionSimpleView = (props) => {
+  const history = useHistory()
+
   return (
     <Row h="center" display="flex">
       <Col>
@@ -15,7 +18,7 @@ const SessionSimpleView = (props) => {
           </Text>
         </Box>
         <Box mb={2}>
-          <Button type="primary">
+          <Button type="primary" onClick={() => history.push('/companies')}>
             <GoogleOutlined />
             Sign in
           </Button>

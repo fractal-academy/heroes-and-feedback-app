@@ -1,6 +1,7 @@
 import { PropTypes } from 'prop-types'
+import { Progress, Typography } from 'antd'
+import { CustomAvatar } from 'app/components'
 import { RightOutlined } from '@ant-design/icons'
-import { Avatar, Progress, Typography } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 
 const { Title, Text } = Typography
@@ -11,9 +12,7 @@ const ListItem = (props) => {
   return (
     <Row display="flex" v="center">
       <Col cw="auto" m={2}>
-        <Avatar shape={type !== 'users' && 'square'} size="large" src={image}>
-          {name[0]}
-        </Avatar>
+        <CustomAvatar shape={type} name={name} src={image} size="large" />
       </Col>
       <Col m={2}>
         <Box textAlign="left">
