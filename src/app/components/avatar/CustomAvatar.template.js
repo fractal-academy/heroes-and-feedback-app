@@ -19,7 +19,7 @@ const imageMap = {
       size={size || 64}
     />
   ),
-  business: (src, size) => (
+  enterprise: (src, size) => (
     <Avatar
       alt="avatar"
       src={src || './assets/avatar-placeholder.png'}
