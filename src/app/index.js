@@ -1,3 +1,4 @@
+import 'antd/dist/antd.css'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { ROUTES_PATHS, ROUTES_VALUE } from 'app/constants'
 import 'antd/dist/antd.css'

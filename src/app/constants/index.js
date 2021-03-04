@@ -1,5 +1,14 @@
 import ROUTES_PATHS from './routePaths'
-import ROUTES, { ROUTES_KEYS, ROUTES_VALUE } from './routes'
 import FIREBASE_CONFIG from './firebaseConfig'
+import { APP_ROLES, PROJECT_ROLES } from './roles'
+import ROUTES, { ROUTES_KEYS, ROUTES_VALUE } from './routes'
 
-export { ROUTES_PATHS, FIREBASE_CONFIG, ROUTES, ROUTES_KEYS, ROUTES_VALUE }
+export {
+  APP_ROLES,
+  PROJECT_ROLES,
+  ROUTES,
+  ROUTES_KEYS,
+  ROUTES_VALUE,
+  ROUTES_PATHS,
+  FIREBASE_CONFIG
+}

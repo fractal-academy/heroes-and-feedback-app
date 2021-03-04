@@ -2,7 +2,7 @@ import { Avatar } from 'antd'
 import './CustomAvatar.styles.css'
 
 const imageMap = {
-  badge: (src) => (
+  badge: (src, size, name) => (
     <div className="polygon">
       <img
         alt="badge"
@@ -11,27 +11,21 @@ const imageMap = {
       />
     </div>
   ),
-  avatar: (src, size) => (
-    <Avatar
-      alt="avatar"
-      src={src || './assets/avatar-placeholder.png'}
-      shape="circle"
-      size={size || 64}
-    />
+  user: (src, size, name) => (
+    <Avatar alt="avatar" src={src} shape="circle" size={size || 64}>
+      {name[0]}
+    </Avatar>
   ),
-  enterprise: (src, size) => (
-    <Avatar
-      alt="avatar"
-      src={src || './assets/avatar-placeholder.png'}
-      shape="square"
-      size={size || 64}
-    />
+  enterprise: (src, size, name) => (
+    <Avatar alt="avatar" src={src} shape="square" size={size || 64}>
+      {name[0]}
+    </Avatar>
   )
 }
 
 const CustomAvatar = (props) => {
-  const { shape, size, src } = props
-  return imageMap[shape](src, size)
+  const { shape, size, src, name } = props
+  return imageMap[shape](src, size, name)
 }
 
 export default CustomAvatar
