@@ -18,7 +18,7 @@ const companiesMap = [
 ]
 
 const CompanyList = (props) => {
-  return <List type="companies" data={companiesMap} />
+  return <List type="enterprise" data={companiesMap} />
 }
 
 export default CompanyList

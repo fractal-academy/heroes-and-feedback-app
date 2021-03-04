@@ -30,7 +30,7 @@ const badgesMap = [
 ]
 
 const PersonalBadgeList = (props) => {
-  return <List type="badges" data={badgesMap} />
+  return <List type="badge" data={badgesMap} />
 }
 
 export default PersonalBadgeList

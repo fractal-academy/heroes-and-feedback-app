@@ -18,7 +18,7 @@ const ListItem = (props) => {
       <Col m={2}>
         <Box textAlign="left">
           <Title level={5}>{name}</Title>
-          {type === 'badges' ? (
+          {type === 'badge' ? (
             <Progress
               strokeColor={{
                 '0%': '#108ee9',

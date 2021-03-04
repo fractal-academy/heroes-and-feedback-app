@@ -30,7 +30,7 @@ const usersMap = [
 ]
 
 const UserList = (props) => {
-  return <List type="users" data={usersMap} />
+  return <List type="user" data={usersMap} />
 }
 
 export default UserList
