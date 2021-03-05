@@ -2,22 +2,22 @@ import { Upload, message } from 'antd'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import React from 'react'
 import { useState } from 'react'
-import { storage, firestore } from 'app/services'
-import { setData } from 'app/services'
+import { storage } from 'app/services'
 import { CustomAvatar } from 'app/components/'
-import { useDocumentData } from 'react-firebase-hooks/firestore'
 
 const ImageUploader = (props) => {
   // INTERFACE
-  const { shape, collection, itemId, size } = props
+  const { shape, src, name, size, value, onChange } = props
 
   // STATE
   const [loading, setLoading] = useState(false)
-
-  // CUSTOM HOOKS
-  const [value] = useDocumentData(firestore.collection(collection).doc(itemId))
+  const [currentSource, setCurrentSource] = useState(src)
 
   // HELPER FUNCTIONS
+  const triggerChange = (src) => {
+    onChange?.(src)
+  }
+
   const beforeUpload = (file) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
     if (!isJpgOrPng) {
@@ -34,20 +34,21 @@ const ImageUploader = (props) => {
     try {
       setLoading(true)
       try {
-        const avatarRef = storage.createRefFromULR(value.image)
-        await storage.delete(avatarRef)
+        const imageRef = storage.refFromURL(currentSource)
+        await imageRef.delete()
       } catch (e) {
         console.log('internal', e)
       }
-      const res = storage.child(`images/${file.file.name}`).put(file.file)
+      const res = storage.ref().child(`images/${file.file.name}`).put(file.file)
       res.on(
         'state_changed',
         () => {},
         () => {},
         async () => {
           const url = await res.snapshot.ref.getDownloadURL()
-          setData(collection, itemId, { image: url })
           setLoading(false)
+          triggerChange(url)
+          setCurrentSource(url)
         }
       )
     } catch (e) {
@@ -58,8 +59,9 @@ const ImageUploader = (props) => {
   // TEMPLATE
   return (
     <>
-      {value ? (
+      {src ? (
         <Upload
+          value={value}
           name="avatar"
           customRequest={upload}
           beforeUpload={beforeUpload}
@@ -69,9 +71,9 @@ const ImageUploader = (props) => {
           ) : (
             <CustomAvatar
               shape={shape}
-              src={value.image}
+              src={currentSource}
               size={size}
-              name={value.name}
+              name={name}
             />
           )}
         </Upload>
