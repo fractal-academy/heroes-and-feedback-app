@@ -1,12 +1,19 @@
 import { Avatar } from 'antd'
 import './CustomAvatar.styles.css'
 
+// CONSTANTS
 const imageMap = {
   badge: (src, size, name) => (
-    <div className="polygon">
+    <div
+      className="polygon"
+      style={{
+        maxHeight: `${size * Math.sqrt(3)}px`,
+        minWidth: `${2 * size}px`
+      }}>
       <img
         alt="badge"
         src={src || './assets/image-placeholder.png'}
+        style={{ width: `${size * 2}px`, height: `${size * 2}px` }}
         className="avatar"
       />
     </div>
@@ -24,7 +31,10 @@ const imageMap = {
 }
 
 const CustomAvatar = (props) => {
+  // INTERFACE
   const { shape, size, src, name } = props
+
+  // TEMPLATE
   return imageMap[shape](src, size, name)
 }
 

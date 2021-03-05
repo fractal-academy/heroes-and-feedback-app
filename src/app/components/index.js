@@ -1,2 +1,3 @@
 import { CustomAvatar } from './avatar'
-export { CustomAvatar }
+import { ImageUploader } from './ImageUploader'
+export { CustomAvatar, ImageUploader }
