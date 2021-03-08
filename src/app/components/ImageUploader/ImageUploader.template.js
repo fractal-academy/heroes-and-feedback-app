@@ -1,9 +1,9 @@
 import { Upload, message } from 'antd'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
-import React from 'react'
 import { useState } from 'react'
 import { storage } from 'app/services'
-import { CustomAvatar } from 'app/components/'
+import { CustomAvatar } from 'app/components'
+import { Row } from '@qonsoll/react-design'
 
 const ImageUploader = (props) => {
   // INTERFACE
@@ -58,7 +58,7 @@ const ImageUploader = (props) => {
 
   // TEMPLATE
   return (
-    <>
+    <Row h="center">
       {src ? (
         <Upload
           value={value}
@@ -80,7 +80,7 @@ const ImageUploader = (props) => {
       ) : (
         <PlusOutlined />
       )}
-    </>
+    </Row>
   )
 }
 

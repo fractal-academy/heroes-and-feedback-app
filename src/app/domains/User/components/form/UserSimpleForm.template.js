@@ -61,7 +61,8 @@ const UserSimpleForm = (props) => {
               {
                 required: true
               }
-            ]}>
+            ]}
+            style={{ margin: '8px 24px' }}>
             <Input />
           </Form.Item>
           <Form.Item
@@ -72,7 +73,8 @@ const UserSimpleForm = (props) => {
               {
                 required: true
               }
-            ]}>
+            ]}
+            style={{ margin: '8px 24px' }}>
             <Input />
           </Form.Item>
           <Form.Item
@@ -84,7 +86,8 @@ const UserSimpleForm = (props) => {
                 required: true,
                 type: 'email'
               }
-            ]}>
+            ]}
+            style={{ margin: '8px 24px' }}>
             <Input />
           </Form.Item>
           <Form.Item
@@ -96,10 +99,14 @@ const UserSimpleForm = (props) => {
                 required: true,
                 type: 'date'
               }
-            ]}>
+            ]}
+            style={{ margin: '8px 24px' }}>
             <DatePicker size="large" />
           </Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{ margin: '8px 24px' }}>
             Submit
           </Button>
         </Form>
