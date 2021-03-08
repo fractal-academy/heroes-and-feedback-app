@@ -8,7 +8,8 @@ const imageMap = {
       className="polygon"
       style={{
         maxHeight: `${size * Math.sqrt(3)}px`,
-        minWidth: `${2 * size}px`
+        minWidth: `${2 * size}px`,
+        minHeight: `${size * Math.sqrt(3)}px`
       }}>
       <img
         alt="badge"
