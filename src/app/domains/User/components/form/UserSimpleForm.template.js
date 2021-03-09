@@ -1,5 +1,5 @@
 import { Form, Input, Button, DatePicker } from 'antd'
-import { Row, Col } from '@qonsoll/react-design'
+import { Row, Col, Box } from '@qonsoll/react-design'
 import { ImageUploader } from 'app/components'
 import { setData, getTimestamp } from 'app/services/Firestore'
 import moment from 'moment'
@@ -29,9 +29,10 @@ const UserSimpleForm = (props) => {
     })
   }
 
+  // TEMPLATE
   return (
     <Row>
-      <Col>
+      <Col marginX={4}>
         <Form
           ref={formRef}
           onFinish={onFinish}
@@ -53,62 +54,65 @@ const UserSimpleForm = (props) => {
               size={250}
             />
           </Form.Item>
-          <Form.Item
-            name="firstName"
-            label="First Name"
-            placeholder="Enter your first name"
-            rules={[
-              {
-                required: true
-              }
-            ]}
-            style={{ margin: '8px 24px' }}>
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="surname"
-            label="Surname"
-            placeholder="Enter your surname"
-            rules={[
-              {
-                required: true
-              }
-            ]}
-            style={{ margin: '8px 24px' }}>
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="email"
-            label="E-mail"
-            placeholder="Enter your e-mail"
-            rules={[
-              {
-                required: true,
-                type: 'email'
-              }
-            ]}
-            style={{ margin: '8px 24px' }}>
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="birthday"
-            label="Birthday"
-            placeholder="Enter your birthday date"
-            rules={[
-              {
-                required: true,
-                type: 'date'
-              }
-            ]}
-            style={{ margin: '8px 24px' }}>
-            <DatePicker size="large" />
-          </Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            style={{ margin: '8px 24px' }}>
-            Submit
-          </Button>
+          <Box marginY={2}>
+            <Form.Item
+              name="firstName"
+              label="First Name"
+              placeholder="Enter your first name"
+              rules={[
+                {
+                  required: true
+                }
+              ]}>
+              <Input />
+            </Form.Item>
+          </Box>
+          <Box marginY={2}>
+            <Form.Item
+              name="surname"
+              label="Surname"
+              placeholder="Enter your surname"
+              rules={[
+                {
+                  required: true
+                }
+              ]}>
+              <Input />
+            </Form.Item>
+          </Box>
+          <Box marginY={2}>
+            <Form.Item
+              name="email"
+              label="E-mail"
+              placeholder="Enter your e-mail"
+              rules={[
+                {
+                  required: true,
+                  type: 'email'
+                }
+              ]}>
+              <Input />
+            </Form.Item>
+          </Box>
+          <Box marginY={2}>
+            <Form.Item
+              name="birthday"
+              label="Birthday"
+              placeholder="Enter your birthday date"
+              rules={[
+                {
+                  required: true,
+                  type: 'date'
+                }
+              ]}>
+              <DatePicker size="large" />
+            </Form.Item>
+          </Box>
+          <Box marginY={2}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Box>
         </Form>
       </Col>
     </Row>

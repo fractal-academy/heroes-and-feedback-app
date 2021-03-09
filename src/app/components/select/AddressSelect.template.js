@@ -5,10 +5,13 @@ import { Row, Col } from '@qonsoll/react-design'
 const { Option } = Select
 
 const AddressSelect = (props) => {
+  // INTERFACE
   const { data, onChange, value = {} } = props
 
+  // COMPUTED PROPERTIES
   const countries = Object.entries(data)
 
+  // STATE
   const [selectedCountry, setSelectedCountry] = useState(
     value.selectedCountry || Object.keys(data)[0]
   )
@@ -21,6 +24,7 @@ const AddressSelect = (props) => {
     value.selectedCity ? value.selectedCity : data[Object.keys(data)[0]][0]
   )
 
+  // HELPER FUNCTIONS
   const triggerChange = (changedValue) => {
     onChange?.({
       selectedCountry,
@@ -30,7 +34,10 @@ const AddressSelect = (props) => {
     })
   }
 
-  const handleProvinceChange = (value) => {
+  const selectSearchFieldFilter = (input, option) =>
+    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+
+  const handleCountryChange = (value) => {
     setSelectedCountry(value)
     setCities(data[value])
     setSelectedCity(data[value][0])
@@ -40,7 +47,7 @@ const AddressSelect = (props) => {
     })
   }
 
-  const onSecondCityChange = (value) => {
+  const handleCityChange = (value) => {
     setSelectedCity(value)
     triggerChange({
       selectedCountry: selectedCountry,
@@ -48,6 +55,7 @@ const AddressSelect = (props) => {
     })
   }
 
+  // TEMPLATE
   return (
     <Row h="between">
       <Col>
@@ -56,11 +64,9 @@ const AddressSelect = (props) => {
           value={selectedCountry}
           defaultValue={countries[0]}
           style={{ width: 200 }}
-          onChange={handleProvinceChange}
+          onChange={handleCountryChange}
           optionFilterProp="children"
-          filterOption={(input, option) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }>
+          filterOption={selectSearchFieldFilter}>
           {countries.map(([key, value]) => (
             <Option key={key}>{key}</Option>
           ))}
@@ -68,12 +74,10 @@ const AddressSelect = (props) => {
         <Select
           showSearch
           optionFilterProp="children"
-          filterOption={(input, option) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
+          filterOption={selectSearchFieldFilter}
           style={{ width: 200 }}
           value={selectedCity}
-          onChange={onSecondCityChange}>
+          onChange={handleCityChange}>
           {cities.map((city) => (
             <Option key={city}>{city}</Option>
           ))}

@@ -23,11 +23,11 @@ const ImageUploader = (props) => {
     if (!isJpgOrPng) {
       message.error('You can only upload JPG/PNG file!')
     }
-    const isLt2M = file.size / 1024 / 1024 < 2
-    if (!isLt2M) {
+    const isLessThan2Megabytes = file.size / 1024 / 1024 < 2
+    if (!isLessThan2Megabytes) {
       message.error('Image must smaller than 2MB!')
     }
-    return isJpgOrPng && isLt2M
+    return isJpgOrPng && isLessThan2Megabytes
   }
 
   const upload = async (file) => {
