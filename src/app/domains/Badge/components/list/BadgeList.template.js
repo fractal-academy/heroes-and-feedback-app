@@ -1,4 +1,4 @@
-import { List } from 'app/components/list'
+import { List } from 'app/components'
 
 const badgesMap = [
   {
@@ -6,14 +6,14 @@ const badgesMap = [
     name: 'Fastest review',
     info: '50',
     image:
-      'https://i.pinimg.com/474x/11/cf/91/11cf91fdfca454624e970f0b96cb8dc4.jpg'
+      'https://cdn.dribbble.com/users/5746/screenshots/6763891/dribbble-motu-sorceress.jpg'
   },
   {
     id: '1',
     name: 'Cleanest mug',
     info: '70',
     image:
-      'https://i.pinimg.com/474x/11/cf/91/11cf91fdfca454624e970f0b96cb8dc4.jpg'
+      'https://cdn.dribbble.com/users/5746/screenshots/6763891/dribbble-motu-sorceress.jpg'
   },
   {
     id: '2',
@@ -25,7 +25,7 @@ const badgesMap = [
     name: 'Hands from ass',
     info: '100',
     image:
-      'https://i.pinimg.com/474x/11/cf/91/11cf91fdfca454624e970f0b96cb8dc4.jpg'
+      'https://cdn.dribbble.com/users/5746/screenshots/6763891/dribbble-motu-sorceress.jpg'
   }
 ]
 

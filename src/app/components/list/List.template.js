@@ -1,6 +1,6 @@
 import { List, Divider } from 'antd'
 import { PropTypes } from 'prop-types'
-import { Item } from 'app/components/listItem'
+import { Item } from 'app/components'
 import { Row, Col } from '@qonsoll/react-design'
 
 const CustomList = (props) => {

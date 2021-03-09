@@ -13,12 +13,12 @@ const imageMap = {
   ),
   user: (src, size, name) => (
     <Avatar alt="avatar" src={src} shape="circle" size={size || 64}>
-      {name[0]}
+      {name && name[0]}
     </Avatar>
   ),
   enterprise: (src, size, name) => (
     <Avatar alt="avatar" src={src} shape="square" size={size || 64}>
-      {name[0]}
+      {name && name[0]}
     </Avatar>
   )
 }

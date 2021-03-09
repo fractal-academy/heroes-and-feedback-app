@@ -1,5 +1,7 @@
+import { UserAdvancedView } from 'app/domains/User/components/views'
+
 const UserShow = (props) => {
-  return <></>
+  return <UserAdvancedView />
 }
 
 export default UserShow

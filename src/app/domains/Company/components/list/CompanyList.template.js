@@ -1,4 +1,4 @@
-import { List } from 'app/components/list'
+import { List } from 'app/components'
 
 const companiesMap = [
   {
@@ -6,7 +6,7 @@ const companiesMap = [
     name: 'Senseteq Global',
     info: 'Hordaland, Norway',
     image:
-      'https://i.pinimg.com/474x/11/cf/91/11cf91fdfca454624e970f0b96cb8dc4.jpg'
+      'https://cdn.dribbble.com/users/5746/screenshots/3676209/dribbble-spiderman-salvatier.jpg'
   },
   {
     id: '1',
