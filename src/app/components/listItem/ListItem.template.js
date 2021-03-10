@@ -18,39 +18,44 @@ const ListItem = (props) => {
   const ItemTypeMap = {
     user: {
       image: 'user',
+      style: 'info',
       name: `${data.firstName} ${data.surname}`,
       info: data.email,
       path: ROUTES_PATHS.USER_SHOW
     },
     badge: {
       image: 'badge',
+      style: 'description',
       name: `${data.name}`,
       info: data.description,
       path: ROUTES_PATHS.BADGE_SHOW
     },
     company: {
       image: 'enterprise',
+      style: 'description',
       name: `${data.name}`,
       info: data.description,
       path: ROUTES_PATHS.COMPANY_SHOW
     },
     project: {
       image: 'enterprise',
+      style: 'description',
       name: `${data.name}`,
       info: data.description,
       path: ROUTES_PATHS.PROJECT_SHOW
     }
   }
 
+  const image = ItemTypeMap[type].image
   const info = ItemTypeMap[type].info
   const name = ItemTypeMap[type].name
-  const image = ItemTypeMap[type].image
   const path = ItemTypeMap[type].path.replace(':id', data.id)
+  const style = ItemTypeMap[type].style
 
   return (
     <Row display="flex" v="center">
       <Col cw="auto" m={2}>
-        <CustomAvatar shape={image} name={name} src={data.image} size="large" />
+        <CustomAvatar shape={image} name={name} src={data.image} size={50} />
       </Col>
       <Col m={2}>
         <Box textAlign="left">
@@ -64,7 +69,7 @@ const ListItem = (props) => {
               percent={data.maxLvl}
             />
           ) : (
-            <Box className="description">
+            <Box className={style}>
               <Text type="secondary">{info || 'No description.'}</Text>
             </Box>
           )}

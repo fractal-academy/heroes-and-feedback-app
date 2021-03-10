@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <Row noGutters h="center">
-      <Col cw={['10', '10', '8', '8', '10', '10']}>
+      <Col cw={['11', '10', '8', '8', '10', '10']}>
         <Switch>
           {ROUTES_VALUE.map((route) => (
             <Route key={route.path} {...route} />
