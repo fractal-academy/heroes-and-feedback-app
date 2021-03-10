@@ -5,6 +5,7 @@ import { Row, Col } from '@qonsoll/react-design'
 
 const CustomList = (props) => {
   const { type, data } = props
+
   return (
     <Row>
       <Col>
@@ -13,13 +14,7 @@ const CustomList = (props) => {
           dataSource={data}
           renderItem={(item) => (
             <>
-              <Item
-                id={item.id}
-                type={type}
-                name={item.name}
-                info={item.info}
-                image={item.image}
-              />
+              <Item type={type} data={item} />
               <Divider style={{ margin: '0' }} />
             </>
           )}

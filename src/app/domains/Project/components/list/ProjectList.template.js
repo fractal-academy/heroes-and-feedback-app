@@ -1,21 +1,12 @@
 import { List } from 'app/components'
-
-const companiesMap = [
-  {
-    id: '0',
-    name: 'FOI Helse',
-    image:
-      'https://cdn.dribbble.com/users/5746/screenshots/3676209/dribbble-spiderman-salvatier.jpg'
-  },
-  {
-    id: '1',
-    name: 'Worktube',
-    info: 'Easy hiring of workers.'
-  }
-]
+import { firestore } from 'app/services'
+import { PROJECTS } from 'app/constants/collections'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const ProjectList = (props) => {
-  return <List type="enterprise" data={companiesMap} />
+  const [data] = useCollectionData(firestore.collection(PROJECTS))
+
+  return <List type="project" data={data} />
 }
 
 export default ProjectList

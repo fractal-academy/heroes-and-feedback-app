@@ -1,22 +1,12 @@
 import { List } from 'app/components'
-
-const companiesMap = [
-  {
-    id: '0',
-    name: 'Senseteq Global',
-    info: 'Hordaland, Norway',
-    image:
-      'https://cdn.dribbble.com/users/5746/screenshots/3676209/dribbble-spiderman-salvatier.jpg'
-  },
-  {
-    id: '1',
-    name: 'Senseteq Khm.',
-    info: 'Khmelnytskyi, Ukraine'
-  }
-]
+import { firestore } from 'app/services'
+import { COMPANIES } from 'app/constants/collections'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const CompanyList = (props) => {
-  return <List type="enterprise" data={companiesMap} />
+  const [data] = useCollectionData(firestore.collection(COMPANIES))
+
+  return <List type="company" data={data} />
 }
 
 export default CompanyList

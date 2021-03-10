@@ -1,19 +1,15 @@
 import { Card } from 'app/components'
-
-const data = {
-  id: 0,
-  firstName: 'Tom',
-  secondName: 'Holland',
-  role: 'Project manager',
-  birth: '01.06.1996',
-  mail: 'tom.holland@mail.com',
-  currentExp: 1200,
-  image:
-    'https://cdn.dribbble.com/users/5746/screenshots/3676209/dribbble-spiderman-salvatier.jpg'
-}
+import { useParams } from 'react-router-dom'
+import { USERS } from 'app/constants/collections'
+import { getCollectionRef } from 'app/services/Firestore'
+import { useDocumentData } from 'react-firebase-hooks/firestore'
 
 const UserAdvancedView = (props) => {
-  return <Card type="user" data={data} />
+  const { id } = useParams()
+
+  const [data] = useDocumentData(getCollectionRef(USERS).doc(id))
+
+  return <>{data && <Card data={data} type="user" />}</>
 }
 
 export default UserAdvancedView

@@ -34,8 +34,7 @@ const ROUTES = {
   },
   USERS_SHOW: {
     render: () => <UserShow />,
-    path: ROUTES_PATHS.USER_SHOW,
-    exact: true
+    path: ROUTES_PATHS.USER_SHOW
   },
   USERS_EDIT: {
     render: () => <UserEdit />,
@@ -50,8 +49,7 @@ const ROUTES = {
   },
   BADGES_SHOW: {
     render: () => <BadgeShow />,
-    path: ROUTES_PATHS.BADGE_SHOW,
-    exact: true
+    path: ROUTES_PATHS.BADGE_SHOW
   },
   BADGES_EDIT: {
     render: () => <BadgeEdit />,
@@ -66,8 +64,7 @@ const ROUTES = {
   },
   COMPANIES_SHOW: {
     render: () => <CompanyShow />,
-    path: ROUTES_PATHS.COMPANY_SHOW,
-    exact: true
+    path: ROUTES_PATHS.COMPANY_SHOW
   },
   COMPANIES_EDIT: {
     render: () => <CompanyEdit />,
@@ -82,8 +79,7 @@ const ROUTES = {
   },
   PROJECTS_SHOW: {
     render: () => <ProjectShow />,
-    path: ROUTES_PATHS.PROJECT_SHOW,
-    exact: true
+    path: ROUTES_PATHS.PROJECT_SHOW
   },
   PROJECTS_EDIT: {
     render: () => <ProjectEdit />,

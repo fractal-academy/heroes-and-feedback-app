@@ -1,6 +1,7 @@
+import moment from 'moment'
 import { PropTypes } from 'prop-types'
-import { Typography, Progress } from 'antd'
 import { CustomAvatar } from 'app/components'
+import { Typography, Progress, Badge } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 
 const { Title, Text } = Typography
@@ -8,6 +9,8 @@ const { Title, Text } = Typography
 const Card = (props) => {
   const { type, data } = props
 
+  const birthday =
+    data.birthday && moment(data.birthday.toDate()).format('Do MMMM YYYY')
   const userLvl = Math.floor(data.currentExp / 1000)
   const userExperience = (data.currentExp % 1000) * 0.1
   const badgeProgress = (100 / data.maxLvl) * data.currentLvl
@@ -15,14 +18,14 @@ const Card = (props) => {
 
   const cardTypeMap = {
     user: {
-      name: `${data.firstName} ${data.secondName}`,
+      name: `${data.firstName} ${data.surname}`,
       shape: 'user',
       layout: (
-        <>
+        <Col>
           <Box display="grid" textAlign="center">
             <Text type="success">{data.role}</Text>
-            <Text type="secondary">{data.mail}</Text>
-            <Text type="secondary">{data.birth}</Text>
+            <Text type="secondary">{data.email}</Text>
+            {birthday && <Text type="secondary">{birthday}</Text>}
           </Box>
           <Progress
             strokeColor={{
@@ -36,14 +39,31 @@ const Card = (props) => {
               </Title>
             )}
           />
-        </>
+        </Col>
       )
     },
     badge: {
       name: `${data.name}`,
       shape: 'badge',
       layout: (
-        <>
+        <Col>
+          <Box textAlign="justify">
+            <Text>{data.description}</Text>
+          </Box>
+          <Box textAlign="center" mt={6}>
+            <Title level={4}>Maximum level: {data.maxLvl}</Title>
+          </Box>
+        </Col>
+      )
+    },
+    personalBadge: {
+      name: `${data.name}`,
+      shape: 'badge',
+      layout: (
+        <Col>
+          <Box textAlign="justify">
+            <Text>{data.description}</Text>
+          </Box>
           {data.receiveData && (
             <Progress
               strokeColor={{
@@ -53,7 +73,7 @@ const Card = (props) => {
               percent={badgeProgress}
               format={() => (
                 <Title level={4} type="secondary">
-                  {data.maxLvl}
+                  {data.maxLvl} lvl
                 </Title>
               )}
             />
@@ -61,25 +81,37 @@ const Card = (props) => {
           <Box textAlign="center" mt={6}>
             <Title level={4}>{badgeStatus}</Title>
           </Box>
-        </>
+        </Col>
       )
     },
     company: {
       name: `${data.name}`,
       shape: 'enterprise',
       layout: (
-        <Box textAlign="center">
-          <Text type="secondary">{data.address}</Text>
-        </Box>
+        <Col>
+          <Box textAlign="justify" mb={4}>
+            <Text>{data.description}</Text>
+          </Box>
+          <Box textAlign="center">
+            <Text type="secondary">
+              {data.address?.city}, {data.address?.country}
+            </Text>
+          </Box>
+        </Col>
       )
     },
     project: {
       name: `${data.name}`,
       shape: 'enterprise',
       layout: (
-        <Box display="grid" textAlign="center">
-          <Text type="secondary">{data.company?.name}</Text>
-        </Box>
+        <Col>
+          <Box textAlign="justify" mb={4}>
+            <Text>{data.description}</Text>
+          </Box>
+          <Box display="grid" textAlign="center">
+            <Text type="secondary">{data.company?.name}</Text>
+          </Box>
+        </Col>
       )
     }
   }
@@ -97,23 +129,21 @@ const Card = (props) => {
         </Row>
         <Row mb={2}>
           <Col>
-            <Box textAlign="center">
-              <Title level={2}>{name}</Title>
+            <Box textAlign="center" verticalAlign="center">
+              <Title level={2}>
+                {name}{' '}
+                {(type === 'badge' || type === 'personalBadge') && (
+                  <Badge
+                    count={`+${data.lvlExperience} EXP`}
+                    overflowCount={1000}
+                    style={{ backgroundColor: '#87d068' }}
+                  />
+                )}
+              </Title>
             </Box>
           </Col>
         </Row>
-        {type !== 'user' && (
-          <Row mb={4}>
-            <Col>
-              <Box textAlign="justify">
-                <Text>{data.description}</Text>
-              </Box>
-            </Col>
-          </Row>
-        )}
-        <Row>
-          <Col>{cardTypeMap[type].layout}</Col>
-        </Row>
+        <Row>{cardTypeMap[type].layout}</Row>
       </Col>
     </Row>
   )
@@ -121,7 +151,7 @@ const Card = (props) => {
 
 Card.propTypes = {
   type: PropTypes.string.isRequired,
-  data: PropTypes.array
+  data: PropTypes.object
 }
 
 export default Card

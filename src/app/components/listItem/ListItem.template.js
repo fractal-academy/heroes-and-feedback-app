@@ -1,18 +1,56 @@
+import './ListItem.styles.css'
 import { PropTypes } from 'prop-types'
+
+import { ROUTES_PATHS } from 'app/constants'
 import { Progress, Typography } from 'antd'
 import { CustomAvatar } from 'app/components'
+import { useHistory } from 'react-router-dom'
 import { RightOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
 
 const { Title, Text } = Typography
 
 const ListItem = (props) => {
-  const { type, name, image, info } = props
+  const { type, data } = props
+
+  const history = useHistory()
+
+  const ItemTypeMap = {
+    user: {
+      image: 'user',
+      name: `${data.firstName} ${data.surname}`,
+      info: data.email,
+      path: ROUTES_PATHS.USER_SHOW
+    },
+    badge: {
+      image: 'badge',
+      name: `${data.name}`,
+      info: data.description,
+      path: ROUTES_PATHS.BADGE_SHOW
+    },
+    company: {
+      image: 'enterprise',
+      name: `${data.name}`,
+      info: data.description,
+      path: ROUTES_PATHS.COMPANY_SHOW
+    },
+    project: {
+      image: 'enterprise',
+      name: `${data.name}`,
+      info: data.description,
+      path: ROUTES_PATHS.PROJECT_SHOW
+    }
+  }
+
+  const info = ItemTypeMap[type].info
+  const name = ItemTypeMap[type].name
+  const image = ItemTypeMap[type].image
+  const path = ItemTypeMap[type].path.replace(':id', data.id)
 
   return (
     <Row display="flex" v="center">
       <Col cw="auto" m={2}>
-        <CustomAvatar shape={type} name={name} src={image} size="large" />
+        <CustomAvatar shape={image} name={name} src={data.image} size="large" />
       </Col>
       <Col m={2}>
         <Box textAlign="left">
@@ -23,15 +61,17 @@ const ListItem = (props) => {
                 '0%': '#108ee9',
                 '100%': '#87d068'
               }}
-              percent={info}
+              percent={data.maxLvl}
             />
           ) : (
-            <Text>{info}</Text>
+            <Box className="description">
+              <Text type="secondary">{info || 'No description.'}</Text>
+            </Box>
           )}
         </Box>
       </Col>
       <Col cw="auto" m={2}>
-        <RightOutlined />
+        <RightOutlined onClick={() => history.push(path)} />
       </Col>
     </Row>
   )
