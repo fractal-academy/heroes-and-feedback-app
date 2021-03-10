@@ -1,4 +1,4 @@
-import { firebase } from './Firebase'
+import { firebase, storage } from './Firebase'
 import {
   deleteData,
   addData,
@@ -10,6 +10,7 @@ import {
 
 export {
   firebase,
+  storage,
   setData,
   firestore,
   getCollectionRef,
