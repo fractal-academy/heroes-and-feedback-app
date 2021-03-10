@@ -5,15 +5,19 @@ import {
   setData,
   firestore,
   getCollectionRef,
-  getTimestamp
+  getTimestamp,
+  getData,
+  setDocumentListener
 } from './Firestore'
 
 export {
   firebase,
   setData,
+  getData,
   firestore,
   getCollectionRef,
   deleteData,
   addData,
-  getTimestamp
+  getTimestamp,
+  setDocumentListener
 }

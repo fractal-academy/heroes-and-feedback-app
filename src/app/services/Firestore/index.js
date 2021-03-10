@@ -4,6 +4,8 @@ import getCollectionRef from './getCollectionRef'
 import getTimestamp from './getTimestamp'
 import addData from './addData'
 import deleteData from './deleteData'
+import setDocumentListener from './setDocumentListener'
+import getData from './getData'
 
 export {
   deleteData,
@@ -11,5 +13,7 @@ export {
   setData,
   firestore,
   getCollectionRef,
-  getTimestamp
+  getTimestamp,
+  setDocumentListener,
+  getData
 }

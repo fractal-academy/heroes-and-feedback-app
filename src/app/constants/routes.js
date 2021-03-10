@@ -13,10 +13,12 @@ import {
   CompanyEdit,
   CompanyShow
 } from 'app/domains/Company/routes'
+import { RedirectHOC } from 'app/components'
 
 const ROUTES = {
   // session entity routes
   LOGIN: {
+    notProtected: true,
     render: () => <SessionLogin />,
     path: ROUTES_PATHS.LOGIN,
     exact: true
@@ -28,71 +30,123 @@ const ROUTES = {
 
   // user entity routes
   USERS_ALL: {
-    render: () => <UserAll />,
+    render: () => (
+      <RedirectHOC>
+        <UserAll />
+      </RedirectHOC>
+    ),
     path: ROUTES_PATHS.USERS_ALL,
     exact: true
   },
   USERS_SHOW: {
-    render: () => <UserShow />,
+    render: () => (
+      <RedirectHOC>
+        <UserShow />
+      </RedirectHOC>
+    ),
     path: ROUTES_PATHS.USER_SHOW,
     exact: true
   },
   USERS_EDIT: {
-    render: () => <UserEdit />,
+    render: () => (
+      <RedirectHOC>
+        <UserEdit />
+      </RedirectHOC>
+    ),
     path: ROUTES_PATHS.USER_EDIT
   },
 
   // badge entity routes
   BADGES_ALL: {
-    render: () => <BadgeAll />,
+    render: () => (
+      <RedirectHOC>
+        <BadgeAll />
+      </RedirectHOC>
+    ),
     path: ROUTES_PATHS.BADGES_ALL,
     exact: true
   },
   BADGES_SHOW: {
-    render: () => <BadgeShow />,
+    render: () => (
+      <RedirectHOC>
+        <BadgeShow />
+      </RedirectHOC>
+    ),
     path: ROUTES_PATHS.BADGE_SHOW,
     exact: true
   },
   BADGES_EDIT: {
-    render: () => <BadgeEdit />,
+    render: () => (
+      <RedirectHOC>
+        <BadgeEdit />
+      </RedirectHOC>
+    ),
     path: ROUTES_PATHS.BADGE_EDIT
   },
 
   // company entity routes
   COMPANIES_ALL: {
-    render: () => <CompanyAll />,
+    render: () => (
+      <RedirectHOC>
+        <CompanyAll />
+      </RedirectHOC>
+    ),
     path: ROUTES_PATHS.COMPANIES_ALL,
     exact: true
   },
   COMPANIES_SHOW: {
-    render: () => <CompanyShow />,
+    render: () => (
+      <RedirectHOC>
+        <CompanyShow />
+      </RedirectHOC>
+    ),
     path: ROUTES_PATHS.COMPANY_SHOW,
     exact: true
   },
   COMPANIES_EDIT: {
-    render: () => <CompanyEdit />,
+    render: () => (
+      <RedirectHOC>
+        <CompanyEdit />
+      </RedirectHOC>
+    ),
     path: ROUTES_PATHS.COMPANY_EDIT
   },
 
   // project entity routes
   PROJECTS_ALL: {
-    render: () => <ProjectAll />,
+    render: () => (
+      <RedirectHOC>
+        <ProjectAll />
+      </RedirectHOC>
+    ),
     path: ROUTES_PATHS.PROJECTS_ALL,
     exact: true
   },
   PROJECTS_SHOW: {
-    render: () => <ProjectShow />,
+    render: () => (
+      <RedirectHOC>
+        <ProjectShow />
+      </RedirectHOC>
+    ),
     path: ROUTES_PATHS.PROJECT_SHOW,
     exact: true
   },
   PROJECTS_EDIT: {
-    render: () => <ProjectEdit />,
+    render: () => (
+      <RedirectHOC>
+        <ProjectEdit />
+      </RedirectHOC>
+    ),
     path: ROUTES_PATHS.PROJECT_EDIT
   },
 
   // route for user's personal badges
   PERSONAL_BADGES_ALL: {
-    render: () => <PersonalBadgeAll />,
+    render: () => (
+      <RedirectHOC>
+        <PersonalBadgeAll />
+      </RedirectHOC>
+    ),
     path: ROUTES_PATHS.PERSONAL_BADGES_ALL,
     exact: true
   }

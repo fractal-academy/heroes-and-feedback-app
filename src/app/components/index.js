@@ -1,2 +1,3 @@
 import { CustomAvatar } from './avatar'
-export { CustomAvatar }
+import { RedirectHOC } from './redirectHOC'
+export { CustomAvatar, RedirectHOC }

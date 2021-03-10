@@ -1,5 +1,7 @@
 import { Box } from '@qonsoll/react-design'
 import { SessionSimpleView } from 'app/domains/Session/components/views'
+import { useCallback } from 'react'
+import { loginWithGoogle } from 'app/services/Auth'
 
 const SessionLogin = (props) => {
   return (
