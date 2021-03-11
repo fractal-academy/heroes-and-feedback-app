@@ -13,6 +13,7 @@ import {
   CompanyEdit,
   CompanyShow
 } from 'app/domains/Company/routes'
+import { Header } from 'app/components'
 
 const ROUTES = {
   // session entity routes
@@ -28,71 +29,149 @@ const ROUTES = {
 
   // user entity routes
   USERS_ALL: {
-    render: () => <UserAll />,
+    protect: true,
+    render: () => (
+      <>
+        <Header />
+        <UserAll />
+      </>
+    ),
     path: ROUTES_PATHS.USERS_ALL,
     exact: true
   },
   USERS_SHOW: {
-    render: () => <UserShow />,
+    protect: true,
+    render: () => (
+      <>
+        <Header />
+        <UserShow />
+      </>
+    ),
     path: ROUTES_PATHS.USER_SHOW,
     exact: true
   },
   USERS_EDIT: {
-    render: () => <UserEdit />,
+    protect: true,
+    render: () => (
+      <>
+        <Header />
+        <UserEdit />
+      </>
+    ),
     path: ROUTES_PATHS.USER_EDIT
   },
 
   // badge entity routes
   BADGES_ALL: {
-    render: () => <BadgeAll />,
+    protect: true,
+    render: () => (
+      <>
+        <Header />
+        <BadgeAll />
+      </>
+    ),
     path: ROUTES_PATHS.BADGES_ALL,
     exact: true
   },
   BADGES_SHOW: {
-    render: () => <BadgeShow />,
+    protect: true,
+    render: () => (
+      <>
+        <Header />
+        <BadgeShow />
+      </>
+    ),
     path: ROUTES_PATHS.BADGE_SHOW,
     exact: true
   },
   BADGES_EDIT: {
-    render: () => <BadgeEdit />,
+    protect: true,
+    render: () => (
+      <>
+        <Header />
+        <BadgeEdit />
+      </>
+    ),
     path: ROUTES_PATHS.BADGE_EDIT
   },
 
   // company entity routes
   COMPANIES_ALL: {
-    render: () => <CompanyAll />,
+    protect: true,
+    render: () => (
+      <>
+        <Header />
+        <CompanyAll />
+      </>
+    ),
     path: ROUTES_PATHS.COMPANIES_ALL,
     exact: true
   },
   COMPANIES_SHOW: {
-    render: () => <CompanyShow />,
+    protect: true,
+    render: () => (
+      <>
+        <Header />
+        <CompanyShow />
+      </>
+    ),
     path: ROUTES_PATHS.COMPANY_SHOW,
     exact: true
   },
   COMPANIES_EDIT: {
-    render: () => <CompanyEdit />,
+    protect: true,
+    render: () => (
+      <>
+        <Header />
+        <CompanyEdit />
+      </>
+    ),
     path: ROUTES_PATHS.COMPANY_EDIT
   },
 
   // project entity routes
   PROJECTS_ALL: {
-    render: () => <ProjectAll />,
+    protect: true,
+    render: () => (
+      <>
+        <Header />
+        <ProjectAll />
+      </>
+    ),
     path: ROUTES_PATHS.PROJECTS_ALL,
     exact: true
   },
   PROJECTS_SHOW: {
-    render: () => <ProjectShow />,
+    protect: true,
+    render: () => (
+      <>
+        <Header />
+        <ProjectShow />
+      </>
+    ),
     path: ROUTES_PATHS.PROJECT_SHOW,
     exact: true
   },
   PROJECTS_EDIT: {
-    render: () => <ProjectEdit />,
+    protect: true,
+    render: () => (
+      <>
+        <Header />
+        <ProjectEdit />
+      </>
+    ),
     path: ROUTES_PATHS.PROJECT_EDIT
   },
 
   // route for user's personal badges
   PERSONAL_BADGES_ALL: {
-    render: () => <PersonalBadgeAll />,
+    protect: true,
+    render: () => (
+      <>
+        <Header />
+        <PersonalBadgeAll />
+      </>
+    ),
     path: ROUTES_PATHS.PERSONAL_BADGES_ALL,
     exact: true
   }

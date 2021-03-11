@@ -1,17 +1,12 @@
 import 'antd/dist/antd.css'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { ROUTES_PATHS, ROUTES_VALUE } from 'app/constants'
+import { useUserAuthContext } from 'app/context'
 import 'antd/dist/antd.css'
+import AppNavigator from 'app/AppNavigator'
+import AuthNavigator from 'app/AuthNavigator'
 
 const App = () => {
-  return (
-    <Switch>
-      {ROUTES_VALUE.map((route) => (
-        <Route key={route.path} {...route} />
-      ))}
-      <Redirect to={ROUTES_PATHS.LOGIN} />
-    </Switch>
-  )
+  const user = useUserAuthContext()
+  return <>{user ? <AppNavigator /> : <AuthNavigator />}</>
 }
 
 export default App

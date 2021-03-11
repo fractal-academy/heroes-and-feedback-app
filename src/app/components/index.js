@@ -1,4 +1,5 @@
 import { CustomAvatar } from './avatar'
 import { ImageUploader } from './ImageUploader'
 import { AddressSelect } from './select'
-export { CustomAvatar, ImageUploader, AddressSelect }
+import { Header } from './header'
+export { CustomAvatar, ImageUploader, AddressSelect, Header }
