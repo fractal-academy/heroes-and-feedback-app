@@ -1,3 +1,3 @@
-import { SessionLogin } from './SessionLogin'
+import { GoogleLogin } from './GoogleLogin'
 
-export { SessionLogin }
+export { GoogleLogin }

@@ -4,5 +4,6 @@ import { Item } from './listItem'
 import { CustomAvatar } from './avatar'
 import { ImageUploader } from './ImageUploader'
 import { AddressSelect } from './select'
+import { Header } from './header'
 
-export { Card, List, Item, CustomAvatar, ImageUploader, AddressSelect }
+export { Card, List, Item, Header, CustomAvatar, ImageUploader, AddressSelect }
