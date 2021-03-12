@@ -1,5 +1,3 @@
-import ROUTES_PATHS from './routePaths'
-import { SessionLogin } from 'app/domains/Session/routes'
 import { PersonalBadgeAll } from 'app/domains/PersonalBadge/routes'
 import { UserAll, UserEdit, UserShow } from 'app/domains/User/routes'
 import { BadgeAll, BadgeEdit, BadgeShow } from 'app/domains/Badge/routes'
@@ -14,22 +12,11 @@ import {
   CompanyShow
 } from 'app/domains/Company/routes'
 import { Header } from 'app/components'
+import ROUTES_PATHS from './routePaths'
 
-const ROUTES = {
-  // session entity routes
-  LOGIN: {
-    render: () => <SessionLogin />,
-    path: ROUTES_PATHS.LOGIN,
-    exact: true
-  },
-  REJECT_LOGIN: {
-    path: ROUTES_PATHS.REJECT_LOGIN,
-    exact: true
-  },
-
+const PROTECTED_ROUTES = {
   // user entity routes
   USERS_ALL: {
-    protect: true,
     render: () => (
       <>
         <Header />
@@ -40,7 +27,6 @@ const ROUTES = {
     exact: true
   },
   USERS_SHOW: {
-    protect: true,
     render: () => (
       <>
         <Header />
@@ -51,7 +37,6 @@ const ROUTES = {
     exact: true
   },
   USERS_EDIT: {
-    protect: true,
     render: () => (
       <>
         <Header />
@@ -63,7 +48,6 @@ const ROUTES = {
 
   // badge entity routes
   BADGES_ALL: {
-    protect: true,
     render: () => (
       <>
         <Header />
@@ -74,7 +58,6 @@ const ROUTES = {
     exact: true
   },
   BADGES_SHOW: {
-    protect: true,
     render: () => (
       <>
         <Header />
@@ -85,7 +68,6 @@ const ROUTES = {
     exact: true
   },
   BADGES_EDIT: {
-    protect: true,
     render: () => (
       <>
         <Header />
@@ -97,7 +79,6 @@ const ROUTES = {
 
   // company entity routes
   COMPANIES_ALL: {
-    protect: true,
     render: () => (
       <>
         <Header />
@@ -108,7 +89,6 @@ const ROUTES = {
     exact: true
   },
   COMPANIES_SHOW: {
-    protect: true,
     render: () => (
       <>
         <Header />
@@ -119,7 +99,6 @@ const ROUTES = {
     exact: true
   },
   COMPANIES_EDIT: {
-    protect: true,
     render: () => (
       <>
         <Header />
@@ -131,7 +110,6 @@ const ROUTES = {
 
   // project entity routes
   PROJECTS_ALL: {
-    protect: true,
     render: () => (
       <>
         <Header />
@@ -142,7 +120,6 @@ const ROUTES = {
     exact: true
   },
   PROJECTS_SHOW: {
-    protect: true,
     render: () => (
       <>
         <Header />
@@ -153,7 +130,6 @@ const ROUTES = {
     exact: true
   },
   PROJECTS_EDIT: {
-    protect: true,
     render: () => (
       <>
         <Header />
@@ -165,7 +141,6 @@ const ROUTES = {
 
   // route for user's personal badges
   PERSONAL_BADGES_ALL: {
-    protect: true,
     render: () => (
       <>
         <Header />
@@ -177,8 +152,8 @@ const ROUTES = {
   }
 }
 
-const ROUTES_VALUE = Object.values(ROUTES)
-const ROUTES_KEYS = Object.keys(ROUTES)
+const PROTECTED_ROUTES_VALUE = Object.values(PROTECTED_ROUTES)
+const PROTECTED_ROUTES_KEYS = Object.keys(PROTECTED_ROUTES)
 
-export default ROUTES
-export { ROUTES_VALUE, ROUTES_KEYS }
+export default PROTECTED_ROUTES
+export { PROTECTED_ROUTES_VALUE, PROTECTED_ROUTES_KEYS }

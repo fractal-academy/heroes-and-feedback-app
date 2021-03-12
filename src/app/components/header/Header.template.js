@@ -1,4 +1,4 @@
-import { Col, Row } from '@qonsoll/react-design'
+import { Row } from '@qonsoll/react-design'
 import { Button } from 'antd'
 import { logOut } from 'app/services/Auth'
 

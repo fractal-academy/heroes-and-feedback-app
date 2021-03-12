@@ -7,7 +7,7 @@ import {
   useState
 } from 'react'
 import { Spin } from 'antd'
-import { Row, Col, Container, Box } from '@qonsoll/react-design'
+import { Row, Box } from '@qonsoll/react-design'
 
 const UserAuthContext = createContext()
 const UserAuthDispatchContext = createContext()
@@ -58,7 +58,7 @@ const useUserAuthContext = () => {
 
   if (context === undefined) {
     throw new Error(
-      'useStaffingCandidateState must be used within a StaffingCandidateContext.Provider'
+      'useUserAuthContext must be used within a UserAuthContext.Provider'
     )
   }
 
@@ -68,7 +68,7 @@ function useUserAuthDispatch() {
   const context = useContext(UserAuthDispatchContext)
   if (context === undefined) {
     throw new Error(
-      'useStaffingCandidateDispatch must be used within a StaffingCandidateContext.Provider'
+      'useUserAuthDispatch must be used within a UserAuthContext.Provider'
     )
   }
 

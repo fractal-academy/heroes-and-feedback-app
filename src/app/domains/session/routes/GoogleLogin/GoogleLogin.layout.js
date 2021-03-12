@@ -1,7 +1,7 @@
-import { Box, Container, Row, Col } from '@qonsoll/react-design'
+import { Row, Col } from '@qonsoll/react-design'
 import { SessionSimpleView } from 'app/domains/Session/components/views'
 
-const SessionLogin = (props) => {
+const GoogleLogin = (props) => {
   return (
     <Row h="center" v="center" height="100vh" m={2}>
       <Col v="center">
@@ -11,4 +11,4 @@ const SessionLogin = (props) => {
   )
 }
 
-export default SessionLogin
+export default GoogleLogin
