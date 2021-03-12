@@ -1,7 +1,7 @@
 import { UserList } from 'app/domains/User/components/list'
 import { Header } from 'app/components'
 
-const UserAll = (props) => {
+const UsersAll = (props) => {
   return (
     <>
       <Header />
@@ -10,4 +10,4 @@ const UserAll = (props) => {
   )
 }
 
-export default UserAll
+export default UsersAll

@@ -1,7 +1,7 @@
 import { PersonalBadgeList } from 'app/domains/PersonalBadge/components/list'
 import { Header } from 'app/components'
 
-const PersonalBadgeAll = (props) => {
+const PersonalBadgesAll = (props) => {
   return (
     <>
       <Header />
@@ -10,4 +10,4 @@ const PersonalBadgeAll = (props) => {
   )
 }
 
-export default PersonalBadgeAll
+export default PersonalBadgesAll

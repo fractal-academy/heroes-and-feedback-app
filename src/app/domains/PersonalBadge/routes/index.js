@@ -1,3 +1,3 @@
-import { PersonalBadgeAll } from './PersonalBadgeAll'
+import { PersonalBadgesAll } from './PersonalBadgesAll'
 
-export { PersonalBadgeAll }
+export { PersonalBadgesAll }

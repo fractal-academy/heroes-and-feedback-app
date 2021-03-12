@@ -1,5 +1,5 @@
-import { ProjectAll } from './ProjectAll'
+import { ProjectsAll } from './ProjectsAll'
 import { ProjectEdit } from './ProjectEdit'
 import { ProjectShow } from './ProjectShow'
 
-export { ProjectAll, ProjectEdit, ProjectShow }
+export { ProjectsAll, ProjectEdit, ProjectShow }

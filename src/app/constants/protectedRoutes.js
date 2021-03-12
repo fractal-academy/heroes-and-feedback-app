@@ -1,13 +1,13 @@
-import { PersonalBadgeAll } from 'app/domains/PersonalBadge/routes'
-import { UserAll, UserEdit, UserShow } from 'app/domains/User/routes'
-import { BadgeAll, BadgeEdit, BadgeShow } from 'app/domains/Badge/routes'
+import { PersonalBadgesAll } from 'app/domains/PersonalBadge/routes'
+import { UsersAll, UserEdit, UserShow } from 'app/domains/User/routes'
+import { BadgesAll, BadgeEdit, BadgeShow } from 'app/domains/Badge/routes'
 import {
-  ProjectAll,
+  ProjectsAll,
   ProjectEdit,
   ProjectShow
 } from 'app/domains/Project/routes'
 import {
-  CompanyAll,
+  CompaniesAll,
   CompanyEdit,
   CompanyShow
 } from 'app/domains/Company/routes'
@@ -15,8 +15,8 @@ import ROUTES_PATHS from './routePaths'
 
 const PROTECTED_ROUTES = {
   // user entity routes
-  USER_ALL: {
-    component: UserAll,
+  USERS_ALL: {
+    component: UsersAll,
     path: ROUTES_PATHS.USERS_ALL,
     exact: true
   },
@@ -31,8 +31,8 @@ const PROTECTED_ROUTES = {
   },
 
   // badge entity routes
-  BADGE_ALL: {
-    component: BadgeAll,
+  BADGES_ALL: {
+    component: BadgesAll,
     path: ROUTES_PATHS.BADGES_ALL,
     exact: true
   },
@@ -47,8 +47,8 @@ const PROTECTED_ROUTES = {
   },
 
   // company entity routes
-  COMPANY_ALL: {
-    component: CompanyAll,
+  COMPANIES_ALL: {
+    component: CompaniesAll,
     path: ROUTES_PATHS.COMPANIES_ALL,
     exact: true
   },
@@ -63,8 +63,8 @@ const PROTECTED_ROUTES = {
   },
 
   // project entity routes
-  PROJECT_ALL: {
-    component: ProjectAll,
+  PROJECTS_ALL: {
+    component: ProjectsAll,
     path: ROUTES_PATHS.PROJECTS_ALL,
     exact: true
   },
@@ -79,8 +79,8 @@ const PROTECTED_ROUTES = {
   },
 
   // route for user's personal badges
-  PERSONAL_BADGE_ALL: {
-    component: PersonalBadgeAll,
+  PERSONAL_BADGES_ALL: {
+    component: PersonalBadgesAll,
     path: ROUTES_PATHS.PERSONAL_BADGES_ALL,
     exact: true
   }

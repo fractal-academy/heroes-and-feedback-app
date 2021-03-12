@@ -1,5 +1,5 @@
-import { CompanyAll } from './CompanyAll'
+import { CompaniesAll } from './CompaniesAll'
 import { CompanyEdit } from './CompanyEdit'
 import { CompanyShow } from './CompanyShow'
 
-export { CompanyAll, CompanyEdit, CompanyShow }
+export { CompaniesAll, CompanyEdit, CompanyShow }

@@ -1,7 +1,7 @@
 import { CompanyList } from 'app/domains/Company/components/list'
 import { Header } from 'app/components'
 
-const CompanyAll = (props) => {
+const CompaniesAll = (props) => {
   return (
     <>
       <Header />
@@ -10,4 +10,4 @@ const CompanyAll = (props) => {
   )
 }
 
-export default CompanyAll
+export default CompaniesAll

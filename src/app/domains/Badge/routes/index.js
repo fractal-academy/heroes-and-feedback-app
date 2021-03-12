@@ -1,5 +1,5 @@
-import { BadgeAll } from './BadgeAll'
+import { BadgesAll } from './BadgesAll'
 import { BadgeEdit } from './BadgeEdit'
 import { BadgeShow } from './BadgeShow'
 
-export { BadgeAll, BadgeEdit, BadgeShow }
+export { BadgesAll, BadgeEdit, BadgeShow }

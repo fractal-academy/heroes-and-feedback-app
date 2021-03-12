@@ -1,7 +1,7 @@
 import { ProjectList } from 'app/domains/Project/components/list'
 import { Header } from 'app/components'
 
-const ProjectAll = (props) => {
+const ProjectsAll = (props) => {
   return (
     <>
       <Header />
@@ -10,4 +10,4 @@ const ProjectAll = (props) => {
   )
 }
 
-export default ProjectAll
+export default ProjectsAll
