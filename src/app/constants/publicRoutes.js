@@ -4,7 +4,7 @@ import { GoogleLogin } from 'app/domains/Session/routes'
 const PUBLIC_ROUTES = {
   // session entity routes
   LOGIN: {
-    render: () => <GoogleLogin />,
+    component: GoogleLogin,
     path: ROUTES_PATHS.LOGIN,
     exact: true
   },

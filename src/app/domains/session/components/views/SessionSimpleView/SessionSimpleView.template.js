@@ -1,15 +1,13 @@
 import { Button, Typography } from 'antd'
-// import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { GoogleOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { signInWithGoogle } from 'app/services/Auth'
-import { useUserAuthDispatch } from 'app/context'
 
 const { Title, Text, Link } = Typography
 
 const SessionSimpleView = (props) => {
-  // const history = useHistory()
-  const dispatch = useUserAuthDispatch()
+  const history = useHistory()
 
   return (
     <Box
@@ -30,7 +28,7 @@ const SessionSimpleView = (props) => {
           <Button
             type="primary"
             onClick={() => {
-              signInWithGoogle(dispatch)
+              signInWithGoogle(history)
             }}>
             <GoogleOutlined />
             Sign in

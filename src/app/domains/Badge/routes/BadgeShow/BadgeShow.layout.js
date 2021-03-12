@@ -1,5 +1,11 @@
+import { Header } from 'app/components'
+
 const BadgeShow = (props) => {
-  return <></>
+  return (
+    <>
+      <Header />
+    </>
+  )
 }
 
 export default BadgeShow

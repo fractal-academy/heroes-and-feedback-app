@@ -5,6 +5,7 @@ import { useDocumentData } from 'react-firebase-hooks/firestore'
 import { CompanySimpleForm } from 'app/domains/Company/components/form'
 import { COMPANIES } from 'app/constants/collections'
 import { useParams } from 'react-router-dom'
+import { Header } from 'app/components'
 
 const CompanyEdit = (props) => {
   const { id } = useParams()
@@ -21,7 +22,10 @@ const CompanyEdit = (props) => {
   return (
     <>
       {data && citiesData && (
-        <CompanySimpleForm id={id} data={data} addressData={citiesData} />
+        <>
+          <Header />
+          <CompanySimpleForm id={id} data={data} addressData={citiesData} />
+        </>
       )}
     </>
   )
