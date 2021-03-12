@@ -1,7 +1,13 @@
 import { CompanyList } from 'app/domains/Company/components/list'
+import { Header } from 'app/components'
 
 const CompanyAll = (props) => {
-  return <CompanyList />
+  return (
+    <>
+      <Header />
+      <CompanyList />
+    </>
+  )
 }
 
 export default CompanyAll

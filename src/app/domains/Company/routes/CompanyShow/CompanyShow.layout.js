@@ -1,5 +1,11 @@
+import { Header } from 'app/components'
+
 const CompanyShow = (props) => {
-  return <></>
+  return (
+    <>
+      <Header />
+    </>
+  )
 }
 
 export default CompanyShow

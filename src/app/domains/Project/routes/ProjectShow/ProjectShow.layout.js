@@ -1,5 +1,11 @@
+import { Header } from 'app/components'
+
 const ProjectShow = (props) => {
-  return <></>
+  return (
+    <>
+      <Header />
+    </>
+  )
 }
 
 export default ProjectShow

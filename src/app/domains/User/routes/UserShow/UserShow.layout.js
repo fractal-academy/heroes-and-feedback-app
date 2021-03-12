@@ -1,5 +1,11 @@
+import { Header } from 'app/components'
+
 const UserShow = (props) => {
-  return <></>
+  return (
+    <>
+      <Header />
+    </>
+  )
 }
 
 export default UserShow

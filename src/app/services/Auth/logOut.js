@@ -1,9 +1,12 @@
 import { auth } from 'app/services/Firebase'
 
-const logOut = () => {
-  auth.signOut().catch((error) => {
-    console.log(error.message)
-  })
+const logOut = (history) => {
+  auth
+    .signOut()
+    .then(() => history.push('/login'))
+    .catch((error) => {
+      console.log(error.message)
+    })
 }
 
 export default logOut
