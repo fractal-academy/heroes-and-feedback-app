@@ -1,6 +1,6 @@
 import { COMPANIES } from 'app/constants/collections'
 import { AddressSelect, ImageUploader } from 'app/components'
-import { setData } from 'app/services/Firestore'
+import { firestore, setData } from 'app/services/Firestore'
 import { Form, Input, Button } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
 import { Box } from '@qonsoll/react-design'
@@ -13,11 +13,14 @@ const CompanySimpleForm = (props) => {
   const [formRef] = Form.useForm()
 
   // HELPER FUNCTIONS
+  const companyId = id || firestore.collection(COMPANIES).doc().id
+
   const onFormSubmitFinish = (values) => {
     setData(COMPANIES, id, {
-      image: values.image,
+      id: companyId,
+      image: values.image || '',
       name: values.companyName,
-      description: values.companyDescription,
+      description: values.companyDescription || '',
       address: {
         country: values.companyAddress?.selectedCountry,
         city: values.companyAddress?.selectedCity
@@ -33,19 +36,19 @@ const CompanySimpleForm = (props) => {
         onFinish={onFormSubmitFinish}
         layout="vertical"
         initialValues={{
-          image: data.image,
-          companyName: data.name,
-          companyDescription: data.description,
+          image: data?.image,
+          companyName: data?.name,
+          companyDescription: data?.description,
           companyAddress: {
-            selectedCountry: data.address?.country,
-            selectedCity: data.address?.city
+            selectedCountry: data?.address?.country,
+            selectedCity: data?.address?.city
           }
         }}>
         <Form.Item name="image">
           <ImageUploader
             shape="enterprise"
-            name={data.name}
-            src={data.image}
+            name={data?.name}
+            src={data?.image}
             itemId={id}
             size={150}
           />
@@ -54,7 +57,8 @@ const CompanySimpleForm = (props) => {
           <Form.Item
             name="companyName"
             label="Company Name"
-            placeholder="Enter company name">
+            placeholder="Enter company name"
+            rules={[{ required: true, message: 'Company name is required.' }]}>
             <Input />
           </Form.Item>
         </Box>

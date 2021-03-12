@@ -1,6 +1,11 @@
 import { PersonalBadgeAll } from 'app/domains/PersonalBadge/routes'
 import { UserAll, UserEdit, UserShow } from 'app/domains/User/routes'
-import { BadgeAll, BadgeEdit, BadgeShow } from 'app/domains/Badge/routes'
+import {
+  BadgeAll,
+  BadgeEdit,
+  BadgeShow,
+  BadgeCreate
+} from 'app/domains/Badge/routes'
 import {
   ProjectAll,
   ProjectEdit,
@@ -9,7 +14,8 @@ import {
 import {
   CompanyAll,
   CompanyEdit,
-  CompanyShow
+  CompanyShow,
+  CompanyCreate
 } from 'app/domains/Company/routes'
 import { Header } from 'app/components'
 import ROUTES_PATHS from './routePaths'
@@ -57,6 +63,15 @@ const PROTECTED_ROUTES = {
     path: ROUTES_PATHS.BADGES_ALL,
     exact: true
   },
+  BADGES_CREATE: {
+    render: () => (
+      <>
+        <Header />
+        <BadgeCreate />
+      </>
+    ),
+    path: ROUTES_PATHS.BADGE_CREATE
+  },
   BADGES_SHOW: {
     render: () => (
       <>
@@ -87,6 +102,15 @@ const PROTECTED_ROUTES = {
     ),
     path: ROUTES_PATHS.COMPANIES_ALL,
     exact: true
+  },
+  COMPANIES_CREATE: {
+    render: () => (
+      <>
+        <Header />
+        <CompanyCreate />
+      </>
+    ),
+    path: ROUTES_PATHS.COMPANY_CREATE
   },
   COMPANIES_SHOW: {
     render: () => (

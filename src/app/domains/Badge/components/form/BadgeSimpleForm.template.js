@@ -1,6 +1,6 @@
 import { BADGES } from 'app/constants/collections'
 import { ImageUploader } from 'app/components'
-import { setData } from 'app/services/Firestore'
+import { firestore, setData } from 'app/services/Firestore'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { useState } from 'react'
 import { Box } from '@qonsoll/react-design'
@@ -10,18 +10,21 @@ const BadgeSimpleForm = (props) => {
   const { id, data } = props
 
   // STATE
-  const [upgradable, setUpgradable] = useState(Boolean(data.nextLvl))
+  const [upgradable, setUpgradable] = useState(Boolean(data?.nextLvl))
 
   // CUSTOM HOOKS
   const [formRef] = Form.useForm()
 
   // HELPER FUNCTIONS
+  const badgeId = id || firestore.collection(BADGES).doc().id
+
   const onFormSubmitFinish = (values) => {
     setData(BADGES, id, {
-      image: values.image,
+      id: badgeId,
+      image: values.image || '',
       name: values.badgeName,
-      description: values.badgeDescription,
-      experience: values.badgeExperience
+      description: values.badgeDescription || '',
+      experience: values.badgeExperience || 0
     })
   }
 
@@ -33,17 +36,17 @@ const BadgeSimpleForm = (props) => {
         onFinish={onFormSubmitFinish}
         layout="vertical"
         initialValues={{
-          image: data.image,
-          badgeName: data.name,
-          badgeDescription: data.description,
-          badgeExperience: data.experience,
-          badgeNextLvl: data.nextLvl || 2
+          image: data?.image,
+          badgeName: data?.name,
+          badgeDescription: data?.description,
+          badgeExperience: data?.experience,
+          badgeNextLvl: data?.nextLvl || 2
         }}>
         <Form.Item name="image">
           <ImageUploader
             shape="badge"
-            name={data.name}
-            src={data.image}
+            name={data?.name}
+            src={data?.image}
             itemId={id}
             size={100}
           />
@@ -52,7 +55,8 @@ const BadgeSimpleForm = (props) => {
           <Form.Item
             name="badgeName"
             label="Badge Name"
-            placeholder="Enter badge name">
+            placeholder="Enter badge name"
+            rules={[{ required: true, message: 'Badge name is required.' }]}>
             <Input />
           </Form.Item>
         </Box>
