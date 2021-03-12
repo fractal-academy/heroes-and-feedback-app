@@ -1,10 +1,7 @@
 import { List } from 'app/components'
-import { firestore } from 'app/services'
-import { BADGES } from 'app/constants/collections'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const BadgeList = (props) => {
-  const [data] = useCollectionData(firestore.collection(BADGES))
+  const { data } = props
 
   return <List type="badge" data={data} />
 }

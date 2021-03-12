@@ -1,8 +1,9 @@
 import moment from 'moment'
 import { PropTypes } from 'prop-types'
 import { CustomAvatar } from 'app/components'
-import { Typography, Progress, Badge } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
+// import { EditOutlined } from '@ant-design/icons'
+import { Typography, Progress, Badge } from 'antd'
 
 const { Title, Text } = Typography
 
@@ -89,13 +90,13 @@ const Card = (props) => {
       shape: 'enterprise',
       layout: (
         <Col>
-          <Box textAlign="justify" mb={4}>
-            <Text>{data.description}</Text>
-          </Box>
-          <Box textAlign="center">
+          <Box textAlign="center" mb={2}>
             <Text type="secondary">
               {data.address?.city}, {data.address?.country}
             </Text>
+          </Box>
+          <Box textAlign="justify">
+            <Text>{data.description}</Text>
           </Box>
         </Col>
       )
@@ -116,42 +117,40 @@ const Card = (props) => {
     }
   }
 
-  const shape = cardTypeMap[type].shape
   const name = cardTypeMap[type].name
+  const shape = cardTypeMap[type].shape
 
   return (
-    <Row>
-      <Col>
-        <Row h="center" m={4}>
-          <Col cw="auto">
-            <CustomAvatar shape={shape} size={125} src={data.image} />
-          </Col>
-        </Row>
-        <Row mb={2}>
-          <Col>
-            <Box textAlign="center" verticalAlign="center">
-              <Title level={2}>
-                {name}{' '}
-                {(type === 'badge' || type === 'personalBadge') && (
-                  <Badge
-                    count={`+${data.lvlExperience} EXP`}
-                    overflowCount={1000}
-                    style={{ backgroundColor: '#87d068' }}
-                  />
-                )}
-              </Title>
-            </Box>
-          </Col>
-        </Row>
-        <Row>{cardTypeMap[type].layout}</Row>
-      </Col>
-    </Row>
+    <>
+      <Row h="center" m={4}>
+        <Col cw="auto">
+          <CustomAvatar shape={shape} size={125} src={data.image} name={name} />
+        </Col>
+      </Row>
+      <Row mb={2}>
+        <Col>
+          <Box textAlign="center" verticalAlign="center">
+            <Title level={2}>
+              {name}{' '}
+              {(type === 'badge' || type === 'personalBadge') && (
+                <Badge
+                  count={`+${data.lvlExperience} EXP`}
+                  overflowCount={1000}
+                  style={{ backgroundColor: '#87d068' }}
+                />
+              )}
+            </Title>
+          </Box>
+        </Col>
+      </Row>
+      <Row>{cardTypeMap[type].layout}</Row>
+    </>
   )
 }
 
 Card.propTypes = {
   type: PropTypes.string.isRequired,
-  data: PropTypes.object
+  data: PropTypes.object.isRequired
 }
 
 export default Card

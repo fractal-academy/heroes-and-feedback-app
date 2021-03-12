@@ -1,10 +1,7 @@
 import { List } from 'app/components'
-import { firestore } from 'app/services'
-import { PROJECTS } from 'app/constants/collections'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const ProjectList = (props) => {
-  const [data] = useCollectionData(firestore.collection(PROJECTS))
+  const { data } = props
 
   return <List type="project" data={data} />
 }

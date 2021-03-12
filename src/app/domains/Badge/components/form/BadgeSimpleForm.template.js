@@ -45,7 +45,7 @@ const BadgeSimpleForm = (props) => {
             name={data.name}
             src={data.image}
             itemId={id}
-            size={250}
+            size={100}
           />
         </Form.Item>
         <Box marginY={2}>

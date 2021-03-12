@@ -1,6 +1,5 @@
 import 'antd/dist/antd.css'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Layout } from 'antd'
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
 import { ROUTES_PATHS, ROUTES_VALUE } from 'app/constants'
 import {
@@ -24,7 +23,7 @@ const App = () => {
         </Switch>
 
         {/* Temporary tool */}
-        <Layout.Footer
+        <Box
           style={{
             display: 'flex',
             justifyContent: 'space-around',
@@ -58,7 +57,7 @@ const App = () => {
             onClick={() => history.push(ROUTES_PATHS.PROJECTS_ALL)}>
             <StarOutlined />
           </Box>
-        </Layout.Footer>
+        </Box>
       </Col>
     </Row>
   )

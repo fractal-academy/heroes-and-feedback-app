@@ -19,8 +19,8 @@ const CompanySimpleForm = (props) => {
       name: values.companyName,
       description: values.companyDescription,
       address: {
-        country: values.companyAddress.selectedCountry,
-        city: values.companyAddress.selectedCity
+        country: values.companyAddress?.selectedCountry,
+        city: values.companyAddress?.selectedCity
       }
     })
   }
@@ -37,8 +37,8 @@ const CompanySimpleForm = (props) => {
           companyName: data.name,
           companyDescription: data.description,
           companyAddress: {
-            selectedCountry: data.address.country,
-            selectedCity: data.address.city
+            selectedCountry: data.address?.country,
+            selectedCity: data.address?.city
           }
         }}>
         <Form.Item name="image">
@@ -47,7 +47,7 @@ const CompanySimpleForm = (props) => {
             name={data.name}
             src={data.image}
             itemId={id}
-            size={250}
+            size={150}
           />
         </Form.Item>
         <Box marginY={2}>

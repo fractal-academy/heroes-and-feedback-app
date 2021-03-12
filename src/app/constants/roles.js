@@ -7,7 +7,7 @@ const PROJECT_ROLES = {
   ADMIN: 'Admin',
   COMPANY_MANAGER: 'companyManager',
   PROJECT_MANAGER: 'projectManager',
-  EMPLOYE: 'employe',
+  EMPLOYEE: 'employe',
   CUSTOMER: 'customer'
 }
 

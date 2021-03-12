@@ -51,7 +51,7 @@ const UserSimpleForm = (props) => {
               src={data.image}
               collection="users"
               itemId={id}
-              size={250}
+              size={150}
             />
           </Form.Item>
           <Box marginY={2}>
