@@ -1,6 +1,6 @@
-import { CompanyAll } from './CompanyAll'
+import { CompaniesAll } from './CompaniesAll'
 import { CompanyEdit } from './CompanyEdit'
 import { CompanyShow } from './CompanyShow'
 import { CompanyCreate } from './CompanyCreate'
 
-export { CompanyAll, CompanyEdit, CompanyShow, CompanyCreate }
+export { CompaniesAll, CompanyEdit, CompanyShow, CompanyCreate }

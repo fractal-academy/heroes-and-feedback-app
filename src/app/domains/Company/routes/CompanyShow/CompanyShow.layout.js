@@ -1,3 +1,4 @@
+import { Header } from 'app/components'
 import { useParams } from 'react-router-dom'
 import { getCollectionRef } from 'app/services/Firestore'
 import { COMPANIES, PROJECTS } from 'app/constants/collections'
@@ -18,6 +19,7 @@ const CompanyShow = (props) => {
 
   return (
     <>
+      <Header />
       {companyData && (
         <CompanyCombined data={companyData} subdata={projectsData} />
       )}

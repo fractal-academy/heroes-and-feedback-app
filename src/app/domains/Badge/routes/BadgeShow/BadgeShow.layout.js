@@ -1,3 +1,4 @@
+import { Header } from 'app/components'
 import { useParams } from 'react-router-dom'
 import { BADGES } from 'app/constants/collections'
 import { getCollectionRef } from 'app/services/Firestore'
@@ -8,7 +9,12 @@ const BadgeShow = (props) => {
   const { id } = useParams()
 
   const [data] = useDocumentData(getCollectionRef(BADGES).doc(id))
-  return <>{data && <BadgeAdvancedView data={data} />}</>
+  return (
+    <>
+      <Header />
+      {data && <BadgeAdvancedView data={data} />}
+    </>
+  )
 }
 
 export default BadgeShow
