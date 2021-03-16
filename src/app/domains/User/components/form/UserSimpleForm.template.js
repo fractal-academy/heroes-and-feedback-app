@@ -30,7 +30,7 @@ const UserSimpleForm = (props) => {
 
     setData(USERS, userId, {
       id: userId,
-      role: data?.role || 'User',
+      role: values.role.selectedOption || 'User',
       currentExp: data?.currentExp || 0,
       image: values.image || '',
       firstName: values.firstName,

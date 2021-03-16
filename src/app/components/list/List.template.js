@@ -17,11 +17,12 @@ const CustomList = (props) => {
     data && setCurrentData(data)
   }, [data])
 
+  const fuse = new Fuse(data, { keys: ['name'] })
+
   // CUSTOM HOOKS
   const searchRef = useRef()
 
   const searchData = () => {
-    const fuse = new Fuse(currentData, { keys: ['name'] })
     if (searchRef.current.input.value) {
       const searchRes = fuse.search(searchRef.current.input.value)
       setCurrentData(searchRes.map((item) => item.item))

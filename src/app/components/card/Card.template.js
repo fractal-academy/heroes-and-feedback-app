@@ -14,11 +14,12 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography, Progress, Badge, Button } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { deleteData } from 'app/services'
+import { PersonalBadgeSimpleForm } from 'app/domains/PersonalBadge/components/form'
 
 const { Title, Text } = Typography
 
 const Card = (props) => {
-  const { type, data } = props
+  const { type, data, userId } = props
 
   const history = useHistory()
 
@@ -161,6 +162,9 @@ const Card = (props) => {
                 icon={<EditOutlined />}
                 onClick={() => history.push(path)}
               />
+            </Box>
+            <Box mr={1}>
+              <PersonalBadgeSimpleForm userId={userId} />
             </Box>
             <Button
               type="primary"

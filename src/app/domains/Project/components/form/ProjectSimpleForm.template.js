@@ -27,81 +27,89 @@ const ProjectSimpleForm = (props) => {
       image: values.image || '',
       name: values.projectName,
       description: values.projectDescription || '',
-      companyId: ''
+      companyId: values.companyId.id,
+      companyName: values.companyId.selectedOption
     }).then(history.goBack())
   }
 
   // TEMPLATE
   return (
-    <Row h="center">
-      <Col cw="8">
-        <Form
-          form={formRef}
-          onFinish={onFormSubmitFinish}
-          layout="vertical"
-          initialValues={{
-            image: data?.image,
-            projectName: data?.name,
-            projectDescription: data?.description
-          }}>
-          <Form.Item name="image">
-            <ImageUploader
-              shape="enterprise"
-              name={data?.name}
-              src={data?.image}
-              itemId={id}
-              size={170}
-            />
-          </Form.Item>
-
-          <Box my={2}>
-            <Form.Item
-              name="projectName"
-              label="Project Name"
-              placeholder="Enter company name"
-              rules={[
-                { required: true, message: 'Project name is required.' }
-              ]}>
-              <Input />
-            </Form.Item>
-          </Box>
-
-          <Box my={2}>
-            <Form.Item
-              name="companyId"
-              label="Company"
-              placeholder="Description">
-              <CompanySelect data={companies} />
-            </Form.Item>
-          </Box>
-
-          <Box my={2}>
-            <Form.Item
-              name="projectDescription"
-              label="Description"
-              placeholder="Description">
-              <TextArea rows={5} />
-            </Form.Item>
-          </Box>
-
-          <Box display="flex" mb={2}>
-            <Box mr={1}>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-            </Box>
-            <Button
-              type="primary"
-              danger
-              onClick={() => {
-                history.goBack()
+    <>
+      {companies && (
+        <Row h="center">
+          <Col cw="8">
+            <Form
+              form={formRef}
+              onFinish={onFormSubmitFinish}
+              layout="vertical"
+              initialValues={{
+                image: data?.image,
+                projectName: data?.name,
+                projectDescription: data?.description,
+                companyId: {
+                  id: data?.companyId,
+                  selectedOption: data?.companyName
+                }
               }}>
-              Cancel
-            </Button>
-          </Box>
-        </Form>
-      </Col>
-    </Row>
+              <Form.Item name="image">
+                <ImageUploader
+                  shape="enterprise"
+                  name={data?.name}
+                  src={data?.image}
+                  itemId={id}
+                  size={170}
+                />
+              </Form.Item>
+
+              <Box my={2}>
+                <Form.Item
+                  name="projectName"
+                  label="Project Name"
+                  placeholder="Enter company name"
+                  rules={[
+                    { required: true, message: 'Project name is required.' }
+                  ]}>
+                  <Input />
+                </Form.Item>
+              </Box>
+              <Box my={2}>
+                <Form.Item
+                  name="companyId"
+                  label="Company"
+                  placeholder="Description">
+                  <CompanySelect data={companies} />
+                </Form.Item>
+              </Box>
+
+              <Box my={2}>
+                <Form.Item
+                  name="projectDescription"
+                  label="Description"
+                  placeholder="Description">
+                  <TextArea rows={5} />
+                </Form.Item>
+              </Box>
+
+              <Box display="flex" mb={2}>
+                <Box mr={1}>
+                  <Button type="primary" htmlType="submit">
+                    Submit
+                  </Button>
+                </Box>
+                <Button
+                  type="primary"
+                  danger
+                  onClick={() => {
+                    history.goBack()
+                  }}>
+                  Cancel
+                </Button>
+              </Box>
+            </Form>
+          </Col>
+        </Row>
+      )}
+    </>
   )
 }
 

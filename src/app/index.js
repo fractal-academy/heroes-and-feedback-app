@@ -37,16 +37,16 @@ const App = () => {
             <Layout style={{ background: '#fff' }}>
               {user && <Navigation />}
               <Layout.Content>
+                {currentRoutes.routes.map((route) => (
+                  <Route key={route.path} {...route} />
+                ))}
                 <Route
                   exact
                   path="/"
                   render={() => {
-                    return <Redirect to={currentRoutes.default} />
+                    return <Redirect to={user ? '/companies' : '/login'} />
                   }}
                 />
-                {currentRoutes.routes.map((route) => (
-                  <Route key={route.path} {...route} />
-                ))}
               </Layout.Content>
             </Layout>
           </Switch>

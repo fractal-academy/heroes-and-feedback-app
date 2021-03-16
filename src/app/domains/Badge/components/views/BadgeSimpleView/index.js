@@ -1,3 +1,3 @@
-import { UserAdvancedView } from './UserAdvancedView'
+import BadgeSimpleView from './BadgeSimpleView.template'
 
-export { UserAdvancedView }
+export { BadgeSimpleView }

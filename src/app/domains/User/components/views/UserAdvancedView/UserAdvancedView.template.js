@@ -7,7 +7,7 @@ const UserAdvancedView = (props) => {
 
   return (
     <>
-      <Card data={data} type="user" />
+      <Card data={data} type="user" userId={id} />
       <Box>
         <PersonalBadgeList userId={id} />
       </Box>

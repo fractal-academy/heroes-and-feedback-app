@@ -25,15 +25,7 @@ const Navigation = () => {
     <Row h="center" mr={2}>
       <Col cw="auto">
         <Layout.Sider>
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            style={{
-              position: 'absolute',
-              top: '50%',
-              display: 'flex',
-              flexDirection: 'column'
-            }}>
+          <Menu mode="inline" defaultSelectedKeys={['1']}>
             <Item key="0" onClick={() => history.push(path)}>
               <UserSimpleView />
             </Item>
