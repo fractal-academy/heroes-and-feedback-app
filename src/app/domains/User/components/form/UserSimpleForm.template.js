@@ -5,7 +5,7 @@ import { USERS } from 'app/constants/collections'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Form, Input, Button, DatePicker } from 'antd'
 import { firestore, setData, getTimestamp } from 'app/services/Firestore'
-// import AppRoleSelect from 'app/domains/Role/components/AppRoleSelect.template'
+import AppRoleSelect from 'app/domains/Role/components/AppRoleSelect.template'
 
 const UserSimpleForm = (props) => {
   // INTERFACE
@@ -118,11 +118,11 @@ const UserSimpleForm = (props) => {
                 <DatePicker size="large" />
               </Form.Item>
             </Col>
-            {/* <Col cw="5">
+            <Col cw="5">
               <Form.Item name="role" label="Role" rules={[{ required: true }]}>
                 <AppRoleSelect />
               </Form.Item>
-            </Col> */}
+            </Col>
           </Row>
 
           <Box display="flex" mb={2}>

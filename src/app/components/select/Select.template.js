@@ -10,8 +10,8 @@ const CustomSelect = (props) => {
   return (
     <Select>
       {data?.map((item) => (
-        <Option value={item.name} key={item.id}>
-          {item.name}
+        <Option value={item.name || item} key={item.name || item}>
+          {item.name || item}
         </Option>
       ))}
     </Select>

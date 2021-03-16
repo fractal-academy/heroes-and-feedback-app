@@ -28,7 +28,12 @@ const Navigation = () => {
           <Menu
             mode="inline"
             defaultSelectedKeys={['1']}
-            style={{ position: 'absolute', top: '50%' }}>
+            style={{
+              position: 'absolute',
+              top: '50%',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
             <Item key="0" onClick={() => history.push(path)}>
               <UserSimpleView />
             </Item>

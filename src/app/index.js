@@ -30,7 +30,7 @@ const App = () => {
   }, [user])
 
   return (
-    <Row noGutters h="center" mt={4}>
+    <Row noGutters h="center" pt={4}>
       <Col cw={['12', '11', '11', '11', '11', '11']}>
         <Router>
           <Switch>
