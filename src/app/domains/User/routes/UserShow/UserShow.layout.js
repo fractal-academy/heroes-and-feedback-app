@@ -12,7 +12,7 @@ const UserShow = (props) => {
 
   return (
     <Row noGutters h="center">
-      <Col cw="9">{data && <UserAdvancedView data={data} />} </Col>
+      <Col cw="9">{data && <UserAdvancedView data={data} id={id} />} </Col>
     </Row>
   )
 }
