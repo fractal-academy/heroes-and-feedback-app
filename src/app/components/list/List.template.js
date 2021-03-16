@@ -1,14 +1,31 @@
-// import Fuse from 'fuse.js'
+import Fuse from 'fuse.js'
 import { Item } from 'app/components'
 import { PropTypes } from 'prop-types'
 import { List, Divider, Input } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import { useEffect, useRef, useState } from 'react'
 
 const CustomList = (props) => {
+  // INTERFACE
   const { type, data } = props
 
+  // STATE
+  const [currentData, setCurrentData] = useState(data)
+
+  // USE EFFECTS
+  useEffect(() => {
+    data && setCurrentData(data)
+  }, [data])
+
+  // CUSTOM HOOKS
+  const searchRef = useRef()
+
   const searchData = () => {
-    return
+    const fuse = new Fuse(currentData, { keys: ['name'] })
+    if (searchRef.current.input.value) {
+      const searchRes = fuse.search(searchRef.current.input.value)
+      setCurrentData(searchRes.map((item) => item.item))
+    } else setCurrentData(data)
   }
 
   return (
@@ -17,6 +34,7 @@ const CustomList = (props) => {
         <Box my={4}></Box>
         <Box mb={2}>
           <Input.Search
+            ref={searchRef}
             placeholder="input search text"
             onSearch={searchData}
             enterButton
@@ -24,7 +42,7 @@ const CustomList = (props) => {
         </Box>
         <List
           itemLayout="horizontal"
-          dataSource={data}
+          dataSource={currentData}
           renderItem={(item) => (
             <>
               <Item type={type} data={item} />

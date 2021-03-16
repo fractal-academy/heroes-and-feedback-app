@@ -16,7 +16,9 @@ const UserSimpleForm = (props) => {
   const [formRef] = Form.useForm()
 
   // COMPUTED PROPERTIES
-  const editedBirthday = moment(data?.birthday?.toDate().getTime())
+  const editedBirthday = data.birthday
+    ? moment(data.birthday.toDate().getTime())
+    : moment()
 
   // HELPER FUNCTIONS
   const userId = id || firestore.collection(USERS).doc().id

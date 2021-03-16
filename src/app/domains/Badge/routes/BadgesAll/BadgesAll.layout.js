@@ -19,7 +19,7 @@ const BadgesAll = (props) => {
         }}>
         + Add
       </Button>
-      <BadgeList data={data} />
+      {data && <BadgeList data={data} />}
     </>
   )
 }

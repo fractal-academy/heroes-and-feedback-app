@@ -19,7 +19,7 @@ const ProjectsAll = (props) => {
         }}>
         + Add
       </Button>
-      <ProjectList data={data} />
+      {data && <ProjectList data={data} />}
     </>
   )
 }
