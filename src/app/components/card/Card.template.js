@@ -1,14 +1,26 @@
 import moment from 'moment'
 import { PropTypes } from 'prop-types'
+import { ROUTES_PATHS } from 'app/constants'
+import {
+  USERS,
+  COMPANIES,
+  PROJECTS,
+  PERSONAL_BADGES,
+  BADGES
+} from 'app/constants/collections'
 import { CustomAvatar } from 'app/components'
+import { useHistory } from 'react-router-dom'
 import { Row, Col, Box } from '@qonsoll/react-design'
-// import { EditOutlined } from '@ant-design/icons'
-import { Typography, Progress, Badge } from 'antd'
+import { Typography, Progress, Badge, Button } from 'antd'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
+import { deleteData } from 'app/services'
 
 const { Title, Text } = Typography
 
 const Card = (props) => {
   const { type, data } = props
+
+  const history = useHistory()
 
   const birthday =
     data.birthday && moment(data.birthday.toDate()).format('Do MMMM YYYY')
@@ -20,6 +32,8 @@ const Card = (props) => {
   const cardTypeMap = {
     user: {
       name: `${data.firstName} ${data.surname}`,
+      collection: USERS,
+      path: ROUTES_PATHS.USER_EDIT.replace(':id', data.id),
       shape: 'user',
       layout: (
         <Col>
@@ -45,6 +59,8 @@ const Card = (props) => {
     },
     badge: {
       name: `${data.name}`,
+      collection: BADGES,
+      path: ROUTES_PATHS.BADGE_EDIT.replace(':id', data.id),
       shape: 'badge',
       layout: (
         <Col>
@@ -59,6 +75,8 @@ const Card = (props) => {
     },
     personalBadge: {
       name: `${data.name}`,
+      collection: PERSONAL_BADGES,
+      path: ROUTES_PATHS.BADGE_EDIT.replace(':id', data.id),
       shape: 'badge',
       layout: (
         <Col>
@@ -87,6 +105,8 @@ const Card = (props) => {
     },
     company: {
       name: `${data.name}`,
+      collection: COMPANIES,
+      path: ROUTES_PATHS.COMPANY_EDIT.replace(':id', data.id),
       shape: 'enterprise',
       layout: (
         <Col>
@@ -103,6 +123,8 @@ const Card = (props) => {
     },
     project: {
       name: `${data.name}`,
+      collection: PROJECTS,
+      path: ROUTES_PATHS.PROJECT_EDIT.replace(':id', data.id),
       shape: 'enterprise',
       layout: (
         <Col>
@@ -119,14 +141,46 @@ const Card = (props) => {
 
   const name = cardTypeMap[type].name
   const shape = cardTypeMap[type].shape
+  const path = cardTypeMap[type].path
+  const collection = cardTypeMap[type].collection
+
+  const hadleDelete = () => {
+    deleteData(collection, data.id)
+    history.goBack()
+  }
 
   return (
     <>
-      <Row h="center" m={4}>
+      <Row h="center" mb={3} style={{ position: 'relative' }}>
         <Col cw="auto">
-          <CustomAvatar shape={shape} size={125} src={data.image} name={name} />
+          <Box display="flex" position="absolute" right="0">
+            <Box mr={1}>
+              <Button
+                type="primary"
+                shape="circle"
+                icon={<EditOutlined />}
+                onClick={() => history.push(path)}
+              />
+            </Box>
+            <Button
+              type="primary"
+              danger
+              shape="circle"
+              icon={<DeleteOutlined />}
+              onClick={hadleDelete}
+            />
+          </Box>
+          <Box width="auto">
+            <CustomAvatar
+              shape={shape}
+              size={125}
+              src={data.image}
+              name={name}
+            />
+          </Box>
         </Col>
       </Row>
+
       <Row mb={2}>
         <Col>
           <Box textAlign="center" verticalAlign="center">
@@ -134,7 +188,7 @@ const Card = (props) => {
               {name}{' '}
               {(type === 'badge' || type === 'personalBadge') && (
                 <Badge
-                  count={`+${data.lvlExperience} EXP`}
+                  count={`+${data.experience} EXP`}
                   overflowCount={1000}
                   style={{ backgroundColor: '#87d068' }}
                 />
@@ -143,6 +197,7 @@ const Card = (props) => {
           </Box>
         </Col>
       </Row>
+
       <Row>{cardTypeMap[type].layout}</Row>
     </>
   )

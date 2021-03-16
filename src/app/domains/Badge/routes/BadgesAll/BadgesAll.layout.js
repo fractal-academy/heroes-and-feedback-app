@@ -1,4 +1,3 @@
-import { Header } from 'app/components'
 import { Button } from 'antd'
 import { firestore } from 'app/services'
 import { ROUTES_PATHS } from 'app/constants'
@@ -13,7 +12,6 @@ const BadgesAll = (props) => {
   const history = useHistory()
   return (
     <>
-      <Header />
       <Button
         type="primary"
         onClick={() => {

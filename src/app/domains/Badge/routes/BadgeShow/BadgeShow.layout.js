@@ -1,5 +1,5 @@
-import { Header } from 'app/components'
 import { useParams } from 'react-router-dom'
+import { Row, Col } from '@qonsoll/react-design'
 import { BADGES } from 'app/constants/collections'
 import { getCollectionRef } from 'app/services/Firestore'
 import { useDocumentData } from 'react-firebase-hooks/firestore'
@@ -9,11 +9,11 @@ const BadgeShow = (props) => {
   const { id } = useParams()
 
   const [data] = useDocumentData(getCollectionRef(BADGES).doc(id))
+
   return (
-    <>
-      <Header />
-      {data && <BadgeAdvancedView data={data} />}
-    </>
+    <Row noGutters h="center">
+      <Col cw="9">{data && <BadgeAdvancedView data={data} />}</Col>
+    </Row>
   )
 }
 

@@ -1,8 +1,7 @@
-// import { ProjectSimpleForm } from 'app/domains/Project/components/'
+import { ProjectSimpleForm } from 'app/domains/Project/components/form'
 
 const ProjectCreate = (props) => {
-  return <></>
-  // <ProjectSimpleForm />
+  return <ProjectSimpleForm />
 }
 
 export default ProjectCreate

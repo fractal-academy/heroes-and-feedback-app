@@ -1,5 +1,10 @@
 import { PersonalBadgesAll } from 'app/domains/PersonalBadge/routes'
-import { UsersAll, UserEdit, UserShow } from 'app/domains/User/routes'
+import {
+  UsersAll,
+  UserEdit,
+  UserShow,
+  UserCreate
+} from 'app/domains/User/routes'
 import {
   BadgesAll,
   BadgeEdit,
@@ -26,6 +31,10 @@ const PROTECTED_ROUTES = {
     component: UsersAll,
     path: ROUTES_PATHS.USERS_ALL,
     exact: true
+  },
+  USER_CREATE: {
+    component: UserCreate,
+    path: ROUTES_PATHS.USER_CREATE
   },
   USER_SHOW: {
     component: UserShow,

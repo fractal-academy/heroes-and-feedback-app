@@ -12,7 +12,7 @@ const CustomList = (props) => {
   }
 
   return (
-    <Row>
+    <Row noGutters>
       <Col>
         <Box my={4}></Box>
         <Box mb={2}>

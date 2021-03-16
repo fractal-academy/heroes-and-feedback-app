@@ -1,3 +1,1 @@
-import { UserAdvancedView } from './UserAdvancedView'
-
-export { UserAdvancedView }
+export { default as UserSimpleView } from './UserSimpleView.template'

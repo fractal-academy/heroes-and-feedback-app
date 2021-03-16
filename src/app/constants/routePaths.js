@@ -5,6 +5,7 @@ const ROUTES_PATHS = {
   USERS_ALL: '/users',
   USER_SHOW: '/users/:id',
   USER_EDIT: '/users/:id/edit',
+  USER_CREATE: '/user/create',
   // company entity routes
   COMPANIES_ALL: '/companies',
   COMPANY_SHOW: '/companies/:id',

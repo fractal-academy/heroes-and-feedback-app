@@ -1,32 +1,33 @@
 import { Form, Input, Button } from 'antd'
 import { useHistory } from 'react-router-dom'
 import TextArea from 'antd/lib/input/TextArea'
-import { COMPANIES } from 'app/constants/collections'
+import { ImageUploader } from 'app/components'
 import { Box, Row, Col } from '@qonsoll/react-design'
 import { firestore, setData } from 'app/services/Firestore'
-import { AddressSelect, ImageUploader } from 'app/components'
+import { PROJECTS, COMPANIES } from 'app/constants/collections'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { CompanySelect } from 'app/domains/Company/components/select'
 
-const CompanySimpleForm = (props) => {
+const ProjectSimpleForm = (props) => {
   // INTERFACE
-  const { id, data, addressData } = props
+  const { id, data } = props
+
+  const [companies] = useCollectionData(firestore.collection(COMPANIES))
 
   // CUSTOM HOOKS
   const history = useHistory()
   const [formRef] = Form.useForm()
 
   // HELPER FUNCTIONS
-  const companyId = id || firestore.collection(COMPANIES).doc().id
+  const projectId = id || firestore.collection(PROJECTS).doc().id
 
   const onFormSubmitFinish = (values) => {
-    setData(COMPANIES, companyId, {
-      id: companyId,
+    setData(PROJECTS, projectId, {
+      id: projectId,
       image: values.image || '',
-      name: values.companyName,
-      description: values.companyDescription || '',
-      address: {
-        country: values.companyAddress?.selectedCountry,
-        city: values.companyAddress?.selectedCity
-      }
+      name: values.projectName,
+      description: values.projectDescription || '',
+      companyId: ''
     }).then(history.goBack())
   }
 
@@ -40,12 +41,8 @@ const CompanySimpleForm = (props) => {
           layout="vertical"
           initialValues={{
             image: data?.image,
-            companyName: data?.name,
-            companyDescription: data?.description,
-            companyAddress: {
-              selectedCountry: data?.address?.country,
-              selectedCity: data?.address?.city
-            }
+            projectName: data?.name,
+            projectDescription: data?.description
           }}>
           <Form.Item name="image">
             <ImageUploader
@@ -59,11 +56,11 @@ const CompanySimpleForm = (props) => {
 
           <Box my={2}>
             <Form.Item
-              name="companyName"
-              label="Company Name"
+              name="projectName"
+              label="Project Name"
               placeholder="Enter company name"
               rules={[
-                { required: true, message: 'Company name is required.' }
+                { required: true, message: 'Project name is required.' }
               ]}>
               <Input />
             </Form.Item>
@@ -71,16 +68,19 @@ const CompanySimpleForm = (props) => {
 
           <Box my={2}>
             <Form.Item
-              name="companyDescription"
-              label="Description"
+              name="companyId"
+              label="Company"
               placeholder="Description">
-              <TextArea rows={5} />
+              <CompanySelect data={companies} />
             </Form.Item>
           </Box>
 
           <Box my={2}>
-            <Form.Item name="companyAddress" label="Address">
-              <AddressSelect data={addressData} />
+            <Form.Item
+              name="projectDescription"
+              label="Description"
+              placeholder="Description">
+              <TextArea rows={5} />
             </Form.Item>
           </Box>
 
@@ -105,4 +105,4 @@ const CompanySimpleForm = (props) => {
   )
 }
 
-export default CompanySimpleForm
+export default ProjectSimpleForm

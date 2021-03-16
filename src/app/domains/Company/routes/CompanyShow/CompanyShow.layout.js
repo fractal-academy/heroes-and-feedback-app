@@ -1,5 +1,5 @@
-import { Header } from 'app/components'
 import { useParams } from 'react-router-dom'
+import { Row, Col } from '@qonsoll/react-design'
 import { getCollectionRef } from 'app/services/Firestore'
 import { COMPANIES, PROJECTS } from 'app/constants/collections'
 import {
@@ -18,12 +18,13 @@ const CompanyShow = (props) => {
   )
 
   return (
-    <>
-      <Header />
-      {companyData && (
-        <CompanyCombined data={companyData} subdata={projectsData} />
-      )}
-    </>
+    <Row noGutters h="center">
+      <Col cw="9">
+        {companyData && (
+          <CompanyCombined data={companyData} subdata={projectsData} />
+        )}
+      </Col>
+    </Row>
   )
 }
 
