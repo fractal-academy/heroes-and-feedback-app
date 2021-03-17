@@ -1,6 +1,6 @@
 import { Row, Col, Container, Box } from '@qonsoll/react-design'
 import Fuse from 'fuse.js'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Input, Spin } from 'antd'
 
 const GallerySelect = (props) => {
@@ -9,10 +9,15 @@ const GallerySelect = (props) => {
   const [loading, setLoading] = useState(false)
   const [currentData, setCurrentData] = useState(data)
 
+  useEffect(() => {
+    setCurrentData(data)
+  }, [data])
+
   const handleSelect = (item) => {
     setSelected(item)
   }
 
+  const badgeImageSize = 60
   const fuse = new Fuse(data, { keys: ['name'] })
 
   // CUSTOM HOOKS
@@ -44,18 +49,25 @@ const GallerySelect = (props) => {
       {loading ? (
         <Spin />
       ) : (
-        <Row h="center">
-          {currentData?.map((item) => (
-            <Col
-              cw={[6, 4, 3, 2]}
-              onClick={() => {
-                handleSelect(item)
-              }}
-              mb={1}>
-              <Component data={item} selected={selected?.id === item.id} />
-            </Col>
-          ))}
-        </Row>
+        <Container overflowY="auto" overflowX="hidden" maxHeight="40vh">
+          <Row h="center">
+            {currentData?.map((item) => (
+              <Col
+                key={item.id}
+                cw="auto"
+                onClick={() => {
+                  handleSelect(item)
+                }}
+                mb={1}>
+                <Component
+                  data={item}
+                  selected={selected?.id === item.id}
+                  size={badgeImageSize}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Container>
       )}
     </Container>
   )

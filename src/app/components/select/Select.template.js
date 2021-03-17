@@ -4,10 +4,10 @@ import { useState } from 'react'
 const { Option } = Select
 
 const CustomSelect = (props) => {
-  const { data, onChange, value = {} } = props
+  const { data, onChange, value } = props
 
   const [selectedOption, setSelectedOption] = useState(
-    value.selectedOption || value
+    value?.selectedOption || ''
   )
 
   const triggerChange = (changedValue) => {

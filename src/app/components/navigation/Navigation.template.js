@@ -20,46 +20,65 @@ const Navigation = () => {
   const session = useUserAuthContext()
 
   const path = ROUTES_PATHS.USER_SHOW.replace(':id', session.uid)
-
+  const navigationButtonProps = [
+    {
+      key: path,
+      onClick: () => history.push(path),
+      name: <UserSimpleView />
+    },
+    {
+      key: ROUTES_PATHS.COMPANIES_ALL,
+      icon: <GroupOutlined />,
+      onClick: () => history.push(ROUTES_PATHS.COMPANIES_ALL),
+      name: 'Companies'
+    },
+    {
+      key: ROUTES_PATHS.PROJECTS_ALL,
+      icon: <FundProjectionScreenOutlined />,
+      onClick: () => history.push(ROUTES_PATHS.PROJECTS_ALL),
+      name: 'Projects'
+    },
+    {
+      key: ROUTES_PATHS.USERS_ALL,
+      icon: <TeamOutlined />,
+      onClick: () => history.push(ROUTES_PATHS.USERS_ALL),
+      name: 'Users'
+    },
+    {
+      key: ROUTES_PATHS.BADGES_ALL,
+      icon: <TrophyOutlined />,
+      onClick: () => history.push(ROUTES_PATHS.BADGES_ALL),
+      name: 'Badges'
+    },
+    {
+      key: ROUTES_PATHS.LOGIN,
+      danger: true,
+      icon: <LogoutOutlined />,
+      onClick: () => logOut(history),
+      name: 'Log out'
+    }
+  ]
+  const defaultSelected = navigationButtonProps.filter((item) =>
+    history.location.pathname.includes(item.key)
+  )
   return (
     <Row h="center" mr={2}>
       <Col cw="auto">
         <Layout.Sider>
-          <Menu mode="inline" defaultSelectedKeys={['1']}>
-            <Item key="0" onClick={() => history.push(path)}>
-              <UserSimpleView />
-            </Item>
-            <Item
-              key="1"
-              icon={<GroupOutlined />}
-              onClick={() => history.push(ROUTES_PATHS.COMPANIES_ALL)}>
-              Companies
-            </Item>
-            <Item
-              key="2"
-              icon={<FundProjectionScreenOutlined />}
-              onClick={() => history.push(ROUTES_PATHS.PROJECTS_ALL)}>
-              Projects
-            </Item>
-            <Item
-              key="3"
-              icon={<TeamOutlined />}
-              onClick={() => history.push(ROUTES_PATHS.USERS_ALL)}>
-              Users
-            </Item>
-            <Item
-              key="4"
-              icon={<TrophyOutlined />}
-              onClick={() => history.push(ROUTES_PATHS.BADGES_ALL)}>
-              Badges
-            </Item>
-            <Item
-              key="5"
-              danger
-              icon={<LogoutOutlined />}
-              onClick={() => logOut(history)}>
-              Log out
-            </Item>
+          <Menu
+            mode="inline"
+            defaultSelectedKeys={
+              defaultSelected[0]?.key || ROUTES_PATHS.COMPANIES_ALL
+            }>
+            {navigationButtonProps.map((item) => (
+              <Item
+                key={item.key}
+                icon={item?.icon}
+                danger={item?.danger}
+                onClick={item.onClick}>
+                {item?.name}
+              </Item>
+            ))}
           </Menu>
         </Layout.Sider>
       </Col>

@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { ImageUploader } from 'app/components'
-import { BADGES } from 'app/constants/collections'
+import { BADGES, PERSONAL_BADGES } from 'app/constants/collections'
 import { Box, Row, Col } from '@qonsoll/react-design'
-import { firestore, setData } from 'app/services/Firestore'
+import { firestore, getCollectionRef, setData } from 'app/services/Firestore'
 import { BadgeSelect } from 'app/domains/Badge/components/select'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { Form, Input, Button, Checkbox, Typography, InputNumber } from 'antd'
@@ -31,8 +31,18 @@ const BadgeSimpleForm = (props) => {
       name: values.badgeName,
       description: values.badgeDescription || '',
       experience: values.badgeExperience || 0,
-      maxLvl: values.maxLvl || 1
-    }).then(history.goBack())
+      maxLvl: values.badgeMaxLvl || 1
+    }).then(() => {
+      getCollectionRef(PERSONAL_BADGES)
+        .where('badgeId', '==', badgeId)
+        .get()
+        .then((res) =>
+          res.docs.forEach((item) =>
+            setData(PERSONAL_BADGES, item.id, { image: values.image || '' })
+          )
+        )
+      history.goBack()
+    })
   }
 
   // TEMPLATE

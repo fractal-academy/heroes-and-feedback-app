@@ -3,7 +3,7 @@ import './CustomAvatar.styles.css'
 
 // CONSTANTS
 const imageMap = {
-  badge: (src, size, name) => (
+  badge: (src, size, name, className) => (
     <div
       className="polygon"
       style={{
@@ -15,17 +15,27 @@ const imageMap = {
         alt=""
         src={src || './assets/image-placeholder.png'}
         style={{ width: `${size * 2}px`, height: `${size * 2}px` }}
-        className="avatar"
+        className={`avatar ${className}`}
       />
     </div>
   ),
-  user: (src, size, name) => (
-    <Avatar alt="avatar" src={src} shape="circle" size={size || 64}>
+  user: (src, size, name, className) => (
+    <Avatar
+      alt="avatar"
+      src={src}
+      shape="circle"
+      size={size || 64}
+      className={className}>
       {name && name[0]}
     </Avatar>
   ),
-  enterprise: (src, size, name) => (
-    <Avatar alt="avatar" src={src} shape="square" size={size || 64}>
+  enterprise: (src, size, name, className) => (
+    <Avatar
+      alt="avatar"
+      src={src}
+      shape="square"
+      size={size || 64}
+      className={className}>
       {name && name[0]}
     </Avatar>
   )
@@ -33,10 +43,10 @@ const imageMap = {
 
 const CustomAvatar = (props) => {
   // INTERFACE
-  const { shape, size, src, name } = props
+  const { shape, size, src, name, className } = props
 
   // TEMPLATE
-  return imageMap[shape](src, size, name)
+  return imageMap[shape](src, size, name, className)
 }
 
 export default CustomAvatar

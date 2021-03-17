@@ -16,7 +16,7 @@ const UserSimpleForm = (props) => {
   const [formRef] = Form.useForm()
 
   // COMPUTED PROPERTIES
-  const editedBirthday = data.birthday
+  const editedBirthday = data?.birthday
     ? moment(data.birthday.toDate().getTime())
     : moment()
 
@@ -50,7 +50,7 @@ const UserSimpleForm = (props) => {
           layout="vertical"
           initialValues={{
             image: data?.image,
-            role: data?.role,
+            role: { selectedOption: data?.role },
             firstName: data?.firstName,
             surname: data?.surname,
             email: data?.email,

@@ -156,15 +156,15 @@ const Card = (props) => {
         <Col cw="auto">
           <Box display="flex" position="absolute" right="0">
             <Box mr={1}>
+              <PersonalBadgeSimpleForm userId={userId} />
+            </Box>
+            <Box mr={1}>
               <Button
                 type="primary"
                 shape="circle"
                 icon={<EditOutlined />}
                 onClick={() => history.push(path)}
               />
-            </Box>
-            <Box mr={1}>
-              <PersonalBadgeSimpleForm userId={userId} />
             </Box>
             <Button
               type="primary"

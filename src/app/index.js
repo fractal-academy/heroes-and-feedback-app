@@ -9,7 +9,11 @@ import {
   Route,
   Redirect
 } from 'react-router-dom'
-import { PUBLIC_ROUTES_VALUE, PROTECTED_ROUTES_VALUE } from 'app/constants'
+import {
+  PUBLIC_ROUTES_VALUE,
+  PROTECTED_ROUTES_VALUE,
+  ROUTES_PATHS
+} from 'app/constants'
 
 import { Navigation } from 'app/components'
 
@@ -17,9 +21,7 @@ const App = () => {
   const user = useUserAuthContext()
 
   const changeAvailableRoutes = (user) =>
-    user
-      ? { routes: PROTECTED_ROUTES_VALUE, default: '/companies' }
-      : { routes: PUBLIC_ROUTES_VALUE, default: '/login' }
+    user ? PROTECTED_ROUTES_VALUE : PUBLIC_ROUTES_VALUE
 
   const [currentRoutes, setCurrentRoutes] = useState(
     changeAvailableRoutes(user)
@@ -37,14 +39,20 @@ const App = () => {
             <Layout style={{ background: '#fff' }}>
               {user && <Navigation />}
               <Layout.Content>
-                {currentRoutes.routes.map((route) => (
+                {currentRoutes.map((route) => (
                   <Route key={route.path} {...route} />
                 ))}
                 <Route
                   exact
                   path="/"
                   render={() => {
-                    return <Redirect to={user ? '/companies' : '/login'} />
+                    return (
+                      <Redirect
+                        to={
+                          user ? ROUTES_PATHS.COMPANIES_ALL : ROUTES_PATHS.LOGIN
+                        }
+                      />
+                    )
                   }}
                 />
               </Layout.Content>

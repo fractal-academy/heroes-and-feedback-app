@@ -3,7 +3,7 @@ import { Row, Col } from '@qonsoll/react-design'
 import { USERS } from 'app/constants/collections'
 import { getCollectionRef } from 'app/services/Firestore'
 import { useDocumentData } from 'react-firebase-hooks/firestore'
-import { UserAdvancedView } from 'app/domains/User/components/views'
+import { UserCombinedView } from 'app/domains/User/components/views'
 
 const UserShow = (props) => {
   const { id } = useParams()
@@ -12,7 +12,7 @@ const UserShow = (props) => {
 
   return (
     <Row noGutters h="center">
-      <Col cw="9">{data && <UserAdvancedView data={data} id={id} />} </Col>
+      <Col cw="9">{data && <UserCombinedView data={data} id={id} />} </Col>
     </Row>
   )
 }

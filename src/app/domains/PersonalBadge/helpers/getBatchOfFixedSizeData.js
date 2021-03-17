@@ -8,18 +8,27 @@ const getBatchOfFixedSizeData = async (
 ) => {
   try {
     const data = key
+      ? condition
+        ? await firestore
+            .collection(collectionName)
+            .where(condition.fieldName, condition.operator, condition.value)
+            .orderBy('id')
+            .startAfter(key)
+            .limit(limit)
+            .get()
+        : await firestore
+            .collection(collectionName)
+            .orderBy('id')
+            .startAfter(key)
+            .limit(limit)
+            .get()
+      : condition
       ? await firestore
           .collection(collectionName)
-          .where('userId', '==', condition)
-          .orderBy('id')
-          .startAfter(key)
+          .where(condition.fieldName, condition.operator, condition.value)
           .limit(limit)
           .get()
-      : await firestore
-          .collection(collectionName)
-          .where('userId', '==', condition)
-          .limit(limit)
-          .get()
+      : await firestore.collection(collectionName).limit(limit).get()
 
     let resData = []
     let lastKey = ''

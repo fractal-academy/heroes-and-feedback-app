@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { storage } from 'app/services'
 import { CustomAvatar } from 'app/components'
 import { Row, Col } from '@qonsoll/react-design'
+import './ImageUploader.style.css'
 
 const ImageUploader = (props) => {
   // INTERFACE
@@ -74,6 +75,7 @@ const ImageUploader = (props) => {
               src={currentSource}
               size={size}
               name={name}
+              className="image-component"
             />
           )}
         </Upload>

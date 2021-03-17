@@ -4,7 +4,7 @@ import { ROUTES_PATHS } from 'app/constants'
 const signInWithGoogle = (history) => {
   const googleProvider = new firebase.auth.GoogleAuthProvider()
   auth
-    .signInWithRedirect(googleProvider)
+    .signInWithPopup(googleProvider)
     .then(() => history.push(ROUTES_PATHS.COMPANIES_ALL))
     .catch((error) => {
       console.log(error.message)

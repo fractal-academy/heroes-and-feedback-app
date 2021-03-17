@@ -4,7 +4,9 @@ import { CustomAvatar } from 'app/components'
 import './BadgeSimpleView.style.css'
 
 const BadgeSimpleView = (props) => {
-  const { data, selected } = props
+  const { data, selected, size } = props
+
+  const textWidth = size * 2
 
   return (
     <Row v="center" h="center">
@@ -16,10 +18,10 @@ const BadgeSimpleView = (props) => {
         <CustomAvatar
           shape="badge"
           src={data.image}
-          size={60}
+          size={size}
           name={data.name}
         />
-        <Box textAlign="center">
+        <Box textAlign="center" maxWidth={textWidth}>
           <Typography.Text>{data.name}</Typography.Text>
         </Box>
       </Col>

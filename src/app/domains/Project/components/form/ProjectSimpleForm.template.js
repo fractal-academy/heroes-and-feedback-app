@@ -47,8 +47,8 @@ const ProjectSimpleForm = (props) => {
                 projectName: data?.name,
                 projectDescription: data?.description,
                 companyId: {
-                  id: data?.companyId,
-                  selectedOption: data?.companyName
+                  id: data?.companyId || '',
+                  selectedOption: data?.companyName || ''
                 }
               }}>
               <Form.Item name="image">

@@ -12,10 +12,17 @@ const PersonalBadgeList = (props) => {
   const [lastKey, setLastKey] = useState('')
   const [loadingBatch, setLoadingBatch] = useState(false)
 
+  const batchSize = 2
+
   const fetchMoreData = (key) => {
     if (key.length > 0) {
       setLoadingBatch(true)
-      getBatchOfFixedSizeData(2, PERSONAL_BADGES, userId, key)
+      getBatchOfFixedSizeData(
+        batchSize,
+        PERSONAL_BADGES,
+        { fieldName: 'userId', operator: '==', value: userId },
+        key
+      )
         .then((res) => {
           setLastKey(res.lastKey)
           setDataBatch(dataBatch.concat(res.resData))
@@ -29,7 +36,11 @@ const PersonalBadgeList = (props) => {
   }
 
   useEffect(() => {
-    getBatchOfFixedSizeData(2, PERSONAL_BADGES, userId).then((res) => {
+    getBatchOfFixedSizeData(batchSize, PERSONAL_BADGES, {
+      fieldName: 'userId',
+      operator: '==',
+      value: userId
+    }).then((res) => {
       setDataBatch(res.resData)
       setLastKey(res.lastKey)
     })

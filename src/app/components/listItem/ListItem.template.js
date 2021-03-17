@@ -7,6 +7,7 @@ import { CustomAvatar } from 'app/components'
 import { useHistory } from 'react-router-dom'
 import { RightOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import { PersonalBadgeSimpleForm } from 'app/domains/PersonalBadge/components/form'
 
 const { Title, Text } = Typography
 
@@ -93,6 +94,11 @@ const ListItem = (props) => {
           )}
         </Box>
       </Col>
+      {type === 'user' && (
+        <Col cw="auto" m={2}>
+          <PersonalBadgeSimpleForm userId={data.id} />
+        </Col>
+      )}
       <Col cw="auto" m={2}>
         <Button shape="circle" type="text" onClick={() => history.push(path)}>
           <RightOutlined />
