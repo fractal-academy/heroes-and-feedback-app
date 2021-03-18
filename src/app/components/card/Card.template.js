@@ -11,7 +11,7 @@ import {
 import { CustomAvatar } from 'app/components'
 import { useHistory } from 'react-router-dom'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Typography, Progress, Badge, Button } from 'antd'
+import { Typography, Progress, Badge, Button, Popconfirm } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { deleteData } from 'app/services'
 import { PersonalBadgeSimpleForm } from 'app/domains/PersonalBadge/components/form'
@@ -23,6 +23,7 @@ const Card = (props) => {
 
   const history = useHistory()
 
+  const confirmText = 'Are you sure you want to delete?'
   const birthday =
     data.birthday && moment(data.birthday.toDate()).format('Do MMMM YYYY')
   const userLvl = Math.floor(data.currentExp / 1000)
@@ -156,7 +157,10 @@ const Card = (props) => {
         <Col cw="auto">
           <Box display="flex" position="absolute" right="0">
             <Box mr={1}>
-              <PersonalBadgeSimpleForm userId={userId} />
+              <PersonalBadgeSimpleForm
+                userId={userId}
+                currentExp={data.currentExp}
+              />
             </Box>
             <Box mr={1}>
               <Button
@@ -166,13 +170,19 @@ const Card = (props) => {
                 onClick={() => history.push(path)}
               />
             </Box>
-            <Button
-              type="primary"
-              danger
-              shape="circle"
-              icon={<DeleteOutlined />}
-              onClick={hadleDelete}
-            />
+            <Popconfirm
+              placement="bottom"
+              title={confirmText}
+              onConfirm={hadleDelete}
+              okText="Yes"
+              cancelText="No">
+              <Button
+                type="primary"
+                danger
+                shape="circle"
+                icon={<DeleteOutlined />}
+              />
+            </Popconfirm>
           </Box>
           <Box width="auto">
             <CustomAvatar

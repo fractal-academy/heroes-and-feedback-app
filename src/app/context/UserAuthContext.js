@@ -31,7 +31,11 @@ const UserAuthProvider = ({ children }) => {
   useEffect(() => {
     setLoading(true)
     auth.onAuthStateChanged(async (user) => {
-      await dispatch({ type: 'SET_DATA', data: user })
+      await dispatch({
+        type: 'SET_DATA',
+        data: user
+      })
+
       setLoading(false)
     })
   }, [])

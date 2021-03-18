@@ -2,14 +2,15 @@ import { useState } from 'react'
 import { Button, Modal, message, Spin } from 'antd'
 import { GallerySelect } from 'app/components'
 import { getCollectionRef, setData, firestore } from 'app/services'
-import { BADGES, PERSONAL_BADGES } from 'app/constants/collections'
+import { BADGES, PERSONAL_BADGES, USERS } from 'app/constants/collections'
 import { BadgeSimpleView } from 'app/domains/Badge/components/views'
 import { TrophyOutlined } from '@ant-design/icons'
 import { getBatchOfFixedSizeData } from 'app/domains/PersonalBadge/helpers'
 import { Row, Col } from '@qonsoll/react-design'
+import './PersonalBadgeSimpleForm.style.css'
 
 const PersonalBadgeSimpleForm = (props) => {
-  const { userId } = props
+  const { userId, currentExp } = props
 
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [selectedBadge, setSelectedBadge] = useState('')
@@ -50,11 +51,13 @@ const PersonalBadgeSimpleForm = (props) => {
       .get()
       .then((res) => {
         if (res.docs.length) {
-          console.log(res.docs[0].data())
           const badgeToLvlUp = res.docs[0].data()
           if (badgeToLvlUp.currentLvl < badgeToLvlUp.maxLvl) {
             setData(PERSONAL_BADGES, badgeToLvlUp.id, {
               currentLvl: badgeToLvlUp.currentLvl + 1
+            })
+            setData(USERS, userId, {
+              currentExp: currentExp + selectedBadge.experience
             })
           } else {
             message.error('This user already has maximum lvl of this badge')
@@ -70,6 +73,9 @@ const PersonalBadgeSimpleForm = (props) => {
             currentLvl: 1,
             description: selectedBadge.description
           })
+          setData(USERS, userId, {
+            currentExp: currentExp + selectedBadge.experience
+          })
         }
       })
     setIsModalVisible(false)
@@ -82,10 +88,10 @@ const PersonalBadgeSimpleForm = (props) => {
   return (
     <>
       <Button
-        style={{ backgroundColor: '#52c41a', color: 'white' }}
         shape="circle"
         icon={<TrophyOutlined />}
         onClick={showModal}
+        className="badge-assign-button"
       />
       {dataBatch && (
         <Modal

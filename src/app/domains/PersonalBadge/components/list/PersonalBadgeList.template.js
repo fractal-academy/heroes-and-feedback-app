@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { getBatchOfFixedSizeData } from 'app/domains/PersonalBadge/helpers'
 import { Row, Col } from '@qonsoll/react-design'
 import { Spin, Button } from 'antd'
+import { firestore } from 'app/services/Firebase'
 
 const PersonalBadgeList = (props) => {
   const { userId } = props
@@ -12,7 +13,7 @@ const PersonalBadgeList = (props) => {
   const [lastKey, setLastKey] = useState('')
   const [loadingBatch, setLoadingBatch] = useState(false)
 
-  const batchSize = 2
+  const batchSize = 4
 
   const fetchMoreData = (key) => {
     if (key.length > 0) {
@@ -36,14 +37,25 @@ const PersonalBadgeList = (props) => {
   }
 
   useEffect(() => {
-    getBatchOfFixedSizeData(batchSize, PERSONAL_BADGES, {
-      fieldName: 'userId',
-      operator: '==',
-      value: userId
-    }).then((res) => {
-      setDataBatch(res.resData)
-      setLastKey(res.lastKey)
-    })
+    const unsubscribe = firestore
+      .collection(PERSONAL_BADGES)
+      .where('userId', '==', userId)
+      .onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          getBatchOfFixedSizeData(batchSize, PERSONAL_BADGES, {
+            fieldName: 'userId',
+            operator: '==',
+            value: userId
+          }).then((res) => {
+            setDataBatch(res.resData)
+            setLastKey(res.lastKey)
+          })
+        })
+      })
+
+    return () => {
+      unsubscribe && unsubscribe()
+    }
   }, [userId])
 
   return (
