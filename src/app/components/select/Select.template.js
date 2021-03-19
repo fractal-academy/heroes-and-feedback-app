@@ -4,7 +4,7 @@ import { useState } from 'react'
 const { Option } = Select
 
 const CustomSelect = (props) => {
-  const { data, onChange, value } = props
+  const { data, onChange, value, disabled } = props
 
   const [selectedOption, setSelectedOption] = useState(
     value?.selectedOption || ''
@@ -26,6 +26,7 @@ const CustomSelect = (props) => {
 
   return (
     <Select
+      disabled={disabled}
       value={selectedOption}
       defaultValue={selectedOption}
       onChange={handleNewOptionSelected}>

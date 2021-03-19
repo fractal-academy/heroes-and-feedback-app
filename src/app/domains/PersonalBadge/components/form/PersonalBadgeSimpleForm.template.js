@@ -18,7 +18,7 @@ const PersonalBadgeSimpleForm = (props) => {
   const [lastKey, setLastKey] = useState('')
   const [loadingBatch, setLoadingBatch] = useState(false)
 
-  const batchSize = 4
+  const batchSize = 6
 
   const showModal = () => {
     getBatchOfFixedSizeData(batchSize, BADGES).then((res) => {
@@ -48,6 +48,7 @@ const PersonalBadgeSimpleForm = (props) => {
     const newId = firestore.collection(PERSONAL_BADGES).doc().id
     getCollectionRef(PERSONAL_BADGES)
       .where('badgeId', '==', selectedBadge.id)
+      .where('userId', '==', userId)
       .get()
       .then((res) => {
         if (res.docs.length) {
@@ -57,7 +58,7 @@ const PersonalBadgeSimpleForm = (props) => {
               currentLvl: badgeToLvlUp.currentLvl + 1
             })
             setData(USERS, userId, {
-              currentExp: currentExp + selectedBadge.experience
+              currentExp: Number(currentExp) + Number(selectedBadge.experience)
             })
           } else {
             message.error('This user already has maximum lvl of this badge')

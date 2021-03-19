@@ -12,10 +12,11 @@ import { PersonalBadgeSimpleForm } from 'app/domains/PersonalBadge/components/fo
 const { Title, Text } = Typography
 
 const ListItem = (props) => {
-  const { type, data } = props
+  const { type, data, currentUserId } = props
 
   const history = useHistory()
 
+  const currentUsersListItem = currentUserId === data.id
   const ItemTypeMap = {
     user: {
       image: 'user',
@@ -94,7 +95,7 @@ const ListItem = (props) => {
           )}
         </Box>
       </Col>
-      {type === 'user' && (
+      {type === 'user' && !currentUsersListItem && (
         <Col cw="auto" m={2}>
           <PersonalBadgeSimpleForm userId={data.id} />
         </Col>

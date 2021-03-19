@@ -5,20 +5,27 @@ import { useHistory } from 'react-router-dom'
 import { BADGES } from 'app/constants/collections'
 import { BadgeList } from 'app/domains/Badge/components/list'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { useUserAuthContext } from 'app/context'
 
 const BadgesAll = (props) => {
   const [data] = useCollectionData(firestore.collection(BADGES))
 
+  const session = useUserAuthContext()
+
+  const addButtonRule = session.userDBData.role === 'Superadmin'
+
   const history = useHistory()
   return (
     <>
-      <Button
-        type="primary"
-        onClick={() => {
-          history.push(ROUTES_PATHS.BADGE_CREATE)
-        }}>
-        + Add
-      </Button>
+      {addButtonRule && (
+        <Button
+          type="primary"
+          onClick={() => {
+            history.push(ROUTES_PATHS.BADGE_CREATE)
+          }}>
+          + Add
+        </Button>
+      )}
       {data && <BadgeList data={data} />}
     </>
   )

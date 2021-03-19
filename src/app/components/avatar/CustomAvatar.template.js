@@ -12,7 +12,7 @@ const imageMap = {
         minHeight: `${size * Math.sqrt(3)}px`
       }}>
       <img
-        alt=""
+        alt=" "
         src={src || './assets/image-placeholder.png'}
         style={{ width: `${size * 2}px`, height: `${size * 2}px` }}
         className={`avatar ${className}`}

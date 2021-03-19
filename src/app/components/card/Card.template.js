@@ -15,14 +15,23 @@ import { Typography, Progress, Badge, Button, Popconfirm } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { deleteData } from 'app/services'
 import { PersonalBadgeSimpleForm } from 'app/domains/PersonalBadge/components/form'
+import { useUserAuthContext } from 'app/context'
 
 const { Title, Text } = Typography
 
 const Card = (props) => {
   const { type, data, userId } = props
 
+  const session = useUserAuthContext()
   const history = useHistory()
 
+  const badgeAssignButtonRule = userId !== session.uid && type === 'user'
+  const deleteButtonRule = userId
+    ? session.userDBData.role === 'Superadmin' && userId !== session.uid
+    : session.userDBData.role === 'Superadmin'
+  const editButtonRule = userId
+    ? userId === session.uid
+    : session.userDBData.role === 'Superadmin'
   const confirmText = 'Are you sure you want to delete?'
   const birthday =
     data.birthday && moment(data.birthday.toDate()).format('Do MMMM YYYY')
@@ -156,32 +165,39 @@ const Card = (props) => {
       <Row h="center" mb={3} style={{ position: 'relative' }}>
         <Col cw="auto">
           <Box display="flex" position="absolute" right="0">
-            <Box mr={1}>
-              <PersonalBadgeSimpleForm
-                userId={userId}
-                currentExp={data.currentExp}
-              />
-            </Box>
-            <Box mr={1}>
-              <Button
-                type="primary"
-                shape="circle"
-                icon={<EditOutlined />}
-                onClick={() => history.push(path)}
-              />
-            </Box>
+            {badgeAssignButtonRule && (
+              <Box mr={1}>
+                <PersonalBadgeSimpleForm
+                  userId={userId}
+                  currentExp={data.currentExp}
+                />
+              </Box>
+            )}
+            {editButtonRule && (
+              <Box mr={1}>
+                <Button
+                  type="primary"
+                  shape="circle"
+                  icon={<EditOutlined />}
+                  onClick={() => history.push(path)}
+                />
+              </Box>
+            )}
+
             <Popconfirm
               placement="bottom"
               title={confirmText}
               onConfirm={hadleDelete}
               okText="Yes"
               cancelText="No">
-              <Button
-                type="primary"
-                danger
-                shape="circle"
-                icon={<DeleteOutlined />}
-              />
+              {deleteButtonRule && (
+                <Button
+                  type="primary"
+                  danger
+                  shape="circle"
+                  icon={<DeleteOutlined />}
+                />
+              )}
             </Popconfirm>
           </Box>
           <Box width="auto">

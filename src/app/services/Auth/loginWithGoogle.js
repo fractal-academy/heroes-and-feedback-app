@@ -3,7 +3,7 @@ import { ROUTES_PATHS } from 'app/constants'
 import { USERS } from 'app/constants/collections'
 import { setData, getTimestamp } from 'app/services'
 
-const signInWithGoogle = (history) => {
+const signInWithGoogle = (history, dispatch) => {
   const googleProvider = new firebase.auth.GoogleAuthProvider()
   auth
     .signInWithPopup(googleProvider)

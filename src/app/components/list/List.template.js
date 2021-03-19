@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const CustomList = (props) => {
   // INTERFACE
-  const { type, data } = props
+  const { type, data, currentUserId } = props
 
   // STATE
   const [currentData, setCurrentData] = useState(data)
@@ -46,7 +46,7 @@ const CustomList = (props) => {
           dataSource={currentData}
           renderItem={(item) => (
             <>
-              <Item type={type} data={item} />
+              <Item type={type} data={item} currentUserId={currentUserId} />
               <Divider style={{ margin: '0' }} />
             </>
           )}
