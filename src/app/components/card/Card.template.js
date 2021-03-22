@@ -29,9 +29,9 @@ const Card = (props) => {
   const deleteButtonRule = userId
     ? session.userDBData.role === 'Superadmin' && userId !== session.uid
     : session.userDBData.role === 'Superadmin'
-  const editButtonRule = userId
-    ? userId === session.uid
-    : session.userDBData.role === 'Superadmin'
+  const editButtonRule =
+    (userId && userId === session.uid) ||
+    session.userDBData.role === 'Superadmin'
   const confirmText = 'Are you sure you want to delete?'
   const birthday =
     data.birthday && moment(data.birthday.toDate()).format('Do MMMM YYYY')

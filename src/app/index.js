@@ -1,4 +1,3 @@
-import 'antd/dist/antd.css'
 import { Layout } from 'antd'
 import { useEffect, useState } from 'react'
 import { Row, Col } from '@qonsoll/react-design'
@@ -35,10 +34,11 @@ const App = () => {
     <Row noGutters h="center" pt={4}>
       <Col cw={['12', '11', '11', '11', '11', '11']}>
         <Router>
-          <Switch>
-            <Layout style={{ background: '#fff' }}>
-              {user && <Navigation />}
-              <Layout.Content>
+          <Layout style={{ background: '#fff' }}>
+            {user && <Navigation />}
+
+            <Layout.Content>
+              <Switch>
                 {currentRoutes.map((route) => (
                   <Route key={route.path} {...route} />
                 ))}
@@ -55,9 +55,9 @@ const App = () => {
                     )
                   }}
                 />
-              </Layout.Content>
-            </Layout>
-          </Switch>
+              </Switch>
+            </Layout.Content>
+          </Layout>
         </Router>
       </Col>
     </Row>
