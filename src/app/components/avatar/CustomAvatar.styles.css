@@ -1,8 +1,9 @@
 .polygon {
-  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  clip-path: polygon(26% 1%, 76% 1%, 99% 51%, 76% 99%, 26% 99%, 1% 51%);
   max-height: 60px;
   min-width: 70px;
-  background-color: lightgray;
+  box-sizing: border-box;
+  background-color: rgb(238, 238, 238);
 }
 
 .avatar {

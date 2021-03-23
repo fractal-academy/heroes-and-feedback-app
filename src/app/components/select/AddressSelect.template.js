@@ -6,7 +6,7 @@ const { Option } = Select
 
 const AddressSelect = (props) => {
   // INTERFACE
-  const { data, onChange, value = {} } = props
+  const { data, onChange, value } = props
 
   // COMPUTED PROPERTIES
   const countries = Object.entries(data)
@@ -57,8 +57,8 @@ const AddressSelect = (props) => {
 
   // TEMPLATE
   return (
-    <Row h="between">
-      <Col>
+    <Row display="flex">
+      <Col cw="auto" mr={1}>
         <Select
           showSearch
           value={selectedCountry}
@@ -71,6 +71,8 @@ const AddressSelect = (props) => {
             <Option key={key}>{key}</Option>
           ))}
         </Select>
+      </Col>
+      <Col cw="auto">
         <Select
           showSearch
           optionFilterProp="children"

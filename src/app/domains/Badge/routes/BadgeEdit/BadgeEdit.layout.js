@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 import { useDocumentData } from 'react-firebase-hooks/firestore'
 import { firestore } from 'app/services'
 import { BADGES } from 'app/constants/collections'
-import { Header } from 'app/components'
 
 const BadgeEdit = (props) => {
   const { id } = useParams()
@@ -14,7 +13,6 @@ const BadgeEdit = (props) => {
     <>
       {data && (
         <>
-          <Header />
           <BadgeSimpleForm id={id} data={data} />
         </>
       )}

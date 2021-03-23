@@ -1,2 +1,3 @@
 import AddressSelect from './AddressSelect.template'
-export { AddressSelect }
+import CustomSelect from './Select.template'
+export { AddressSelect, CustomSelect }

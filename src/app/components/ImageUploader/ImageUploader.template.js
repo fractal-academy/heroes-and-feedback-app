@@ -1,9 +1,10 @@
 import { Upload, message } from 'antd'
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
+import { LoadingOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import { storage } from 'app/services'
 import { CustomAvatar } from 'app/components'
-import { Row } from '@qonsoll/react-design'
+import { Row, Col } from '@qonsoll/react-design'
+import './ImageUploader.style.css'
 
 const ImageUploader = (props) => {
   // INTERFACE
@@ -25,7 +26,7 @@ const ImageUploader = (props) => {
     }
     const isLessThan2Megabytes = file.size / 1024 / 1024 < 2
     if (!isLessThan2Megabytes) {
-      message.error('Image must smaller than 2MB!')
+      message.error('Image must be smaller than 2MB!')
     }
     return isJpgOrPng && isLessThan2Megabytes
   }
@@ -59,7 +60,7 @@ const ImageUploader = (props) => {
   // TEMPLATE
   return (
     <Row h="center">
-      {src ? (
+      <Col cw="auto">
         <Upload
           value={value}
           name="avatar"
@@ -74,12 +75,11 @@ const ImageUploader = (props) => {
               src={currentSource}
               size={size}
               name={name}
+              className="image-component"
             />
           )}
         </Upload>
-      ) : (
-        <PlusOutlined />
-      )}
+      </Col>
     </Row>
   )
 }

@@ -1,4 +1,4 @@
-import { auth } from 'app/services/Firebase'
+import { auth, firestore } from 'app/services/Firebase'
 import {
   createContext,
   useEffect,
@@ -8,6 +8,7 @@ import {
 } from 'react'
 import { Spin } from 'antd'
 import { Row, Box } from '@qonsoll/react-design'
+import { USERS } from 'app/constants/collections'
 
 const UserAuthContext = createContext()
 const UserAuthDispatchContext = createContext()
@@ -31,7 +32,15 @@ const UserAuthProvider = ({ children }) => {
   useEffect(() => {
     setLoading(true)
     auth.onAuthStateChanged(async (user) => {
-      await dispatch({ type: 'SET_DATA', data: user })
+      const userData =
+        user && (await firestore.collection(USERS).doc(user.uid).get())
+      const dispatchData = userData
+        ? { ...user, userDBData: userData.data() }
+        : user
+      await dispatch({
+        type: 'SET_DATA',
+        data: dispatchData
+      })
       setLoading(false)
     })
   }, [])

@@ -1,10 +1,37 @@
-import { Header } from 'app/components'
+import { useParams } from 'react-router-dom'
+import { Row, Col } from '@qonsoll/react-design'
+import { PROJECTS, PROJECT_MEMBER } from 'app/constants/collections'
+import { getCollectionRef } from 'app/services/Firestore'
+import {
+  useDocumentData,
+  useCollectionData
+} from 'react-firebase-hooks/firestore'
+import { ProjectCombined } from 'app/domains/Project/components/combined'
+import { useUserAuthContext } from 'app/context'
 
 const ProjectShow = (props) => {
+  const { id } = useParams()
+
+  const [projectsData] = useDocumentData(getCollectionRef(PROJECTS).doc(id))
+
+  const [membersData] = useCollectionData(
+    getCollectionRef(PROJECT_MEMBER).where('projectId', '==', id)
+  )
+
+  const session = useUserAuthContext()
+
   return (
-    <>
-      <Header />
-    </>
+    <Row noGutters h="center">
+      <Col cw="9">
+        {projectsData && (
+          <ProjectCombined
+            data={projectsData}
+            subdata={membersData}
+            userId={session.uid}
+          />
+        )}
+      </Col>
+    </Row>
   )
 }
 
