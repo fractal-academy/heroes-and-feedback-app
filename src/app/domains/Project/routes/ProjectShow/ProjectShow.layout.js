@@ -7,6 +7,7 @@ import {
   useCollectionData
 } from 'react-firebase-hooks/firestore'
 import { ProjectCombined } from 'app/domains/Project/components/combined'
+import { useUserAuthContext } from 'app/context'
 
 const ProjectShow = (props) => {
   const { id } = useParams()
@@ -17,11 +18,17 @@ const ProjectShow = (props) => {
     getCollectionRef(PROJECT_MEMBER).where('projectId', '==', id)
   )
 
+  const session = useUserAuthContext()
+
   return (
     <Row noGutters h="center">
       <Col cw="9">
         {projectsData && (
-          <ProjectCombined data={projectsData} subdata={membersData} />
+          <ProjectCombined
+            data={projectsData}
+            subdata={membersData}
+            userId={session.uid}
+          />
         )}
       </Col>
     </Row>

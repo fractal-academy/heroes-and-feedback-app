@@ -12,8 +12,6 @@ const CustomSelect = (props) => {
 
   const triggerChange = (changedValue) => {
     onChange?.({
-      selectedOption,
-      ...value,
       ...changedValue
     })
   }
