@@ -1,4 +1,5 @@
 import moment from 'moment'
+import './Card.styles.css'
 import { PropTypes } from 'prop-types'
 import { ROUTES_PATHS } from 'app/constants'
 import {
@@ -11,7 +12,7 @@ import {
 import { CustomAvatar } from 'app/components'
 import { useHistory } from 'react-router-dom'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Typography, Progress, Badge, Button, Popconfirm } from 'antd'
+import { Typography, Progress, Badge, Button, Popconfirm, message } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { deleteData } from 'app/services'
 import { PersonalBadgeSimpleForm } from 'app/domains/PersonalBadge/components/form'
@@ -126,7 +127,7 @@ const Card = (props) => {
               {data.address?.city}, {data.address?.country}
             </Text>
           </Box>
-          <Box textAlign="justify">
+          <Box textAlign="justify" mb={4}>
             <Text>{data.description}</Text>
           </Box>
         </Col>
@@ -139,11 +140,11 @@ const Card = (props) => {
       shape: 'enterprise',
       layout: (
         <Col>
+          <Box display="grid" textAlign="center" mb={4}>
+            <Text type="secondary">{data.companyName}</Text>
+          </Box>
           <Box textAlign="justify" mb={4}>
             <Text>{data.description}</Text>
-          </Box>
-          <Box display="grid" textAlign="center">
-            <Text type="secondary">{data.company?.name}</Text>
           </Box>
         </Col>
       )
@@ -157,7 +158,8 @@ const Card = (props) => {
 
   const hadleDelete = () => {
     deleteData(collection, data.id)
-    history.goBack()
+      .then(() => message.success('Item was deleted.'))
+      .then(history.goBack())
   }
 
   return (

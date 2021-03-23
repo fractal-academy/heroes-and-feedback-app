@@ -1,4 +1,4 @@
-import { Layout, Menu } from 'antd'
+import { Menu } from 'antd'
 import { logOut } from 'app/services/Auth'
 import { ROUTES_PATHS } from 'app/constants'
 import { useHistory } from 'react-router-dom'
@@ -64,23 +64,21 @@ const Navigation = () => {
   return (
     <Row h="center" mr={2}>
       <Col cw="auto">
-        <Layout.Sider>
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={
-              defaultSelected[0]?.key || ROUTES_PATHS.COMPANIES_ALL
-            }>
-            {navigationButtonProps.map((item) => (
-              <Item
-                key={item.key}
-                icon={item?.icon}
-                danger={item?.danger}
-                onClick={item.onClick}>
-                {item?.name}
-              </Item>
-            ))}
-          </Menu>
-        </Layout.Sider>
+        <Menu
+          mode="inline"
+          defaultSelectedKeys={
+            defaultSelected[0]?.key || ROUTES_PATHS.COMPANIES_ALL
+          }>
+          {navigationButtonProps.map((item) => (
+            <Item
+              key={item.key}
+              icon={item?.icon}
+              danger={item?.danger}
+              onClick={item.onClick}>
+              {item?.name}
+            </Item>
+          ))}
+        </Menu>
       </Col>
     </Row>
   )

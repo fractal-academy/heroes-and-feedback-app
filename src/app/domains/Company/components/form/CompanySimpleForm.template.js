@@ -1,4 +1,4 @@
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, message } from 'antd'
 import { useHistory } from 'react-router-dom'
 import TextArea from 'antd/lib/input/TextArea'
 import { COMPANIES } from 'app/constants/collections'
@@ -27,7 +27,14 @@ const CompanySimpleForm = (props) => {
         country: values.companyAddress?.selectedCountry,
         city: values.companyAddress?.selectedCity
       }
-    }).then(history.goBack())
+    })
+      .then(() =>
+        message.success(
+          (id && 'Company was edited successfully!') ||
+            'Company was created successfully!'
+        )
+      )
+      .then(history.goBack())
   }
 
   // TEMPLATE

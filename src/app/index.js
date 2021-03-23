@@ -1,6 +1,7 @@
-import { Layout } from 'antd'
+import 'antd/dist/antd.css'
 import { useEffect, useState } from 'react'
-import { Row, Col } from '@qonsoll/react-design'
+import { Navigation } from 'app/components'
+import { Container, Row, Col } from '@qonsoll/react-design'
 import { useUserAuthContext } from 'app/context'
 import {
   BrowserRouter as Router,
@@ -13,8 +14,6 @@ import {
   PROTECTED_ROUTES_VALUE,
   ROUTES_PATHS
 } from 'app/constants'
-
-import { Navigation } from 'app/components'
 
 const App = () => {
   const user = useUserAuthContext()
@@ -31,36 +30,39 @@ const App = () => {
   }, [user])
 
   return (
-    <Row noGutters h="center" pt={4}>
-      <Col cw={['12', '11', '11', '11', '11', '11']}>
-        <Router>
-          <Layout style={{ background: '#fff' }}>
-            {user && <Navigation />}
-
-            <Layout.Content>
-              <Switch>
-                {currentRoutes.map((route) => (
-                  <Route key={route.path} {...route} />
-                ))}
-                <Route
-                  exact
-                  path="/"
-                  render={() => {
-                    return (
-                      <Redirect
-                        to={
-                          user ? ROUTES_PATHS.COMPANIES_ALL : ROUTES_PATHS.LOGIN
-                        }
-                      />
-                    )
-                  }}
-                />
-              </Switch>
-            </Layout.Content>
-          </Layout>
-        </Router>
-      </Col>
-    </Row>
+    <Container>
+      <Row noGutters h="center" pt={4}>
+        <Col cw={['12', '11', '11', '11', '11', '11']}>
+          <Router>
+            <Switch>
+              <Row>
+                <Col cw="auto">{user && <Navigation />}</Col>
+                <Col>
+                  {currentRoutes.map((route) => (
+                    <Route key={route.path} {...route} />
+                  ))}
+                  <Route
+                    exact
+                    path="/"
+                    render={() => {
+                      return (
+                        <Redirect
+                          to={
+                            user
+                              ? ROUTES_PATHS.COMPANIES_ALL
+                              : ROUTES_PATHS.LOGIN
+                          }
+                        />
+                      )
+                    }}
+                  />
+                </Col>
+              </Row>
+            </Switch>
+          </Router>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 

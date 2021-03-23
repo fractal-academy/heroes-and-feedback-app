@@ -23,7 +23,7 @@ const ListItem = (props) => {
       imgSize: 60,
       style: 'info',
       name: `${data.firstName} ${data.surname}`,
-      info: data.email,
+      info: data.email || data.role,
       path: ROUTES_PATHS.USER_SHOW
     },
     badge: {
@@ -90,7 +90,7 @@ const ListItem = (props) => {
             />
           ) : (
             <Box className={style}>
-              <Text type="secondary">{info || 'No description.'}</Text>
+              <Text type="secondary">{info || 'No information.'}</Text>
             </Box>
           )}
         </Box>

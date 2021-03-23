@@ -1,4 +1,4 @@
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, message } from 'antd'
 import { useHistory } from 'react-router-dom'
 import TextArea from 'antd/lib/input/TextArea'
 import { ImageUploader } from 'app/components'
@@ -29,7 +29,14 @@ const ProjectSimpleForm = (props) => {
       description: values.projectDescription || '',
       companyId: values.companyId.id,
       companyName: values.companyId.selectedOption
-    }).then(history.goBack())
+    })
+      .then(() =>
+        message.success(
+          (id && 'Project was edited successfully!') ||
+            'Project was created successfully!'
+        )
+      )
+      .then(history.goBack())
   }
 
   // TEMPLATE

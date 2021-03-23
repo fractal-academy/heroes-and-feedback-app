@@ -22,17 +22,29 @@ const CustomSelect = (props) => {
     setSelectedOption(value)
     triggerChange({ id: key.key, selectedOption: value })
   }
-  //TODO: Fix for roles
 
   return (
     <Select
       disabled={disabled}
       value={selectedOption}
       defaultValue={selectedOption}
-      onChange={handleNewOptionSelected}>
+      onChange={handleNewOptionSelected}
+      style={{ width: '100%' }}>
       {data?.map((item) => (
-        <Option value={item.name || item} key={item.name || item}>
-          {item.name || item}
+        <Option
+          value={
+            typeof item === 'object'
+              ? item.name || `${item.firstName} ${item.surname}`
+              : item
+          }
+          key={
+            typeof item === 'object'
+              ? item.id || `${item.firstName} ${item.surname}`
+              : item
+          }>
+          {typeof item === 'object'
+            ? item.name || `${item.firstName} ${item.surname}`
+            : item}
         </Option>
       ))}
     </Select>

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { ImageUploader } from 'app/components'
 import { USERS } from 'app/constants/collections'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Form, Input, Button, DatePicker } from 'antd'
+import { Form, Input, Button, DatePicker, message } from 'antd'
 import { firestore, setData, getTimestamp } from 'app/services/Firestore'
 import AppRoleSelect from 'app/domains/Role/components/AppRoleSelect.template'
 
@@ -37,7 +37,14 @@ const UserSimpleForm = (props) => {
       surname: values.surname,
       email: values.email,
       birthday: settedBirthday
-    }).then(history.goBack())
+    })
+      .then(() =>
+        message.success(
+          (id && 'User was edited successfully!') ||
+            'User was created successfully!'
+        )
+      )
+      .then(history.goBack())
   }
 
   // TEMPLATE

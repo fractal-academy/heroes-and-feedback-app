@@ -6,7 +6,7 @@ const { Option } = Select
 
 const AddressSelect = (props) => {
   // INTERFACE
-  const { data, onChange, value = {} } = props
+  const { data, onChange, value } = props
 
   // COMPUTED PROPERTIES
   const countries = Object.entries(data)

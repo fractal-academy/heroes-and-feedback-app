@@ -6,7 +6,15 @@ import { Box, Row, Col } from '@qonsoll/react-design'
 import { firestore, getCollectionRef, setData } from 'app/services/Firestore'
 import { BadgeSelect } from 'app/domains/Badge/components/select'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { Form, Input, Button, Checkbox, Typography, InputNumber } from 'antd'
+import {
+  Form,
+  Input,
+  Button,
+  Checkbox,
+  Typography,
+  InputNumber,
+  message
+} from 'antd'
 
 const BadgeSimpleForm = (props) => {
   // INTERFACE
@@ -41,7 +49,13 @@ const BadgeSimpleForm = (props) => {
             setData(PERSONAL_BADGES, item.id, { image: values.image || '' })
           )
         )
-      history.goBack()
+        .then(() =>
+          message.success(
+            (id && 'Badge was edited successfully!') ||
+              'Badge was created successfully!'
+          )
+        )
+        .then(history.goBack())
     })
   }
 

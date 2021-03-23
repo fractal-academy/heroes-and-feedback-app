@@ -1,18 +1,29 @@
 import { useParams } from 'react-router-dom'
 import { Row, Col } from '@qonsoll/react-design'
-import { PROJECTS } from 'app/constants/collections'
+import { PROJECTS, PROJECT_MEMBER } from 'app/constants/collections'
 import { getCollectionRef } from 'app/services/Firestore'
-import { useDocumentData } from 'react-firebase-hooks/firestore'
-import { ProjectAdvancedView } from 'app/domains/Project/components/views'
+import {
+  useDocumentData,
+  useCollectionData
+} from 'react-firebase-hooks/firestore'
+import { ProjectCombined } from 'app/domains/Project/components/combined'
 
 const ProjectShow = (props) => {
   const { id } = useParams()
 
-  const [data] = useDocumentData(getCollectionRef(PROJECTS).doc(id))
+  const [projectsData] = useDocumentData(getCollectionRef(PROJECTS).doc(id))
+
+  const [membersData] = useCollectionData(
+    getCollectionRef(PROJECT_MEMBER).where('projectId', '==', id)
+  )
 
   return (
     <Row noGutters h="center">
-      <Col cw="9">{data && <ProjectAdvancedView data={data} />}</Col>
+      <Col cw="9">
+        {projectsData && (
+          <ProjectCombined data={projectsData} subdata={membersData} />
+        )}
+      </Col>
     </Row>
   )
 }
