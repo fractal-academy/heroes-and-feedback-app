@@ -16,13 +16,15 @@ const ProjectMemberCombined = (props) => {
     setIsModalVisible(true)
   }
 
-  const handleOk = (e) => {
+  const handleOk = async (e) => {
     form.validateFields()
 
-    const validationErrors = Object.values(form.getFieldsError())
+    const { user, projectRole } = form.getFieldsValue()
 
-    if (!validationErrors.find((e) => e === undefined)) {
-      form.submit() && setIsModalVisible(false)
+    if (user && projectRole) {
+      form.submit()
+
+      setIsModalVisible(false)
     }
   }
 
@@ -39,6 +41,7 @@ const ProjectMemberCombined = (props) => {
       </Box>
       {users && (
         <Modal
+          keyboard
           title="Invite new member to the project"
           visible={isModalVisible}
           onOk={handleOk}
