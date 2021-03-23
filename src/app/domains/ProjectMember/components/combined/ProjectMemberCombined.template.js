@@ -17,16 +17,13 @@ const ProjectMemberCombined = (props) => {
   }
 
   const handleOk = (e) => {
-    form.submit()
+    form.validateFields()
 
-    setIsModalVisible(false)
+    const validationErrors = Object.values(form.getFieldsError())
 
-    // form.validateFields()
-
-    // const validationErrors = Object.values(form.getFieldsError())
-
-    // if (!validationErrors.find((e) => e === undefined)) {
-    // }
+    if (!validationErrors.find((e) => e === undefined)) {
+      form.submit() && setIsModalVisible(false)
+    }
   }
 
   const handleCancel = () => {
