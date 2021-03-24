@@ -1,5 +1,6 @@
 {
-    "projects": {
-        "development": "heroes-and-feedback-app"
-    }
+  "projects": {
+    "default": "heroes-and-feedback-app"
+  }
 }
+

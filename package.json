@@ -42,7 +42,6 @@
     "start": "craco start",
     "build": "craco build",
     "build:development": "env-cmd -f .env.development craco build ",
-    "deploy:dev:host": "firebase deploy -P development --only hosting ",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
