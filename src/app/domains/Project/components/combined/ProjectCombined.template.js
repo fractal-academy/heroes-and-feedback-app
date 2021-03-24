@@ -5,14 +5,16 @@ import { ProjectMemberList } from 'app/domains/ProjectMember/components/list'
 import { ProjectMemberCombined } from 'app/domains/ProjectMember/components/combined'
 
 const ProjectCombined = (props) => {
-  const { data, subdata } = props
+  const { data, subdata, userId } = props
+
+  const editedUserList = subdata?.map((item) => ({ ...item, id: item.userId }))
 
   return (
     <>
       <ProjectAdvancedView data={data} />
       <Typography.Title level={4}>Project team:</Typography.Title>
       {subdata?.length > 0 ? (
-        <ProjectMemberList data={subdata} />
+        <ProjectMemberList data={editedUserList} userId={userId} />
       ) : (
         <Box textAlign="center" mt={4}>
           <Typography.Text type="secondary">

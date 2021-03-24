@@ -27,7 +27,7 @@ const UsersAll = (props) => {
           + Add
         </Button>
       )}
-      <UserList data={data} />
+      <UserList data={data} userId={session.uid} />
     </>
   )
 }
