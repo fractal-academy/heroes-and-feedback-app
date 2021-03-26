@@ -19,7 +19,7 @@ const CompanyShow = (props) => {
 
   return (
     <Row noGutters h="center">
-      <Col cw="9">
+      <Col>
         {companyData && (
           <CompanyCombined data={companyData} subdata={projectsData} />
         )}

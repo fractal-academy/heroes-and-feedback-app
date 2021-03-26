@@ -15,16 +15,17 @@ import { UserSimpleView } from 'app/domains/User/components/views'
 
 const { Item } = Menu
 
-const Navigation = () => {
+const Sidebar = () => {
   const history = useHistory()
   const session = useUserAuthContext()
 
   const path = ROUTES_PATHS.USER_SHOW.replace(':id', session.uid)
+
   const navigationButtonProps = [
     {
       key: path,
       onClick: () => history.push(path),
-      name: <UserSimpleView />
+      name: <UserSimpleView size={20} withName={true} />
     },
     {
       key: ROUTES_PATHS.COMPANIES_ALL,
@@ -58,9 +59,11 @@ const Navigation = () => {
       name: 'Log out'
     }
   ]
+
   const defaultSelected = navigationButtonProps.filter((item) =>
     history.location.pathname.includes(item.key)
   )
+
   return (
     <Row h="center" mr={2}>
       <Col cw="auto">
@@ -84,4 +87,4 @@ const Navigation = () => {
   )
 }
 
-export default Navigation
+export default Sidebar

@@ -1,16 +1,16 @@
 import { useState } from 'react'
-import { Button, Modal, message, Spin } from 'antd'
+import { Button, Modal, message, Spin, Typography } from 'antd'
 import { GallerySelect } from 'app/components'
 import { getCollectionRef, setData, firestore } from 'app/services'
 import { BADGES, PERSONAL_BADGES, USERS } from 'app/constants/collections'
 import { BadgeSimpleView } from 'app/domains/Badge/components/views'
 import { TrophyOutlined } from '@ant-design/icons'
 import { getBatchOfFixedSizeData } from 'app/domains/PersonalBadge/helpers'
-import { Row, Col } from '@qonsoll/react-design'
+import { Row, Col, Box } from '@qonsoll/react-design'
 import './PersonalBadgeSimpleForm.style.css'
 
 const PersonalBadgeSimpleForm = (props) => {
-  const { userId, currentExp } = props
+  const { userId, currentExp, withText } = props
 
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [selectedBadge, setSelectedBadge] = useState('')
@@ -88,12 +88,22 @@ const PersonalBadgeSimpleForm = (props) => {
 
   return (
     <>
-      <Button
-        shape="circle"
-        icon={<TrophyOutlined />}
-        onClick={showModal}
-        className="badge-assign-button"
-      />
+      {withText ? (
+        <Box display="flex" onClick={showModal} className="badge-dropdown">
+          <Box className="badge-dropdown" mr={1}>
+            <TrophyOutlined />
+          </Box>
+          <Typography className="badge-dropdown">Prize</Typography>
+        </Box>
+      ) : (
+        <Button
+          shape="circle"
+          icon={<TrophyOutlined />}
+          onClick={showModal}
+          className="badge-assign-button"
+        />
+      )}
+
       {dataBatch && (
         <Modal
           title="Assign new badge"

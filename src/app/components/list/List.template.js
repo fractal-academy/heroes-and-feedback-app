@@ -1,4 +1,5 @@
 import Fuse from 'fuse.js'
+
 import { Item } from 'app/components'
 import { PropTypes } from 'prop-types'
 import { List, Divider, Input } from 'antd'
