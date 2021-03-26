@@ -1,4 +1,3 @@
-import { PersonalBadgesAll } from 'app/domains/PersonalBadge/routes'
 import {
   UsersAll,
   UserEdit,
@@ -104,13 +103,6 @@ const PROTECTED_ROUTES = {
   PROJECT_EDIT: {
     component: ProjectEdit,
     path: ROUTES_PATHS.PROJECT_EDIT
-  },
-
-  // route for user's personal badges
-  PERSONAL_BADGES_ALL: {
-    component: PersonalBadgesAll,
-    path: ROUTES_PATHS.PERSONAL_BADGES_ALL,
-    exact: true
   }
 }
 

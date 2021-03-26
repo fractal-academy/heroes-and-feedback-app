@@ -12,7 +12,7 @@ const BadgeShow = (props) => {
 
   return (
     <Row noGutters h="center">
-      <Col cw="9">{data && <BadgeAdvancedView data={data} />}</Col>
+      <Col>{data && <BadgeAdvancedView data={data} />}</Col>
     </Row>
   )
 }

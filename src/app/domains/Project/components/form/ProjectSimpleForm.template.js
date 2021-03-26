@@ -44,7 +44,7 @@ const ProjectSimpleForm = (props) => {
     <>
       {companies && (
         <Row h="center">
-          <Col cw="8">
+          <Col>
             <Form
               form={formRef}
               onFinish={onFormSubmitFinish}

@@ -24,7 +24,7 @@ const { Title, Text } = Typography
 const Card = (props) => {
   const { type, data, userId } = props
 
-  const isNarrow = useMedia({ minWidth: '1000px' })
+  const isNarrow = useMedia({ minWidth: '425px' })
   const session = useUserAuthContext()
   const history = useHistory()
 
@@ -64,7 +64,7 @@ const Card = (props) => {
             percent={userExperience}
             format={() => (
               <Title level={4} type="secondary">
-                {userLvl} lvl
+                {userLvl}
               </Title>
             )}
           />
@@ -207,7 +207,7 @@ const Card = (props) => {
           <Box width="auto">
             <CustomAvatar
               shape={shape}
-              size={125}
+              size={(isNarrow && 125) || 85}
               src={data.image}
               name={name}
             />

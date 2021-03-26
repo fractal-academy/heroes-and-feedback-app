@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js'
-import useMedia from 'use-media'
+
 import { Item } from 'app/components'
 import { PropTypes } from 'prop-types'
 import { List, Divider, Input } from 'antd'
@@ -22,7 +22,6 @@ const CustomList = (props) => {
 
   // CUSTOM HOOKS
   const searchRef = useRef()
-  const isNarrow = useMedia({ minWidth: '1000px' })
 
   const searchData = () => {
     if (searchRef.current.input.value) {
