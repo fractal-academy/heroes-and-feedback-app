@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const CustomList = (props) => {
   // INTERFACE
-  const { type, data, currentUserId } = props
+  const { type, data, currentUserId, onProjectMemberDelete } = props
 
   // STATE
   const [currentData, setCurrentData] = useState(data)
@@ -46,7 +46,12 @@ const CustomList = (props) => {
           dataSource={currentData}
           renderItem={(item) => (
             <>
-              <Item type={type} data={item} currentUserId={currentUserId} />
+              <Item
+                type={type}
+                data={item}
+                currentUserId={currentUserId}
+                onProjectMemberDelete={onProjectMemberDelete}
+              />
               <Divider style={{ margin: '0' }} />
             </>
           )}
