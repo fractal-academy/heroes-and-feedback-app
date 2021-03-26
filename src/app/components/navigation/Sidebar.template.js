@@ -15,7 +15,7 @@ import { UserSimpleView } from 'app/domains/User/components/views'
 
 const { Item } = Menu
 
-const Navigation = () => {
+const Sidebar = () => {
   const history = useHistory()
   const session = useUserAuthContext()
 
@@ -24,7 +24,7 @@ const Navigation = () => {
     {
       key: path,
       onClick: () => history.push(path),
-      name: <UserSimpleView />
+      name: <UserSimpleView size={20} withName={true} />
     },
     {
       key: ROUTES_PATHS.COMPANIES_ALL,
@@ -84,4 +84,4 @@ const Navigation = () => {
   )
 }
 
-export default Navigation
+export default Sidebar
