@@ -1,8 +1,11 @@
-import moment from 'moment'
 import './Card.styles.css'
+import moment from 'moment'
 import useMedia from 'use-media'
 import { PropTypes } from 'prop-types'
 import { ROUTES_PATHS } from 'app/constants'
+import { Typography, Progress, Badge } from 'antd'
+import { Row, Col, Box } from '@qonsoll/react-design'
+import { CustomAvatar, Dropdown } from 'app/components'
 import {
   USERS,
   COMPANIES,
@@ -10,32 +13,13 @@ import {
   PERSONAL_BADGES,
   BADGES
 } from 'app/constants/collections'
-import { CustomAvatar } from 'app/components'
-import { useHistory } from 'react-router-dom'
-import { Row, Col, Box } from '@qonsoll/react-design'
-import { Typography, Progress, Badge, Button, Popconfirm, message } from 'antd'
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
-import { deleteData } from 'app/services'
-import { PersonalBadgeSimpleForm } from 'app/domains/PersonalBadge/components/form'
-import { useUserAuthContext } from 'app/context'
 
 const { Title, Text } = Typography
 
 const Card = (props) => {
   const { type, data, userId } = props
 
-  const isNarrow = useMedia({ minWidth: '1000px' })
-  const session = useUserAuthContext()
-  const history = useHistory()
-
-  const badgeAssignButtonRule = userId !== session.uid && type === 'user'
-  const deleteButtonRule = userId
-    ? session.userDBData.role === 'Superadmin' && userId !== session.uid
-    : session.userDBData.role === 'Superadmin'
-  const editButtonRule =
-    (userId && userId === session.uid) ||
-    session.userDBData.role === 'Superadmin'
-  const confirmText = 'Are you sure you want to delete?'
+  const isNarrow = useMedia({ minWidth: '425px' })
   const birthday =
     data.birthday && moment(data.birthday.toDate()).format('Do MMMM YYYY')
   const userLvl = Math.floor(data.currentExp / 1000)
@@ -64,7 +48,7 @@ const Card = (props) => {
             percent={userExperience}
             format={() => (
               <Title level={4} type="secondary">
-                {userLvl} lvl
+                {userLvl}
               </Title>
             )}
           />
@@ -158,56 +142,23 @@ const Card = (props) => {
   const path = cardTypeMap[type].path
   const collection = cardTypeMap[type].collection
 
-  const hadleDelete = () => {
-    deleteData(collection, data.id)
-      .then(() => message.success('Item was deleted.'))
-      .then(history.goBack())
-  }
-
   return (
     <>
       <Row h="center" mb={3} style={{ position: 'relative' }}>
         <Col cw="auto">
           <Box display="flex" position="absolute" right="0">
-            {badgeAssignButtonRule && (
-              <Box mr={1}>
-                <PersonalBadgeSimpleForm
-                  userId={userId}
-                  currentExp={data.currentExp}
-                />
-              </Box>
-            )}
-            {editButtonRule && (
-              <Box mr={1}>
-                <Button
-                  type="primary"
-                  shape="circle"
-                  icon={<EditOutlined />}
-                  onClick={() => history.push(path)}
-                />
-              </Box>
-            )}
-
-            <Popconfirm
-              placement="bottom"
-              title={confirmText}
-              onConfirm={hadleDelete}
-              okText="Yes"
-              cancelText="No">
-              {deleteButtonRule && (
-                <Button
-                  type="primary"
-                  danger
-                  shape="circle"
-                  icon={<DeleteOutlined />}
-                />
-              )}
-            </Popconfirm>
+            <Dropdown
+              data={data}
+              type={type}
+              path={path}
+              userId={userId}
+              collection={collection}
+            />
           </Box>
           <Box width="auto">
             <CustomAvatar
               shape={shape}
-              size={125}
+              size={(isNarrow && 125) || 85}
               src={data.image}
               name={name}
             />

@@ -40,7 +40,7 @@ const CompanySimpleForm = (props) => {
   // TEMPLATE
   return (
     <Row h="center">
-      <Col cw="8">
+      <Col>
         <Form
           form={formRef}
           onFinish={onFormSubmitFinish}

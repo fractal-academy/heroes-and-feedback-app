@@ -9,7 +9,7 @@ const App = () => {
 
   return (
     <Container>
-      <Row noGutters h="center" pt={4}>
+      <Row noGutters h="center" pt={2}>
         <Col cw={['11', '11', '11', '11', '11', '11']}>
           <Router>
             <Switch>

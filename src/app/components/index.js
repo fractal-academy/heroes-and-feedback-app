@@ -1,5 +1,6 @@
 import { Card } from './card'
 import { List } from './list'
+import { Dropdown } from './dropdown'
 import { Item } from './listItem'
 import { Content } from './content'
 import { CustomAvatar } from './avatar'
@@ -17,6 +18,7 @@ export {
   Navbar,
   Sidebar,
   Content,
+  Dropdown,
   CustomAvatar,
   ImageUploader,
   AddressSelect,

@@ -1,6 +1,6 @@
 import './ListItem.styles.css'
+import useMedia from 'use-media'
 import { PropTypes } from 'prop-types'
-
 import { ROUTES_PATHS } from 'app/constants'
 import { Progress, Typography, Button, Popconfirm } from 'antd'
 import { CustomAvatar } from 'app/components'
@@ -15,12 +15,13 @@ const ListItem = (props) => {
   const { type, data, currentUserId, onProjectMemberDelete } = props
 
   const history = useHistory()
+  const isNarrow = useMedia({ minWidth: '375px' })
 
   const currentUsersListItem = currentUserId === data.id
   const ItemTypeMap = {
     user: {
       image: 'user',
-      imgSize: 60,
+      imgSize: (isNarrow && 60) || 40,
       style: 'info',
       name: `${data.firstName} ${data.surname}`,
       info: data.email || data.role,
