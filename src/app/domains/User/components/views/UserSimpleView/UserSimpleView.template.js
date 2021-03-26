@@ -3,7 +3,9 @@ import { CustomAvatar } from 'app/components'
 import { Row, Col } from '@qonsoll/react-design'
 import { useUserAuthContext } from 'app/context'
 
-const UserSimpleView = () => {
+const UserSimpleView = (props) => {
+  const { withName, size } = props
+
   const session = useUserAuthContext()
 
   return (
@@ -11,14 +13,16 @@ const UserSimpleView = () => {
       <Col cw="auto" mr={1}>
         <CustomAvatar
           shape={'user'}
-          size={20}
+          size={size}
           src={session.photoURL}
           name={session.displayName}
         />
       </Col>
-      <Col>
-        <Typography.Text>{session.displayName}</Typography.Text>
-      </Col>
+      {withName && (
+        <Col>
+          <Typography.Text>{session.displayName}</Typography.Text>
+        </Col>
+      )}
     </Row>
   )
 }

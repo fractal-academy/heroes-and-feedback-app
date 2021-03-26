@@ -1,20 +1,27 @@
 import { Card } from './card'
 import { List } from './list'
 import { Item } from './listItem'
+import { Content } from './content'
 import { CustomAvatar } from './avatar'
-import { AddressSelect, CustomSelect } from './select'
-import { Navigation } from './navigation'
-import { ImageUploader } from './ImageUploader'
 import { GallerySelect } from './galerySelect'
+import { ImageUploader } from './ImageUploader'
+import { AddressSelect, CustomSelect } from './select'
+import { Header, Navbar, Sidebar } from './navigation'
+import { DesktopLayout, MobileLayout } from './layout'
 
 export {
   Card,
   List,
   Item,
-  Navigation,
+  Header,
+  Navbar,
+  Sidebar,
+  Content,
   CustomAvatar,
   ImageUploader,
   AddressSelect,
   CustomSelect,
-  GallerySelect
+  GallerySelect,
+  MobileLayout,
+  DesktopLayout
 }

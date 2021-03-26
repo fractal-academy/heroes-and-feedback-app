@@ -1,5 +1,6 @@
 import moment from 'moment'
 import './Card.styles.css'
+import useMedia from 'use-media'
 import { PropTypes } from 'prop-types'
 import { ROUTES_PATHS } from 'app/constants'
 import {
@@ -23,6 +24,7 @@ const { Title, Text } = Typography
 const Card = (props) => {
   const { type, data, userId } = props
 
+  const isNarrow = useMedia({ minWidth: '1000px' })
   const session = useUserAuthContext()
   const history = useHistory()
 
