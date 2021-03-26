@@ -1,3 +1,4 @@
+import './Layout.styles.css'
 import { useUserAuthContext } from 'app/context'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Content, Header, Navbar } from 'app/components'
@@ -13,7 +14,7 @@ const MobileLayout = () => {
           <Row>
             <Col>{user && <Header />}</Col>
           </Row>
-          <Row>
+          <Row className="scroll">
             <Col>
               <Content />
             </Col>
