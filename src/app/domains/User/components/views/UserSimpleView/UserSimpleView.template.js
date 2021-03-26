@@ -4,12 +4,12 @@ import { Row, Col } from '@qonsoll/react-design'
 import { useUserAuthContext } from 'app/context'
 
 const UserSimpleView = (props) => {
-  const { withName, size } = props
+  const { withName, size, onClick } = props
 
   const session = useUserAuthContext()
 
   return (
-    <Row display="flex" h="left" v="center">
+    <Row display="flex" h="left" v="center" onClick={onClick}>
       <Col cw="auto" mr={1}>
         <CustomAvatar
           shape={'user'}

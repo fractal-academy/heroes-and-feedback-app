@@ -114,16 +114,18 @@ const ListItem = (props) => {
           </Popconfirm>
         </Col>
       )}
-      {type === 'user' && !currentUsersListItem && (
+      {type === 'user' && !currentUsersListItem && isNarrow && (
         <Col cw="auto" m={2}>
           <PersonalBadgeSimpleForm userId={data.id} />
         </Col>
       )}
-      <Col cw="auto" m={2}>
-        <Button shape="circle" type="text" onClick={() => history.push(path)}>
-          <RightOutlined />
-        </Button>
-      </Col>
+      {type !== 'personalBadge' && (
+        <Col cw="auto" m={2}>
+          <Button shape="circle" type="text" onClick={() => history.push(path)}>
+            <RightOutlined />
+          </Button>
+        </Col>
+      )}
     </Row>
   )
 }

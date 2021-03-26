@@ -124,7 +124,7 @@ const BadgeSimpleForm = (props) => {
           <Row h="between" v="bottom" mb={2}>
             <Col cw="auto">
               <Form.Item layout="horizontal">
-                <Typography.Text>Is upgratable </Typography.Text>
+                <Typography.Text>Is upgradable </Typography.Text>
                 <Checkbox
                   onChange={() => setUpgradable(!upgradable)}
                   checked={upgradable}
