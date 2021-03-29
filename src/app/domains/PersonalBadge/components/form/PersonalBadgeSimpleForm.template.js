@@ -37,8 +37,8 @@ const PersonalBadgeSimpleForm = (props) => {
           setDataBatch(dataBatch.concat(res.resData))
           setLoadingBatch(false)
         })
-        .catch((err) => {
-          console.log(err)
+        .catch((e) => {
+          console.log(e)
           setLoadingBatch(false)
         })
     }

@@ -14,6 +14,7 @@ const PersonalBadgeList = (props) => {
   const [loadingBatch, setLoadingBatch] = useState(false)
 
   const batchSize = 4
+  const message = 'Enter personal badge name...'
 
   const fetchMoreData = (key) => {
     if (key.length > 0) {
@@ -29,8 +30,8 @@ const PersonalBadgeList = (props) => {
           setDataBatch(dataBatch.concat(res.resData))
           setLoadingBatch(false)
         })
-        .catch((err) => {
-          console.log(err)
+        .catch((e) => {
+          console.log(e)
           setLoadingBatch(false)
         })
     }
@@ -62,7 +63,7 @@ const PersonalBadgeList = (props) => {
     <>
       {dataBatch && (
         <>
-          <List type="personalBadge" data={dataBatch} />
+          <List type="personalBadge" data={dataBatch} message={message} />
         </>
       )}
       {loadingBatch ? (

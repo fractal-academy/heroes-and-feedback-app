@@ -27,7 +27,6 @@ const signInWithGoogle = (history, dispatch) => {
           }
 
           await setData(USERS, user.uid, userData)
-          console.log('dispatchLogin')
           await dispatch({
             type: 'SET_DATA',
             data: { ...user, userDBData: userData }
@@ -36,8 +35,8 @@ const signInWithGoogle = (history, dispatch) => {
       }
       history.push(ROUTES_PATHS.COMPANIES_ALL)
     })
-    .catch((error) => {
-      console.log(error.message)
+    .catch((e) => {
+      console.log(e.message)
     })
 }
 

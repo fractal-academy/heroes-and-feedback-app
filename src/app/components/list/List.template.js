@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const CustomList = (props) => {
   // INTERFACE
-  const { type, data, currentUserId, onProjectMemberDelete } = props
+  const { type, data, currentUserId, onProjectMemberDelete, message } = props
 
   // STATE
   const [currentData, setCurrentData] = useState(data)
@@ -37,7 +37,7 @@ const CustomList = (props) => {
         <Box mb={2}>
           <Input.Search
             ref={searchRef}
-            placeholder="input search text"
+            placeholder={message}
             onSearch={searchData}
             enterButton
           />
