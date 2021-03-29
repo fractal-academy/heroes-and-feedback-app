@@ -1,7 +1,7 @@
 import firebase, { auth, firestore } from 'app/services/Firebase'
 import { ROUTES_PATHS } from 'app/constants'
 import { USERS } from 'app/constants/collections'
-import { setData, getTimestamp } from 'app/services'
+import { setData } from 'app/services'
 
 const signInWithGoogle = (history, dispatch) => {
   const googleProvider = new firebase.auth.GoogleAuthProvider()
@@ -34,8 +34,8 @@ const signInWithGoogle = (history, dispatch) => {
       }
       history.push(ROUTES_PATHS.COMPANIES_ALL)
     })
-    .catch((error) => {
-      console.log(error.message)
+    .catch((e) => {
+      console.log(e.message)
     })
 }
 

@@ -15,6 +15,7 @@ const CustomList = (props) => {
     onProjectMemberDelete,
     className,
     onScroll,
+    message,
     onPersonalBadgeDelete
   } = props
 
@@ -45,7 +46,7 @@ const CustomList = (props) => {
         <Box mb={2}>
           <Input.Search
             ref={searchRef}
-            placeholder="input search text"
+            placeholder={message}
             onSearch={searchData}
             enterButton
           />

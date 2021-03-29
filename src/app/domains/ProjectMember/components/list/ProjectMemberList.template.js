@@ -1,11 +1,11 @@
 import { deleteData } from 'app/services'
 import { List } from 'app/components'
 import { PROJECT_MEMBER } from 'app/constants/collections'
-import { message } from 'antd'
 
 const ProjectMemberList = (props) => {
   const { data, currentUserId } = props
 
+  const message = 'Enter member name...'
   const editedData =
     data &&
     data.map((item) => ({ ...item, id: item.userId, projectMemberId: item.id }))
@@ -24,6 +24,7 @@ const ProjectMemberList = (props) => {
     <List
       type="user"
       data={editedData}
+      message={message}
       currentUserId={currentUserId}
       onProjectMemberDelete={onProjectMemberDelete}></List>
   )

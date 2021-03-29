@@ -1,10 +1,10 @@
+import { Spin } from 'antd'
 import { List } from 'app/components'
-import { PERSONAL_BADGES } from 'app/constants/collections'
 import { useEffect, useState } from 'react'
-import { getBatchOfFixedSizeData } from 'app/domains/PersonalBadge/helpers'
 import { Row, Col } from '@qonsoll/react-design'
-import { message, Spin } from 'antd'
 import { firestore } from 'app/services/Firebase'
+import { PERSONAL_BADGES } from 'app/constants/collections'
+import { getBatchOfFixedSizeData } from 'app/domains/PersonalBadge/helpers'
 import './PersonalBadgeList.style.css'
 
 const PersonalBadgeList = (props) => {
@@ -15,6 +15,7 @@ const PersonalBadgeList = (props) => {
   const [loadingBatch, setLoadingBatch] = useState(false)
 
   const batchSize = 3
+  const message = 'Enter personal badge name...'
 
   const fetchMoreData = (key) => {
     if (key.length > 0) {
@@ -30,8 +31,8 @@ const PersonalBadgeList = (props) => {
           setDataBatch(dataBatch.concat(res.resData))
           setLoadingBatch(false)
         })
-        .catch((err) => {
-          console.log(err)
+        .catch((e) => {
+          console.log(e)
           setLoadingBatch(false)
         })
     }
@@ -86,25 +87,24 @@ const PersonalBadgeList = (props) => {
 
   return (
     <>
-      <>
-        {dataBatch && (
-          <List
-            currentUserId={currentUser}
-            type="personalBadge"
-            data={dataBatch}
-            className="list-scroll"
-            onScroll={onScroll}
-            onPersonalBadgeDelete={onPersonalBadgeDelete}
-          />
-        )}
-        {loadingBatch && (
-          <Row h="center">
-            <Col cw="auto">
-              <Spin />
-            </Col>
-          </Row>
-        )}
-      </>
+      {dataBatch && (
+        <List
+          currentUserId={currentUser}
+          type="personalBadge"
+          data={dataBatch}
+          message={message}
+          className="list-scroll"
+          onScroll={onScroll}
+          onPersonalBadgeDelete={onPersonalBadgeDelete}
+        />
+      )}
+      {loadingBatch && (
+        <Row h="center">
+          <Col cw="auto">
+            <Spin />
+          </Col>
+        </Row>
+      )}
     </>
   )
 }

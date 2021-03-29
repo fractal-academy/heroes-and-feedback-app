@@ -38,7 +38,7 @@ const ImageUploader = (props) => {
         const imageRef = storage.refFromURL(currentSource)
         await imageRef.delete()
       } catch (e) {
-        console.log('internal', e)
+        console.log(e)
       }
       const res = storage.ref().child(`images/${file.file.name}`).put(file.file)
       res.on(

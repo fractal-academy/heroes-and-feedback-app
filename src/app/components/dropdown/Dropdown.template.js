@@ -16,7 +16,6 @@ const CustomDropdown = (props) => {
   const session = useUserAuthContext()
 
   const hadleDelete = () => {
-    console.log('Delete')
     deleteData(collection, data.id)
       .then(() => message.success('Item was deleted.'))
       .then(history.goBack())
