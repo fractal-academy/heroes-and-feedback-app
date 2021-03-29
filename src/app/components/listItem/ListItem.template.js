@@ -42,7 +42,8 @@ const ListItem = (props) => {
       name: `${data.name}`,
       info: data.currentLvl,
       path: ROUTES_PATHS.BADGE_SHOW,
-      personalBadgeProgress: ((data.currentLvl / data.maxLvl) * 100).toFixed(1)
+      personalBadgeProgress: ((data.currentLvl / data.maxLvl) * 100).toFixed(1),
+      personalBadgeValue: `${data.currentLvl}/${data.maxLvl} lvl`
     },
     company: {
       image: 'enterprise',
@@ -69,6 +70,7 @@ const ListItem = (props) => {
   const path = ItemTypeMap[type].path.replace(':id', data.id)
   const style = ItemTypeMap[type].style
   const progressBarValue = ItemTypeMap[type]?.personalBadgeProgress
+  const personalBadgeValue = ItemTypeMap[type]?.personalBadgeValue
 
   return (
     <Row display="flex" v="center">
@@ -85,11 +87,14 @@ const ListItem = (props) => {
           <Title level={5}>{name}</Title>
           {type === 'personalBadge' ? (
             <Progress
+              style={{ alignItems: 'center' }}
+              className="progressBar"
               strokeColor={{
                 '0%': '#108ee9',
                 '100%': '#87d068'
               }}
               percent={progressBarValue}
+              format={() => <Col mb={1}>{personalBadgeValue}</Col>}
             />
           ) : (
             <Box className={style}>

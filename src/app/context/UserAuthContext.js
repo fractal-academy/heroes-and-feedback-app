@@ -41,6 +41,7 @@ const UserAuthProvider = ({ children }) => {
         type: 'SET_DATA',
         data: dispatchData
       })
+      console.log('userAuth')
       setLoading(false)
     })
   }, [])

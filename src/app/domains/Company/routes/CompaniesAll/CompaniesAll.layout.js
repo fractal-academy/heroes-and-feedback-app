@@ -12,6 +12,7 @@ const CompaniesAll = (props) => {
   const [data] = useCollectionData(firestore.collection(COMPANIES))
 
   const session = useUserAuthContext()
+  console.log(session)
 
   const addButtonRule = session.userDBData.role === 'Superadmin'
 

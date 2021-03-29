@@ -13,12 +13,17 @@ import {
   PERSONAL_BADGES,
   BADGES
 } from 'app/constants/collections'
+import { useUserAuthContext } from 'app/context'
 
 const { Title, Text } = Typography
 
 const Card = (props) => {
   const { type, data, userId } = props
 
+  const session = useUserAuthContext()
+
+  const dropdownRules =
+    session.userDBData.role === 'Superadmin' || type === 'user'
   const isNarrow = useMedia({ minWidth: '425px' })
   const birthday =
     data.birthday && moment(data.birthday.toDate()).format('Do MMMM YYYY')
@@ -40,15 +45,17 @@ const Card = (props) => {
             <Text type="secondary">{data.email}</Text>
             {birthday && <Text type="secondary">{birthday}</Text>}
           </Box>
+
           <Progress
+            className="progress"
             strokeColor={{
               '0%': '#108ee9',
               '100%': '#87d068'
             }}
             percent={userExperience}
             format={() => (
-              <Title level={4} type="secondary">
-                {userLvl}
+              <Title level={4} type="secondary" style={{ marginBottom: 0 }}>
+                {userLvl} lvl
               </Title>
             )}
           />
@@ -146,15 +153,17 @@ const Card = (props) => {
     <>
       <Row h="center" mb={3} style={{ position: 'relative' }}>
         <Col cw="auto">
-          <Box display="flex" position="absolute" right="0">
-            <Dropdown
-              data={data}
-              type={type}
-              path={path}
-              userId={userId}
-              collection={collection}
-            />
-          </Box>
+          {dropdownRules && (
+            <Box display="flex" position="absolute" right="0">
+              <Dropdown
+                data={data}
+                type={type}
+                path={path}
+                userId={userId}
+                collection={collection}
+              />
+            </Box>
+          )}
           <Box width="auto">
             <CustomAvatar
               shape={shape}

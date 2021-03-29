@@ -15,7 +15,7 @@ const signInWithGoogle = (history, dispatch) => {
           .where('id', '==', user?.uid)
           .get()
         if (!userDBData.docs.length) {
-          await setData(USERS, user.uid, {
+          const userData = {
             id: user.uid,
             firstName: user.displayName.split(' ')[0] || 'No',
             surname: user.displayName.split(' ')[1] || 'name',
@@ -24,6 +24,13 @@ const signInWithGoogle = (history, dispatch) => {
             image: user.photoURL || '',
             role: 'User',
             birthday: getTimestamp().fromDate(new Date())
+          }
+
+          await setData(USERS, user.uid, userData)
+          console.log('dispatchLogin')
+          await dispatch({
+            type: 'SET_DATA',
+            data: { ...user, userDBData: userData }
           })
         }
       }
