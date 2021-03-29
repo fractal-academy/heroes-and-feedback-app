@@ -18,7 +18,7 @@ const PersonalBadgeSimpleForm = (props) => {
   const [lastKey, setLastKey] = useState('')
   const [loadingBatch, setLoadingBatch] = useState(false)
 
-  const batchSize = 6
+  const batchSize = 4
 
   const showModal = () => {
     getBatchOfFixedSizeData(batchSize, BADGES).then((res) => {
@@ -44,6 +44,17 @@ const PersonalBadgeSimpleForm = (props) => {
     }
   }
 
+  const onScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight &&
+      !(dataBatch.length % 4)
+    ) {
+      console.log('scroll')
+      fetchMoreData(lastKey)
+    }
+  }
+
   const handleOk = () => {
     const newId = firestore.collection(PERSONAL_BADGES).doc().id
     getCollectionRef(PERSONAL_BADGES)
@@ -60,6 +71,7 @@ const PersonalBadgeSimpleForm = (props) => {
             setData(USERS, userId, {
               currentExp: Number(currentExp) + Number(selectedBadge.experience)
             })
+            message.success('Badge lvl was successfully upgraded')
           } else {
             message.error('This user already has maximum lvl of this badge')
           }
@@ -77,6 +89,7 @@ const PersonalBadgeSimpleForm = (props) => {
           setData(USERS, userId, {
             currentExp: currentExp + selectedBadge.experience
           })
+          message.success('Badge was successfully assigned to user')
         }
       })
     setIsModalVisible(false)
@@ -106,27 +119,24 @@ const PersonalBadgeSimpleForm = (props) => {
 
       {dataBatch && (
         <Modal
+          destroyOnClose
           title="Assign new badge"
           visible={isModalVisible}
           width="60vw"
           onOk={handleOk}
           onCancel={handleCancel}>
           <GallerySelect
+            className="galery-scroll"
             data={dataBatch}
             Component={BadgeSimpleView}
             setSelected={setSelectedBadge}
             selected={selectedBadge}
+            onScroll={onScroll}
           />
-          {loadingBatch ? (
-            <Spin />
-          ) : (
-            <Row v="center" h="center" marginTop={2}>
-              <Col v="center" cw="auto">
-                {lastKey.length > 0 && (
-                  <Button onClick={() => fetchMoreData(lastKey)}>
-                    Load More
-                  </Button>
-                )}
+          {loadingBatch && (
+            <Row h="center">
+              <Col cw="auto">
+                <Spin />
               </Col>
             </Row>
           )}

@@ -8,7 +8,16 @@ import { useEffect, useRef, useState } from 'react'
 
 const CustomList = (props) => {
   // INTERFACE
-  const { type, data, currentUserId, onProjectMemberDelete, message } = props
+  const {
+    type,
+    data,
+    currentUserId,
+    onProjectMemberDelete,
+    className,
+    onScroll,
+    message,
+    onPersonalBadgeDelete
+  } = props
 
   // STATE
   const [currentData, setCurrentData] = useState(data)
@@ -43,6 +52,8 @@ const CustomList = (props) => {
           />
         </Box>
         <List
+          onScroll={onScroll}
+          className={className}
           itemLayout="horizontal"
           dataSource={currentData}
           renderItem={(item) => (
@@ -52,6 +63,7 @@ const CustomList = (props) => {
                 data={item}
                 currentUserId={currentUserId}
                 onProjectMemberDelete={onProjectMemberDelete}
+                onPersonalBadgeDelete={onPersonalBadgeDelete}
               />
               <Divider style={{ margin: '0' }} />
             </>

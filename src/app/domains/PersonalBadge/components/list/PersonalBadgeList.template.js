@@ -1,19 +1,20 @@
+import { Spin } from 'antd'
 import { List } from 'app/components'
-import { PERSONAL_BADGES } from 'app/constants/collections'
 import { useEffect, useState } from 'react'
-import { getBatchOfFixedSizeData } from 'app/domains/PersonalBadge/helpers'
 import { Row, Col } from '@qonsoll/react-design'
-import { Spin, Button } from 'antd'
 import { firestore } from 'app/services/Firebase'
+import { PERSONAL_BADGES } from 'app/constants/collections'
+import { getBatchOfFixedSizeData } from 'app/domains/PersonalBadge/helpers'
+import './PersonalBadgeList.style.css'
 
 const PersonalBadgeList = (props) => {
-  const { userId } = props
+  const { userId, currentUser } = props
 
   const [dataBatch, setDataBatch] = useState([])
   const [lastKey, setLastKey] = useState('')
   const [loadingBatch, setLoadingBatch] = useState(false)
 
-  const batchSize = 4
+  const batchSize = 3
   const message = 'Enter personal badge name...'
 
   const fetchMoreData = (key) => {
@@ -59,21 +60,48 @@ const PersonalBadgeList = (props) => {
     }
   }, [userId])
 
+  const onPersonalBadgeDelete = (badgeId) => {
+    firestore
+      .collection(PERSONAL_BADGES)
+      .doc(badgeId)
+      .delete()
+      .then(() => {
+        message.success('Badge was successfully deleted')
+      })
+      .catch((e) => {
+        console.log(e)
+        message.error('Error occured during badge deletion')
+      })
+  }
+
+  const onScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight &&
+      !(dataBatch.length % 3)
+    ) {
+      console.log('scroll')
+      fetchMoreData(lastKey)
+    }
+  }
+
   return (
     <>
       {dataBatch && (
-        <>
-          <List type="personalBadge" data={dataBatch} message={message} />
-        </>
+        <List
+          currentUserId={currentUser}
+          type="personalBadge"
+          data={dataBatch}
+          message={message}
+          className="list-scroll"
+          onScroll={onScroll}
+          onPersonalBadgeDelete={onPersonalBadgeDelete}
+        />
       )}
-      {loadingBatch ? (
-        <Spin />
-      ) : (
-        <Row v="center" h="center" marginTop={2}>
-          <Col v="center" cw="auto">
-            {lastKey.length > 0 && (
-              <Button onClick={() => fetchMoreData(lastKey)}>Load More</Button>
-            )}
+      {loadingBatch && (
+        <Row h="center">
+          <Col cw="auto">
+            <Spin />
           </Col>
         </Row>
       )}

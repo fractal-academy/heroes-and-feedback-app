@@ -1,16 +1,19 @@
 import useMedia from 'use-media'
 import { useEffect, useState } from 'react'
 import { Row, Col } from '@qonsoll/react-design'
-import { useUserAuthContext } from 'app/context'
+import { useUserAuth } from 'app/context'
 import { Route, Redirect } from 'react-router-dom'
 import {
   PUBLIC_ROUTES_VALUE,
   PROTECTED_ROUTES_VALUE,
   ROUTES_PATHS
 } from 'app/constants'
+import { firestore } from 'app/services'
+import { USERS } from 'app/constants/collections'
+import { message } from 'antd'
 
 const Content = () => {
-  const user = useUserAuthContext()
+  const [user, dispatch] = useUserAuth()
 
   const changeAvailableRoutes = (user) =>
     user ? PROTECTED_ROUTES_VALUE : PUBLIC_ROUTES_VALUE
@@ -22,6 +25,30 @@ const Content = () => {
   useEffect(() => {
     setCurrentRoutes(changeAvailableRoutes(user))
   }, [user])
+
+  useEffect(() => {
+    const unsubscribe = () => {
+      user &&
+        firestore
+          .collection(USERS)
+          .where('id', '==', user.uid)
+          .onSnapshot((snapshot) => {
+            const userDocChanges = snapshot.docChanges()[0]
+            if (userDocChanges.type === 'modified') {
+              dispatch({
+                type: 'SET_DATA',
+                data: { ...user, userDBData: snapshot.docs[0].data() }
+              })
+              message.success(
+                `Your role was changed to: ${snapshot.docs[0].data().role}`
+              )
+            }
+          })
+    }
+    return () => {
+      unsubscribe && unsubscribe()
+    }
+  }, [])
 
   const isWide = useMedia({ minWidth: '1024px' })
 

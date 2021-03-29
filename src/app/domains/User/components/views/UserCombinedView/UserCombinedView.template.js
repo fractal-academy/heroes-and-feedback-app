@@ -1,10 +1,9 @@
 import { Typography } from 'antd'
-import { Box } from '@qonsoll/react-design'
 import { UserAdvancedView } from 'app/domains/User/components/views'
 import { PersonalBadgeList } from 'app/domains/PersonalBadge/components/list'
 
 const UserCombinedView = (props) => {
-  const { data, id } = props
+  const { data, id, currentUser } = props
 
   return (
     <>
@@ -12,7 +11,7 @@ const UserCombinedView = (props) => {
 
       <Typography.Title level={4}>Personal badges:</Typography.Title>
 
-      <PersonalBadgeList userId={id} />
+      <PersonalBadgeList userId={id} currentUser={currentUser} />
     </>
   )
 }

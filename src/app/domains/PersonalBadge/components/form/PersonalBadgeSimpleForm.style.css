@@ -6,3 +6,11 @@
 .badge-dropdown {
   color: #52c41a;
 }
+
+.galery-scroll {
+  max-height: 40vh;
+  overflow-y: auto;
+}
+.galery-scroll::-webkit-scrollbar {
+  display: none;
+}

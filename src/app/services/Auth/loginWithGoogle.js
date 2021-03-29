@@ -1,7 +1,7 @@
 import firebase, { auth, firestore } from 'app/services/Firebase'
 import { ROUTES_PATHS } from 'app/constants'
 import { USERS } from 'app/constants/collections'
-import { setData, getTimestamp } from 'app/services'
+import { setData } from 'app/services'
 
 const signInWithGoogle = (history, dispatch) => {
   const googleProvider = new firebase.auth.GoogleAuthProvider()
@@ -22,8 +22,7 @@ const signInWithGoogle = (history, dispatch) => {
             currentExp: 0,
             email: user.email,
             image: user.photoURL || '',
-            role: 'User',
-            birthday: getTimestamp().fromDate(new Date())
+            role: 'User'
           }
 
           await setData(USERS, user.uid, userData)
