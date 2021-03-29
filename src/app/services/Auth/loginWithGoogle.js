@@ -22,12 +22,10 @@ const signInWithGoogle = (history, dispatch) => {
             currentExp: 0,
             email: user.email,
             image: user.photoURL || '',
-            role: 'User',
-            birthday: getTimestamp().fromDate(new Date())
+            role: 'User'
           }
 
           await setData(USERS, user.uid, userData)
-          console.log('dispatchLogin')
           await dispatch({
             type: 'SET_DATA',
             data: { ...user, userDBData: userData }

@@ -1,0 +1,7 @@
+.list-scroll {
+  max-height: 220px;
+  overflow-y: auto;
+}
+.list-scroll::-webkit-scrollbar {
+  display: none;
+}

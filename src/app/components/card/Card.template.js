@@ -179,7 +179,7 @@ const Card = (props) => {
         <Col>
           <Box textAlign="center" verticalAlign="center">
             <Title level={2}>
-              {name}{' '}
+              {name}
               {(type === 'badge' || type === 'personalBadge') && (
                 <Badge
                   count={`+${data.experience} EXP`}

@@ -5,19 +5,31 @@ import { ROUTES_PATHS } from 'app/constants'
 import { Progress, Typography, Button, Popconfirm } from 'antd'
 import { CustomAvatar } from 'app/components'
 import { useHistory } from 'react-router-dom'
-import { RightOutlined, ImportOutlined } from '@ant-design/icons'
+import {
+  RightOutlined,
+  ImportOutlined,
+  DeleteOutlined
+} from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { PersonalBadgeSimpleForm } from 'app/domains/PersonalBadge/components/form'
 
 const { Title, Text } = Typography
 
 const ListItem = (props) => {
-  const { type, data, currentUserId, onProjectMemberDelete } = props
+  const {
+    type,
+    data,
+    currentUserId,
+    onProjectMemberDelete,
+    onPersonalBadgeDelete
+  } = props
 
   const history = useHistory()
   const isNarrow = useMedia({ minWidth: '375px' })
 
   const currentUsersListItem = currentUserId === data.id
+  const usersPersonalBadgesRule =
+    currentUserId !== data.userId && type === 'personalBadge'
   const ItemTypeMap = {
     user: {
       image: 'user',
@@ -103,6 +115,22 @@ const ListItem = (props) => {
           )}
         </Box>
       </Col>
+      {usersPersonalBadgesRule && (
+        <Col cw="auto" m={2}>
+          <Popconfirm
+            title="Are you sure you want to remove this badge from this user?"
+            onConfirm={() => onPersonalBadgeDelete(data.id)}
+            okText="Yes"
+            cancelText="No">
+            <Button
+              shape="circle"
+              type="primary"
+              danger
+              icon={<DeleteOutlined />}
+            />
+          </Popconfirm>
+        </Col>
+      )}
       {data.projectMemberId && (
         <Col cw="auto" m={2}>
           <Popconfirm

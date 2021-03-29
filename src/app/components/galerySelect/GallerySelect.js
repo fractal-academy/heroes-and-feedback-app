@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Input, Spin } from 'antd'
 
 const GallerySelect = (props) => {
-  const { data, Component, setSelected, selected } = props
+  const { data, Component, setSelected, selected, onScroll, className } = props
 
   const [loading, setLoading] = useState(false)
   const [currentData, setCurrentData] = useState(data)
@@ -49,7 +49,11 @@ const GallerySelect = (props) => {
       {loading ? (
         <Spin />
       ) : (
-        <Container overflowY="auto" overflowX="hidden" maxHeight="40vh">
+        <Container
+          overflowY="auto"
+          overflowX="hidden"
+          className={className}
+          onScroll={onScroll}>
           <Row h="center">
             {currentData?.map((item) => (
               <Col
