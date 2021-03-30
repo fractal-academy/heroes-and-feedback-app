@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import { Modal, Button, Form } from 'antd'
-import { USERS } from 'app/constants/collections'
 import { Box } from '@qonsoll/react-design'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { useUserAuthContext } from 'app/context'
+import { USERS } from 'app/constants/collections'
 import { firestore } from 'app/services/Firestore'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { ProjectMemberForm } from 'app/domains/ProjectMember/components/form'
 
 const ProjectMemberCombined = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [form] = Form.useForm()
 
+  const session = useUserAuthContext()
   const [users] = useCollectionData(firestore.collection(USERS))
 
   const showModal = () => {
@@ -32,13 +34,18 @@ const ProjectMemberCombined = (props) => {
     setIsModalVisible(false)
   }
 
+  const accessRules = session.userDBData.role === 'Superadmin'
+
   return (
     <>
-      <Box textAlign="center" mt={4}>
-        <Button type="primary" onClick={showModal}>
-          Invite members
-        </Button>
-      </Box>
+      {accessRules && (
+        <Box textAlign="center" my={4}>
+          <Button type="primary" onClick={showModal}>
+            Invite members
+          </Button>
+        </Box>
+      )}
+
       {users && (
         <Modal
           keyboard
