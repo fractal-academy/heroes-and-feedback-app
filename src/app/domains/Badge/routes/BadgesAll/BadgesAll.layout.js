@@ -9,7 +9,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { useUserAuthContext } from 'app/context'
 
 const BadgesAll = (props) => {
-  const [data] = useCollectionData(firestore.collection(BADGES))
+  const [data] = useCollectionData(firestore.collection(BADGES).orderBy('name'))
 
   const session = useUserAuthContext()
 

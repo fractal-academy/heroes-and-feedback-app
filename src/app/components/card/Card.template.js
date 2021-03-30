@@ -83,7 +83,7 @@ const Card = (props) => {
           <Box textAlign="justify">
             <Text>{description}</Text>
           </Box>
-          <Box textAlign="center" mt={6}>
+          <Box textAlign="center" mt={4}>
             <Title level={4}>Maximum level: {data.maxLvl}</Title>
           </Box>
         </Col>
@@ -162,7 +162,7 @@ const Card = (props) => {
 
   return (
     <>
-      <Row h="center" mb={3} style={{ position: 'relative' }}>
+      <Row h="center" my={3} style={{ position: 'relative' }}>
         <Col cw="auto">
           <Box display="flex" position="absolute" right="0">
             {editButtonRule && (
