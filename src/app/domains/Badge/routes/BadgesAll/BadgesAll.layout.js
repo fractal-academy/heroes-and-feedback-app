@@ -1,5 +1,6 @@
 import { Button } from 'antd'
 import { firestore } from 'app/services'
+import { Box } from '@qonsoll/react-design'
 import { ROUTES_PATHS } from 'app/constants'
 import { useHistory } from 'react-router-dom'
 import { BADGES } from 'app/constants/collections'
@@ -18,13 +19,15 @@ const BadgesAll = (props) => {
   return (
     <>
       {addButtonRule && (
-        <Button
-          type="primary"
-          onClick={() => {
-            history.push(ROUTES_PATHS.BADGE_CREATE)
-          }}>
-          + Add
-        </Button>
+        <Box mt={2}>
+          <Button
+            type="primary"
+            onClick={() => {
+              history.push(ROUTES_PATHS.BADGE_CREATE)
+            }}>
+            + Add
+          </Button>
+        </Box>
       )}
       {data && <BadgeList data={data} />}
     </>

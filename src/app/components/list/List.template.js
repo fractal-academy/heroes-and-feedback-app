@@ -42,7 +42,7 @@ const CustomList = (props) => {
   return (
     <Row noGutters>
       <Col>
-        <Box mb={2}>
+        <Box my={2}>
           <Input.Search
             ref={searchRef}
             placeholder={message}

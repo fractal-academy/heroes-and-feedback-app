@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import { COMPANIES } from 'app/constants/collections'
 import { CompanyList } from 'app/domains/Company/components/list'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Box } from '@qonsoll/react-design'
 import { useUserAuthContext } from 'app/context'
 
 const CompaniesAll = (props) => {
@@ -18,22 +18,20 @@ const CompaniesAll = (props) => {
   const history = useHistory()
 
   return (
-    <Row>
-      <Col>
-        {addButtonRule && (
-          <Box>
-            <Button
-              type="primary"
-              onClick={() => {
-                history.push(ROUTES_PATHS.COMPANY_CREATE)
-              }}>
-              + Add
-            </Button>
-          </Box>
-        )}
-        <CompanyList data={data} />
-      </Col>
-    </Row>
+    <>
+      {addButtonRule && (
+        <Box mt={2}>
+          <Button
+            type="primary"
+            onClick={() => {
+              history.push(ROUTES_PATHS.COMPANY_CREATE)
+            }}>
+            + Add
+          </Button>
+        </Box>
+      )}
+      <CompanyList data={data} />
+    </>
   )
 }
 

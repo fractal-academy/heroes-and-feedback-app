@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 import { EditOutlined } from '@ant-design/icons'
 import { PropTypes } from 'prop-types'
 import { ROUTES_PATHS } from 'app/constants'
+import { useUserAuthContext } from 'app/context'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { CustomAvatar, Dropdown } from 'app/components'
 import { Typography, Progress, Badge, Button } from 'antd'
@@ -16,7 +17,6 @@ import {
   PERSONAL_BADGES,
   BADGES
 } from 'app/constants/collections'
-import { useUserAuthContext } from 'app/context'
 
 const { Title, Text } = Typography
 
@@ -34,7 +34,7 @@ const Card = (props) => {
   const commonRules =
     session.userDBData.role === 'Superadmin' && userId !== session.uid
   const dropdownRules = commonRules || (commonRules && type === 'user')
-
+  const description = data.description || "There's no description."
   const isNarrow = useMedia({ minWidth: '425px' })
   const birthday =
     data.birthday && moment(data.birthday.toDate()).format('Do MMMM YYYY')
@@ -81,7 +81,7 @@ const Card = (props) => {
       layout: (
         <Col>
           <Box textAlign="justify">
-            <Text>{data.description}</Text>
+            <Text>{description}</Text>
           </Box>
           <Box textAlign="center" mt={6}>
             <Title level={4}>Maximum level: {data.maxLvl}</Title>
@@ -97,7 +97,7 @@ const Card = (props) => {
       layout: (
         <Col>
           <Box textAlign="justify">
-            <Text>{data.description}</Text>
+            <Text>{description}</Text>
           </Box>
           {data.receiveData && (
             <Progress
@@ -132,7 +132,7 @@ const Card = (props) => {
             </Text>
           </Box>
           <Box textAlign="justify" mb={4}>
-            <Text>{data.description}</Text>
+            <Text>{description}</Text>
           </Box>
         </Col>
       )
@@ -148,7 +148,7 @@ const Card = (props) => {
             <Text type="secondary">{data.companyName}</Text>
           </Box>
           <Box textAlign="justify" mb={4}>
-            <Text>{data.description}</Text>
+            <Text>{description}</Text>
           </Box>
         </Col>
       )
@@ -204,7 +204,7 @@ const Card = (props) => {
         <Col>
           <Box textAlign="center" verticalAlign="center">
             <Title level={2}>
-              {name}
+              {name}{' '}
               {(type === 'badge' || type === 'personalBadge') && (
                 <Badge
                   count={`+${data.experience} EXP`}
