@@ -42,7 +42,6 @@ const CustomList = (props) => {
   return (
     <Row noGutters>
       <Col>
-        <Box my={4}></Box>
         <Box mb={2}>
           <Input.Search
             ref={searchRef}

@@ -6,7 +6,7 @@ const GoogleLogin = (props) => {
   const isWide = useMedia({ minWidth: '768px' })
 
   return (
-    <Row h="center" v="center" height="100vh" m={2}>
+    <Row noGutters h="center" v="center" height="inherit">
       <Col cw={(!isWide && '12') || '6'} v="center">
         <SessionSimpleView />
       </Col>

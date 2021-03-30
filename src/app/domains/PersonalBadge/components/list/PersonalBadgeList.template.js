@@ -5,6 +5,7 @@ import { Row, Col } from '@qonsoll/react-design'
 import { firestore } from 'app/services/Firebase'
 import { PERSONAL_BADGES } from 'app/constants/collections'
 import { getBatchOfFixedSizeData } from 'app/domains/PersonalBadge/helpers'
+import useMedia from 'use-media'
 import './PersonalBadgeList.style.css'
 
 const PersonalBadgeList = (props) => {
@@ -14,7 +15,8 @@ const PersonalBadgeList = (props) => {
   const [lastKey, setLastKey] = useState('')
   const [loadingBatch, setLoadingBatch] = useState(false)
 
-  const batchSize = 3
+  const isWide = useMedia({ minWidth: '768px' })
+  const batchSize = isWide ? 3 : 4
   const message = 'Enter personal badge name...'
 
   const fetchMoreData = (key) => {
@@ -78,7 +80,7 @@ const PersonalBadgeList = (props) => {
     if (
       window.innerHeight + document.documentElement.scrollTop ===
         document.documentElement.offsetHeight &&
-      !(dataBatch.length % 3)
+      !(dataBatch.length % batchSize)
     ) {
       console.log('scroll')
       fetchMoreData(lastKey)

@@ -1,5 +1,4 @@
 .scroll {
-  height: 85vh;
   overflow-x: hidden;
 }
 .scroll::-webkit-scrollbar {

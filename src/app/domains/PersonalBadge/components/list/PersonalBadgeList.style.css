@@ -1,6 +1,24 @@
 .list-scroll {
-  max-height: 220px;
+  max-height: 300px;
   overflow-y: auto;
+}
+@media (max-width: 767px) {
+  .list-scroll {
+    max-height: 150px;
+    overflow-y: auto;
+  }
+}
+@media (max-width: 425px) {
+  .list-scroll {
+    max-height: 190px;
+    overflow-y: auto;
+  }
+}
+@media (max-width: 1023px) {
+  .list-scroll {
+    max-height: 230px;
+    overflow-y: auto;
+  }
 }
 .list-scroll::-webkit-scrollbar {
   display: none;

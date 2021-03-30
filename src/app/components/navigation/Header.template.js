@@ -14,7 +14,7 @@ const Header = () => {
   const path = ROUTES_PATHS.USER_SHOW.replace(':id', session.uid)
 
   return (
-    <Row noGutters h="right">
+    <Row noGutters h="right" pt={2} pb={2}>
       <Col cw="auto" display="flex">
         <UserSimpleView size={32} onClick={() => history.push(path)} />
         <Button

@@ -53,8 +53,8 @@ const Content = () => {
   const isWide = useMedia({ minWidth: '1024px' })
 
   return (
-    <Row h="center" mt={4}>
-      <Col cw={(isWide && 9) || 12}>
+    <Row h="center" height="inherit">
+      <Col cw={(isWide && 9) || 12} height="inherit">
         {currentRoutes.map((route) => (
           <Route key={route.path} {...route} />
         ))}
