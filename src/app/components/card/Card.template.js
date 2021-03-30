@@ -1,4 +1,5 @@
 import './Card.styles.css'
+import { useEffect } from 'react'
 import moment from 'moment'
 import useMedia from 'use-media'
 import { useHistory } from 'react-router-dom'
@@ -26,6 +27,12 @@ const Card = (props) => {
   const session = useUserAuthContext()
   const history = useHistory()
 
+  const itemIndex = history.location?.state?.itemLinks.findIndex(
+    (item) => item === history.location.pathname
+  )
+  const previousItem = history.location?.state?.itemLinks?.[itemIndex - 1]
+  const nextItem = history.location?.state?.itemLinks?.[itemIndex + 1]
+
   const editButtonRule = userId && userId === session.uid
   const prizeButtonRule =
     session.userDBData.role === 'User' &&
@@ -42,6 +49,18 @@ const Card = (props) => {
   const userExperience = (data.currentExp % 1000) * 0.1
   const badgeProgress = (100 / data.maxLvl) * data.currentLvl
   const badgeStatus = (data.receiveData && 'Unlocked!') || 'Locked.'
+
+  const redirectToNextHop = (event) => {
+    if (event.key === 'a' && previousItem) {
+      history.push(previousItem, {
+        itemLinks: history.location?.state?.itemLinks
+      })
+    } else if (event.key === 'd' && nextItem) {
+      history.push(nextItem, {
+        itemLinks: history.location?.state?.itemLinks
+      })
+    }
+  }
 
   const cardTypeMap = {
     user: {
@@ -159,6 +178,13 @@ const Card = (props) => {
   const shape = cardTypeMap[type].shape
   const path = cardTypeMap[type].path
   const collection = cardTypeMap[type].collection
+
+  useEffect(() => {
+    window.document.addEventListener('keypress', redirectToNextHop, false)
+    return () => {
+      window.document.removeEventListener('keypress', redirectToNextHop, false)
+    }
+  }, [])
 
   return (
     <>

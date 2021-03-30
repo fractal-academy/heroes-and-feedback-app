@@ -22,7 +22,8 @@ const ListItem = (props) => {
     data,
     currentUserId,
     onProjectMemberDelete,
-    onPersonalBadgeDelete
+    onPersonalBadgeDelete,
+    itemIds
   } = props
 
   const history = useHistory()
@@ -83,6 +84,9 @@ const ListItem = (props) => {
   const name = ItemTypeMap[type].name
   const style = ItemTypeMap[type].style
   const path = ItemTypeMap[type].path.replace(':id', data.id)
+  const itemLinks = itemIds.map((item) =>
+    ItemTypeMap[type].path.replace(':id', item)
+  )
   const accessRules = session.userDBData.role === 'Superadmin'
   const personalBadgeValue = ItemTypeMap[type]?.personalBadgeValue
   const progressBarValue = ItemTypeMap[type]?.personalBadgeProgress
@@ -138,7 +142,10 @@ const ListItem = (props) => {
       )}
       {type === 'user' && !currentUsersListItem && isNarrow && (
         <Col cw="auto" m={2}>
-          <PersonalBadgeSimpleForm userId={data.id} />
+          <PersonalBadgeSimpleForm
+            userId={data.id}
+            currentExp={data.currentExp}
+          />
         </Col>
       )}
       {data.projectMemberId && accessRules && (
@@ -159,7 +166,14 @@ const ListItem = (props) => {
       )}
       {type !== 'personalBadge' && (
         <Col cw="auto" m={2}>
-          <Button shape="circle" type="text" onClick={() => history.push(path)}>
+          <Button
+            shape="circle"
+            type="text"
+            onClick={() =>
+              history.push(path, {
+                itemLinks: itemLinks
+              })
+            }>
             <RightOutlined />
           </Button>
         </Col>

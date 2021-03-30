@@ -18,9 +18,11 @@ const ProjectSimpleForm = (props) => {
   const history = useHistory()
   const [formRef] = Form.useForm()
 
-  // HELPER FUNCTIONS
+  // COMPUTED PROPERTIES
   const projectId = id || firestore.collection(PROJECTS).doc().id
+  const companyRef = history.location.state
 
+  // HELPER FUNCTIONS
   const onFormSubmitFinish = (values) => {
     setData(PROJECTS, projectId, {
       id: projectId,
@@ -54,8 +56,8 @@ const ProjectSimpleForm = (props) => {
                 projectName: data?.name,
                 projectDescription: data?.description,
                 companyId: {
-                  id: data?.companyId || '',
-                  selectedOption: data?.companyName || ''
+                  id: data?.companyId || companyRef?.id || '',
+                  selectedOption: data?.companyName || companyRef?.name || ''
                 }
               }}>
               <Form.Item name="image">

@@ -1,4 +1,4 @@
-import { Spin } from 'antd'
+import { Spin, message } from 'antd'
 import { List } from 'app/components'
 import { useEffect, useState } from 'react'
 import { Row, Col } from '@qonsoll/react-design'
@@ -17,7 +17,7 @@ const PersonalBadgeList = (props) => {
 
   const isWide = useMedia({ minWidth: '768px' })
   const batchSize = isWide ? 3 : 4
-  const message = 'Enter personal badge name...'
+  const placeholderMessage = 'Enter personal badge name...'
 
   const fetchMoreData = (key) => {
     if (key.length > 0) {
@@ -94,7 +94,7 @@ const PersonalBadgeList = (props) => {
           currentUserId={currentUser}
           type="personalBadge"
           data={dataBatch}
-          message={message}
+          message={placeholderMessage}
           className="list-scroll"
           onScroll={onScroll}
           onPersonalBadgeDelete={onPersonalBadgeDelete}

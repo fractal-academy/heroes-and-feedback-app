@@ -58,6 +58,7 @@ const CustomList = (props) => {
           renderItem={(item) => (
             <>
               <Item
+                itemIds={currentData.map((item) => item.id)}
                 type={type}
                 data={item}
                 currentUserId={currentUserId}

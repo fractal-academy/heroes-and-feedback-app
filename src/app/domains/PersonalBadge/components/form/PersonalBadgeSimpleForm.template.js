@@ -17,6 +17,7 @@ const PersonalBadgeSimpleForm = (props) => {
   const [dataBatch, setDataBatch] = useState([])
   const [lastKey, setLastKey] = useState('')
   const [loadingBatch, setLoadingBatch] = useState(false)
+  const [addBadgeState, setAddBadgeState] = useState(false)
 
   const batchSize = 4
 
@@ -50,7 +51,6 @@ const PersonalBadgeSimpleForm = (props) => {
         document.documentElement.offsetHeight &&
       !(dataBatch.length % 4)
     ) {
-      console.log('scroll')
       fetchMoreData(lastKey)
     }
   }
@@ -71,6 +71,12 @@ const PersonalBadgeSimpleForm = (props) => {
             setData(USERS, userId, {
               currentExp: Number(currentExp) + Number(selectedBadge.experience)
             })
+            setAddBadgeState(!addBadgeState)
+            setTimeout(() => {
+              setIsModalVisible(false)
+
+              setAddBadgeState(false)
+            }, 900)
             message.success('Badge lvl was successfully upgraded')
           } else {
             message.error('This user already has maximum lvl of this badge')
@@ -87,12 +93,19 @@ const PersonalBadgeSimpleForm = (props) => {
             description: selectedBadge.description
           })
           setData(USERS, userId, {
-            currentExp: currentExp + selectedBadge.experience
+            currentExp: Number(currentExp) + Number(selectedBadge.experience)
           })
+
+          setAddBadgeState(!addBadgeState)
+          setTimeout(() => {
+            setIsModalVisible(false)
+
+            setAddBadgeState(false)
+          }, 900)
+
           message.success('Badge was successfully assigned to user')
         }
       })
-    setIsModalVisible(false)
   }
 
   const handleCancel = () => {
@@ -132,6 +145,7 @@ const PersonalBadgeSimpleForm = (props) => {
             setSelected={setSelectedBadge}
             selected={selectedBadge}
             onScroll={onScroll}
+            addBadgeState={addBadgeState}
           />
           {loadingBatch && (
             <Row h="center">

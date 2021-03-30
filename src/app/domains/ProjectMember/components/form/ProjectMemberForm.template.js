@@ -17,10 +17,7 @@ const ProjectMemberForm = (props) => {
   const onFinish = (values) => {
     const id = firestore.collection(PROJECT_MEMBER).doc().id
 
-    const userName = values.user.selectedOption.split(' ')[0]
-
-    const user = users?.find((item) => item.firstName === userName)
-
+    const user = users?.find((item) => item.id === values.user.id)
     setData(PROJECT_MEMBER, id, {
       id: id,
       userId: user.id,

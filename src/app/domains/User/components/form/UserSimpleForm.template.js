@@ -42,10 +42,12 @@ const UserSimpleForm = (props) => {
     }
     setData(USERS, userId, userData)
       .then(() => {
-        dispatch({
-          type: 'SET_DATA',
-          data: { ...session, userDBData: userData }
-        })
+        if (session.uid === userId) {
+          dispatch({
+            type: 'SET_DATA',
+            data: { ...session, userDBData: userData }
+          })
+        }
         message.success(
           (id && 'User was edited successfully!') ||
             'User was created successfully!'
