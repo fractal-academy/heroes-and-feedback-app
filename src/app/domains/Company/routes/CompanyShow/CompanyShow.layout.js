@@ -1,3 +1,4 @@
+import { Title } from 'app/components'
 import { useParams } from 'react-router-dom'
 import { Row, Col } from '@qonsoll/react-design'
 import { getCollectionRef } from 'app/services/Firestore'
@@ -18,13 +19,16 @@ const CompanyShow = (props) => {
   )
 
   return (
-    <Row noGutters h="center">
-      <Col>
-        {companyData && (
-          <CompanyCombined data={companyData} subdata={projectsData} />
-        )}
-      </Col>
-    </Row>
+    <>
+      <Title />
+      <Row noGutters h="center">
+        <Col>
+          {companyData && (
+            <CompanyCombined data={companyData} subdata={projectsData} />
+          )}
+        </Col>
+      </Row>
+    </>
   )
 }
 
