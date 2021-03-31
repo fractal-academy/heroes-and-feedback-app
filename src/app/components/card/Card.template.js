@@ -51,11 +51,11 @@ const Card = (props) => {
   const badgeStatus = (data.receiveData && 'Unlocked!') || 'Locked.'
 
   const redirectToNextHop = (event) => {
-    if (event.key === 'a' && previousItem) {
+    if (event.which === 37 && previousItem) {
       history.push(previousItem, {
         itemLinks: history.location?.state?.itemLinks
       })
-    } else if (event.key === 'd' && nextItem) {
+    } else if (event.which === 39 && nextItem) {
       history.push(nextItem, {
         itemLinks: history.location?.state?.itemLinks
       })
@@ -180,9 +180,9 @@ const Card = (props) => {
   const collection = cardTypeMap[type].collection
 
   useEffect(() => {
-    window.document.addEventListener('keypress', redirectToNextHop, false)
+    window.document.addEventListener('keydown', redirectToNextHop, false)
     return () => {
-      window.document.removeEventListener('keypress', redirectToNextHop, false)
+      window.document.removeEventListener('keydown', redirectToNextHop, false)
     }
   }, [])
 

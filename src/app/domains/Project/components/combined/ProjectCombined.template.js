@@ -3,6 +3,7 @@ import { Box } from '@qonsoll/react-design'
 import { ProjectAdvancedView } from 'app/domains/Project/components/views'
 import { ProjectMemberList } from 'app/domains/ProjectMember/components/list'
 import { ProjectMemberCombined } from 'app/domains/ProjectMember/components/combined'
+import { ItemHotkeyNavigation } from 'app/components'
 
 const ProjectCombined = (props) => {
   const { data, subdata, currentUserId } = props
@@ -21,6 +22,7 @@ const ProjectCombined = (props) => {
         </Box>
       )}
       <ProjectMemberCombined />
+      <ItemHotkeyNavigation />
     </>
   )
 }

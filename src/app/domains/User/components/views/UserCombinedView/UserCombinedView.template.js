@@ -1,6 +1,7 @@
 import { Typography } from 'antd'
 import { UserAdvancedView } from 'app/domains/User/components/views'
 import { PersonalBadgeList } from 'app/domains/PersonalBadge/components/list'
+import { ItemHotkeyNavigation } from 'app/components'
 
 const UserCombinedView = (props) => {
   const { data, id, currentUser } = props
@@ -12,6 +13,7 @@ const UserCombinedView = (props) => {
       <Typography.Title level={4}>Personal badges:</Typography.Title>
 
       <PersonalBadgeList userId={id} currentUser={currentUser} />
+      <ItemHotkeyNavigation />
     </>
   )
 }
