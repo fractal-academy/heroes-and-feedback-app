@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useMedia } from 'use-media'
 import { Button, Modal, message, Spin, Typography } from 'antd'
 import { GallerySelect } from 'app/components'
 import { getCollectionRef, setData, firestore } from 'app/services'
@@ -18,8 +19,9 @@ const PersonalBadgeSimpleForm = (props) => {
   const [lastKey, setLastKey] = useState('')
   const [loadingBatch, setLoadingBatch] = useState(false)
   const [addBadgeState, setAddBadgeState] = useState(false)
+  const isWide = useMedia({ maxWidth: '567px' })
 
-  const batchSize = 4
+  const batchSize = isWide ? 4 : 6
 
   const showModal = () => {
     getBatchOfFixedSizeData(batchSize, BADGES).then((res) => {
@@ -49,7 +51,7 @@ const PersonalBadgeSimpleForm = (props) => {
     if (
       window.innerHeight + document.documentElement.scrollTop ===
         document.documentElement.offsetHeight &&
-      !(dataBatch.length % 4)
+      !(dataBatch.length % batchSize)
     ) {
       fetchMoreData(lastKey)
     }
