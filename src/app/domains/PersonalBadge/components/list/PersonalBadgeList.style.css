@@ -1,10 +1,10 @@
 .list-scroll {
-  max-height: 300px;
+  max-height: 400px;
   overflow-y: auto;
 }
 @media (max-width: 767px) {
   .list-scroll {
-    max-height: 150px;
+    max-height: 100px;
     overflow-y: auto;
   }
 }
@@ -16,7 +16,7 @@
 }
 @media (max-width: 1023px) {
   .list-scroll {
-    max-height: 230px;
+    max-height: 200px;
     overflow-y: auto;
   }
 }

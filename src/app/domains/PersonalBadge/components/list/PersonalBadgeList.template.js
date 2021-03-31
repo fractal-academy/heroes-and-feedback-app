@@ -15,8 +15,9 @@ const PersonalBadgeList = (props) => {
   const [lastKey, setLastKey] = useState('')
   const [loadingBatch, setLoadingBatch] = useState(false)
 
-  const isWide = useMedia({ minWidth: '768px' })
-  const batchSize = isWide ? 3 : 4
+  const isFullHD = useMedia({ minWidth: '1024px' })
+  console.log(isFullHD)
+  const batchSize = isFullHD ? 5 : 3
   const placeholderMessage = 'Enter personal badge name...'
 
   const fetchMoreData = (key) => {
@@ -41,6 +42,7 @@ const PersonalBadgeList = (props) => {
   }
 
   useEffect(() => {
+    console.log('useEffect')
     const unsubscribe = firestore
       .collection(PERSONAL_BADGES)
       .where('userId', '==', userId)
@@ -60,7 +62,7 @@ const PersonalBadgeList = (props) => {
     return () => {
       unsubscribe && unsubscribe()
     }
-  }, [userId])
+  }, [userId, batchSize])
 
   const onPersonalBadgeDelete = (badgeId) => {
     firestore

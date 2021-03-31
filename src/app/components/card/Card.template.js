@@ -69,7 +69,7 @@ const Card = (props) => {
       path: ROUTES_PATHS.USER_EDIT.replace(':id', data.id),
       shape: 'user',
       layout: (
-        <Col mb={4}>
+        <Col>
           <Box display="grid" textAlign="center">
             <Text type="success">{data.role}</Text>
             <Text type="secondary">{data.email}</Text>
@@ -102,7 +102,7 @@ const Card = (props) => {
           <Box textAlign="justify">
             <Text>{description}</Text>
           </Box>
-          <Box textAlign="center" mt={6}>
+          <Box textAlign="center" mt={4}>
             <Title level={4}>Maximum level: {data.maxLvl}</Title>
           </Box>
         </Col>
@@ -188,7 +188,7 @@ const Card = (props) => {
 
   return (
     <>
-      <Row h="center" mb={3} style={{ position: 'relative' }}>
+      <Row h="center" my={3} style={{ position: 'relative' }}>
         <Col cw="auto">
           <Box display="flex" position="absolute" right="0">
             {editButtonRule && (

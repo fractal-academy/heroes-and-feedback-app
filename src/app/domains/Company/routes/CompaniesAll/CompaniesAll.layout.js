@@ -9,7 +9,9 @@ import { Box } from '@qonsoll/react-design'
 import { useUserAuthContext } from 'app/context'
 
 const CompaniesAll = (props) => {
-  const [data] = useCollectionData(firestore.collection(COMPANIES))
+  const [data] = useCollectionData(
+    firestore.collection(COMPANIES).orderBy('name')
+  )
 
   const session = useUserAuthContext()
 
