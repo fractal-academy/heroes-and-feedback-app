@@ -33,6 +33,7 @@ const BadgeSimpleForm = (props) => {
   const badgeId = id || firestore.collection(BADGES).doc().id
 
   const onFormSubmitFinish = (values) => {
+    console.log(values)
     setData(BADGES, badgeId, {
       id: badgeId,
       image: values.image || '',

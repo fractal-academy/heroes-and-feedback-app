@@ -18,5 +18,8 @@ module.exports = {
 
   'menu-item-active-bg': theme.colors.selectedItemBackground,
   'item-hover-bg': theme.colors.selectedItemBackground,
-  'border-color-split': 'transparent'
+  'border-color-split': 'transparent',
+
+  'select-selection-item-bg': theme.colors.selectedItemBackground,
+  'select-item-selected-bg': theme.colors.selectedItemBackground
 }
