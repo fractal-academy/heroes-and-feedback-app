@@ -188,7 +188,7 @@ const Card = (props) => {
 
   return (
     <>
-      <Row h="center" my={3} style={{ position: 'relative' }}>
+      <Row h="center" mb={3} style={{ position: 'relative' }}>
         <Col cw="auto">
           <Box display="flex" position="absolute" right="0">
             {editButtonRule && (

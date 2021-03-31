@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
-import { getCitiesAndContries } from '../../helpers'
+import { Title } from 'app/components'
 import { firestore } from 'app/services'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { getCitiesAndContries } from '../../helpers'
+import { COMPANIES } from 'app/constants/collections'
 import { useDocumentData } from 'react-firebase-hooks/firestore'
 import { CompanySimpleForm } from 'app/domains/Company/components/form'
-import { COMPANIES } from 'app/constants/collections'
-import { useParams } from 'react-router-dom'
 
 const CompanyEdit = (props) => {
   const { id } = useParams()
@@ -18,8 +19,11 @@ const CompanyEdit = (props) => {
     })
   }, [])
 
+  const titleText = 'Edit company'
+
   return (
     <>
+      <Title titleText={titleText} withName />
       {data && citiesData && (
         <CompanySimpleForm id={id} data={data} addressData={citiesData} />
       )}

@@ -1,4 +1,5 @@
 import { Button } from 'antd'
+import { Title } from 'app/components'
 import { firestore } from 'app/services'
 import { Box } from '@qonsoll/react-design'
 import { ROUTES_PATHS } from 'app/constants'
@@ -13,15 +14,17 @@ const ProjectsAll = (props) => {
     firestore.collection(PROJECTS).orderBy('name')
   )
 
+  const history = useHistory()
   const session = useUserAuthContext()
 
+  const titleText = 'Projects'
   const addButtonRule = session.userDBData.role === 'Superadmin'
 
-  const history = useHistory()
   return (
     <>
+      <Title withName titleText={titleText} />
       {addButtonRule && (
-        <Box mt={2}>
+        <Box textAlign="right" mt={2}>
           <Button
             type="primary"
             onClick={() => {
