@@ -6,10 +6,13 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { Form, Input, Button, DatePicker, message } from 'antd'
 import { firestore, setData, getTimestamp } from 'app/services/Firestore'
 import AppRoleSelect from 'app/domains/Role/components/AppRoleSelect.template'
+import { useUserAuth } from 'app/context'
 
 const UserSimpleForm = (props) => {
   // INTERFACE
   const { id, data } = props
+
+  const [session, dispatch] = useUserAuth()
 
   // CUSTOM HOOKS
   const history = useHistory()
@@ -27,8 +30,7 @@ const UserSimpleForm = (props) => {
     const settedBirthday = getTimestamp().fromDate(
       moment(values.birthday).toDate()
     )
-
-    setData(USERS, userId, {
+    const userData = {
       id: userId,
       role: values.role.selectedOption || 'User',
       currentExp: data?.currentExp || 0,
@@ -37,13 +39,18 @@ const UserSimpleForm = (props) => {
       surname: values.surname,
       email: values.email,
       birthday: settedBirthday
-    })
-      .then(() =>
+    }
+    setData(USERS, userId, userData)
+      .then(() => {
+        dispatch({
+          type: 'SET_DATA',
+          data: { ...session, userDBData: userData }
+        })
         message.success(
           (id && 'User was edited successfully!') ||
             'User was created successfully!'
         )
-      )
+      })
       .then(history.goBack())
   }
 

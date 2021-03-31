@@ -1,3 +1,4 @@
+import { Title } from 'app/components'
 import { useParams } from 'react-router-dom'
 import { Row, Col } from '@qonsoll/react-design'
 import { BADGES } from 'app/constants/collections'
@@ -11,9 +12,12 @@ const BadgeShow = (props) => {
   const [data] = useDocumentData(getCollectionRef(BADGES).doc(id))
 
   return (
-    <Row noGutters h="center">
-      <Col>{data && <BadgeAdvancedView data={data} />}</Col>
-    </Row>
+    <>
+      <Title />
+      <Row noGutters h="center">
+        <Col>{data && <BadgeAdvancedView data={data} />}</Col>
+      </Row>
+    </>
   )
 }
 

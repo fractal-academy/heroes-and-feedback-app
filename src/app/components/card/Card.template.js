@@ -1,11 +1,15 @@
 import './Card.styles.css'
 import moment from 'moment'
 import useMedia from 'use-media'
+import { useHistory } from 'react-router-dom'
+import { EditOutlined } from '@ant-design/icons'
 import { PropTypes } from 'prop-types'
 import { ROUTES_PATHS } from 'app/constants'
-import { Typography, Progress, Badge } from 'antd'
+import { useUserAuthContext } from 'app/context'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { CustomAvatar, Dropdown } from 'app/components'
+import { Typography, Progress, Badge, Button } from 'antd'
+import { PersonalBadgeSimpleForm } from 'app/domains/PersonalBadge/components/form'
 import {
   USERS,
   COMPANIES,
@@ -19,6 +23,18 @@ const { Title, Text } = Typography
 const Card = (props) => {
   const { type, data, userId } = props
 
+  const session = useUserAuthContext()
+  const history = useHistory()
+
+  const editButtonRule = userId && userId === session.uid
+  const prizeButtonRule =
+    session.userDBData.role === 'User' &&
+    userId !== session.uid &&
+    type === 'user'
+  const commonRules =
+    session.userDBData.role === 'Superadmin' && userId !== session.uid
+  const dropdownRules = commonRules || (commonRules && type === 'user')
+  const description = data.description || "There's no description."
   const isNarrow = useMedia({ minWidth: '425px' })
   const birthday =
     data.birthday && moment(data.birthday.toDate()).format('Do MMMM YYYY')
@@ -34,21 +50,23 @@ const Card = (props) => {
       path: ROUTES_PATHS.USER_EDIT.replace(':id', data.id),
       shape: 'user',
       layout: (
-        <Col>
+        <Col mb={4}>
           <Box display="grid" textAlign="center">
             <Text type="success">{data.role}</Text>
             <Text type="secondary">{data.email}</Text>
             {birthday && <Text type="secondary">{birthday}</Text>}
           </Box>
+
           <Progress
+            className="progress"
             strokeColor={{
               '0%': '#108ee9',
               '100%': '#87d068'
             }}
             percent={userExperience}
             format={() => (
-              <Title level={4} type="secondary">
-                {userLvl}
+              <Title level={4} type="secondary" style={{ marginBottom: 0 }}>
+                {userLvl} lvl
               </Title>
             )}
           />
@@ -63,9 +81,9 @@ const Card = (props) => {
       layout: (
         <Col>
           <Box textAlign="justify">
-            <Text>{data.description}</Text>
+            <Text>{description}</Text>
           </Box>
-          <Box textAlign="center" mt={6}>
+          <Box textAlign="center" mt={4}>
             <Title level={4}>Maximum level: {data.maxLvl}</Title>
           </Box>
         </Col>
@@ -79,7 +97,7 @@ const Card = (props) => {
       layout: (
         <Col>
           <Box textAlign="justify">
-            <Text>{data.description}</Text>
+            <Text>{description}</Text>
           </Box>
           {data.receiveData && (
             <Progress
@@ -114,7 +132,7 @@ const Card = (props) => {
             </Text>
           </Box>
           <Box textAlign="justify" mb={4}>
-            <Text>{data.description}</Text>
+            <Text>{description}</Text>
           </Box>
         </Col>
       )
@@ -130,7 +148,7 @@ const Card = (props) => {
             <Text type="secondary">{data.companyName}</Text>
           </Box>
           <Box textAlign="justify" mb={4}>
-            <Text>{data.description}</Text>
+            <Text>{description}</Text>
           </Box>
         </Col>
       )
@@ -147,14 +165,30 @@ const Card = (props) => {
       <Row h="center" mb={3} style={{ position: 'relative' }}>
         <Col cw="auto">
           <Box display="flex" position="absolute" right="0">
-            <Dropdown
-              data={data}
-              type={type}
-              path={path}
-              userId={userId}
-              collection={collection}
-            />
+            {editButtonRule && (
+              <Button
+                type="primary"
+                shape="circle"
+                icon={<EditOutlined />}
+                onClick={() => history.push(path)}></Button>
+            )}
+            {prizeButtonRule && (
+              <PersonalBadgeSimpleForm
+                userId={userId}
+                currentExp={data?.currentExp}
+              />
+            )}
+            {dropdownRules && (
+              <Dropdown
+                data={data}
+                type={type}
+                path={path}
+                userId={userId}
+                collection={collection}
+              />
+            )}
           </Box>
+
           <Box width="auto">
             <CustomAvatar
               shape={shape}

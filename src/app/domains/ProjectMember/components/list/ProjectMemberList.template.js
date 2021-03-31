@@ -1,11 +1,12 @@
 import { deleteData } from 'app/services'
 import { List } from 'app/components'
-import { PROJECT_MEMBER } from 'app/constants/collections'
 import { message } from 'antd'
+import { PROJECT_MEMBER } from 'app/constants/collections'
 
 const ProjectMemberList = (props) => {
   const { data, currentUserId } = props
 
+  const placeholderMessage = 'Enter member name...'
   const editedData =
     data &&
     data.map((item) => ({ ...item, id: item.userId, projectMemberId: item.id }))
@@ -13,10 +14,10 @@ const ProjectMemberList = (props) => {
   const onProjectMemberDelete = (projectMemberId) => {
     try {
       deleteData(PROJECT_MEMBER, projectMemberId)
-      message.success('Successfully deleted')
-    } catch (e) {
-      console.log(e)
-      message.error('Error occured during deletion. Try again')
+      message.success('Successfully deleted.')
+    } catch (error) {
+      console.log(error)
+      message.error('Error occured during deletion. Try again.')
     }
   }
 
@@ -24,6 +25,7 @@ const ProjectMemberList = (props) => {
     <List
       type="user"
       data={editedData}
+      message={placeholderMessage}
       currentUserId={currentUserId}
       onProjectMemberDelete={onProjectMemberDelete}></List>
   )

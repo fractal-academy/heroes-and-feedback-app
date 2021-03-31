@@ -1,3 +1,4 @@
+import { Title } from 'app/components'
 import { firestore } from 'app/services'
 import { useParams } from 'react-router-dom'
 import { PROJECTS } from 'app/constants/collections'
@@ -9,7 +10,14 @@ const ProjectEdit = (props) => {
 
   const [data] = useDocumentData(firestore.collection(PROJECTS).doc(id))
 
-  return <>{data && <ProjectSimpleForm id={id} data={data} />}</>
+  const titleText = 'Edit project'
+
+  return (
+    <>
+      <Title withName titleText={titleText} />
+      {data && <ProjectSimpleForm id={id} data={data} />}
+    </>
+  )
 }
 
 export default ProjectEdit

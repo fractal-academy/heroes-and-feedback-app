@@ -5,7 +5,16 @@ const UserList = (props) => {
   const { data } = props
   const session = useUserAuthContext()
 
-  return <List type="user" data={data} currentUserId={session.uid} />
+  const message = 'Enter user name...'
+
+  return (
+    <List
+      type="user"
+      data={data}
+      message={message}
+      currentUserId={session.uid}
+    />
+  )
 }
 
 export default UserList

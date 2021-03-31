@@ -1,4 +1,5 @@
 import { Menu } from 'antd'
+import './Navigation.styles.css'
 import { logOut } from 'app/services/Auth'
 import { ROUTES_PATHS } from 'app/constants'
 import { useHistory } from 'react-router-dom'
@@ -65,9 +66,10 @@ const Sidebar = () => {
   )
 
   return (
-    <Row h="center" mr={2}>
+    <Row h="center" height="100%" mr={2}>
       <Col cw="auto">
         <Menu
+          className="sidebar"
           mode="inline"
           defaultSelectedKeys={
             defaultSelected[0]?.key || ROUTES_PATHS.COMPANIES_ALL
