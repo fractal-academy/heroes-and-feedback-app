@@ -4,17 +4,11 @@ import { ROUTES_PATHS } from 'app/constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { ProjectList } from 'app/domains/Project/components/list'
 import { CompanyAdvancedView } from 'app/domains/Company/components/views'
-import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons'
+import { ItemHotkeyNavigation } from 'app/components'
 const CompanyCombined = (props) => {
   const { data, subdata, companyId } = props
 
   const history = useHistory()
-
-  const itemIndex = history.location?.state?.itemLinks.findIndex(
-    (item) => item === history.location.pathname
-  )
-  const previousItem = history.location?.state?.itemLinks?.[itemIndex - 1]
-  const nextItem = history.location?.state?.itemLinks?.[itemIndex + 1]
 
   return (
     <Row>
@@ -42,32 +36,7 @@ const CompanyCombined = (props) => {
             Add project
           </Button>
         </Box>
-        <Row h="center">
-          <Col cw="auto">
-            <Button
-              disabled={!Boolean(previousItem)}
-              shape="circle"
-              type="text"
-              icon={<CaretLeftOutlined />}
-              onClick={() =>
-                history.push(previousItem, {
-                  itemLinks: history.location?.state?.itemLinks
-                })
-              }
-            />
-            <Button
-              disabled={!Boolean(nextItem)}
-              shape="circle"
-              type="text"
-              icon={<CaretRightOutlined />}
-              onClick={() =>
-                history.push(nextItem, {
-                  itemLinks: history.location?.state?.itemLinks
-                })
-              }
-            />
-          </Col>
-        </Row>
+        <ItemHotkeyNavigation />
       </Col>
     </Row>
   )
