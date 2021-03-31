@@ -1,5 +1,6 @@
 import { Card } from './card'
 import { List } from './list'
+import { Title } from './title'
 import { Dropdown } from './dropdown'
 import { Item } from './listItem'
 import { Content } from './content'
@@ -14,6 +15,7 @@ export {
   Card,
   List,
   Item,
+  Title,
   Header,
   Navbar,
   Sidebar,
