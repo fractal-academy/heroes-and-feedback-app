@@ -1,3 +1,4 @@
+import { firestore } from 'app/services'
 import { useParams } from 'react-router-dom'
 import { Row, Col } from '@qonsoll/react-design'
 import { PROJECTS, PROJECT_MEMBER } from 'app/constants/collections'
@@ -15,8 +16,13 @@ const ProjectShow = (props) => {
   const [projectsData] = useDocumentData(getCollectionRef(PROJECTS).doc(id))
 
   const [membersData] = useCollectionData(
-    getCollectionRef(PROJECT_MEMBER).where('projectId', '==', id)
+    firestore.collection(PROJECT_MEMBER).where('projectId', '==', id)
   )
+  const sortedData =
+    membersData &&
+    membersData.sort((a, b) =>
+      a.firstName > b.firstName ? 1 : b.firstName > a.firstName ? -1 : 0
+    )
 
   const session = useUserAuthContext()
 
@@ -26,7 +32,7 @@ const ProjectShow = (props) => {
         {projectsData && (
           <ProjectCombined
             data={projectsData}
-            subdata={membersData}
+            subdata={sortedData}
             currentUserId={session.uid}
           />
         )}

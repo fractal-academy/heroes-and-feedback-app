@@ -1,10 +1,9 @@
 import Fuse from 'fuse.js'
-
 import { Item } from 'app/components'
 import { PropTypes } from 'prop-types'
+import { useEffect, useState } from 'react'
 import { List, Divider, Input } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { useEffect, useRef, useState } from 'react'
 
 const CustomList = (props) => {
   // INTERFACE
@@ -29,12 +28,9 @@ const CustomList = (props) => {
 
   const fuse = new Fuse(data, { keys: ['name'] })
 
-  // CUSTOM HOOKS
-  const searchRef = useRef()
-
-  const searchData = () => {
-    if (searchRef.current.input.value) {
-      const searchRes = fuse.search(searchRef.current.input.value)
+  const searchData = (input) => {
+    if (input) {
+      const searchRes = fuse.search(input)
       setCurrentData(searchRes.map((item) => item.item))
     } else setCurrentData(data)
   }
@@ -43,11 +39,9 @@ const CustomList = (props) => {
     <Row noGutters>
       <Col>
         <Box my={2}>
-          <Input.Search
-            ref={searchRef}
+          <Input
             placeholder={message}
-            onSearch={searchData}
-            enterButton
+            onChange={(input) => searchData(input.target.value)}
           />
         </Box>
         <List

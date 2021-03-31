@@ -9,7 +9,9 @@ import { ProjectList } from 'app/domains/Project/components/list'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const ProjectsAll = (props) => {
-  const [data] = useCollectionData(firestore.collection(PROJECTS))
+  const [data] = useCollectionData(
+    firestore.collection(PROJECTS).orderBy('name')
+  )
 
   const session = useUserAuthContext()
 

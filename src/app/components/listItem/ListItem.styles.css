@@ -10,7 +10,7 @@
   max-width: 97%;
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 430px) {
   .info {
     overflow: hidden;
     max-width: 15ch;

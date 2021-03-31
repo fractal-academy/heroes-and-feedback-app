@@ -14,10 +14,10 @@ const ProjectMemberList = (props) => {
   const onProjectMemberDelete = (projectMemberId) => {
     try {
       deleteData(PROJECT_MEMBER, projectMemberId)
-      message.success('Successfully deleted')
+      message.success('Successfully deleted.')
     } catch (error) {
       console.log(error)
-      message.error('Error occured during deletion. Try again')
+      message.error('Error occured during deletion. Try again.')
     }
   }
 
