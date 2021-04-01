@@ -1,7 +1,8 @@
 import { useState } from 'react'
+import { useMedia } from 'use-media'
 import { Button, Modal, message, Spin, Typography } from 'antd'
 import { GallerySelect } from 'app/components'
-import { getCollectionRef, setData, firestore } from 'app/services'
+import { getCollectionRef, setData, firestore, deleteData } from 'app/services'
 import { BADGES, PERSONAL_BADGES, USERS } from 'app/constants/collections'
 import { BadgeSimpleView } from 'app/domains/Badge/components/views'
 import { TrophyOutlined } from '@ant-design/icons'
@@ -17,8 +18,10 @@ const PersonalBadgeSimpleForm = (props) => {
   const [dataBatch, setDataBatch] = useState([])
   const [lastKey, setLastKey] = useState('')
   const [loadingBatch, setLoadingBatch] = useState(false)
+  const [addBadgeState, setAddBadgeState] = useState(false)
+  const isWide = useMedia({ maxWidth: '567px' })
 
-  const batchSize = 4
+  const batchSize = isWide ? 4 : 6
 
   const showModal = () => {
     getBatchOfFixedSizeData(batchSize, BADGES).then((res) => {
@@ -48,9 +51,8 @@ const PersonalBadgeSimpleForm = (props) => {
     if (
       window.innerHeight + document.documentElement.scrollTop ===
         document.documentElement.offsetHeight &&
-      !(dataBatch.length % 4)
+      !(dataBatch.length % batchSize)
     ) {
-      console.log('scroll')
       fetchMoreData(lastKey)
     }
   }
@@ -71,12 +73,43 @@ const PersonalBadgeSimpleForm = (props) => {
             setData(USERS, userId, {
               currentExp: Number(currentExp) + Number(selectedBadge.experience)
             })
+            setAddBadgeState(!addBadgeState)
+            setTimeout(() => {
+              setIsModalVisible(false)
+
+              setAddBadgeState(false)
+            }, 900)
             message.success('Badge lvl was successfully upgraded')
+          } else if (badgeToLvlUp.nextLvl) {
+            deleteData(PERSONAL_BADGES, badgeToLvlUp.id)
+            getCollectionRef(BADGES)
+              .doc(badgeToLvlUp.nextLvl)
+              .get()
+              .then((res) => {
+                setData(PERSONAL_BADGES, newId, {
+                  ...res.data(),
+                  userId: userId,
+                  id: newId,
+                  currentLvl: 1
+                })
+                setData(USERS, userId, {
+                  currentExp: Number(currentExp) + Number(res.data().experience)
+                })
+                setAddBadgeState(!addBadgeState)
+                setTimeout(() => {
+                  setIsModalVisible(false)
+
+                  setAddBadgeState(false)
+                }, 900)
+                message.success(
+                  `Badge evolved to next stage: ${res.data().name}`
+                )
+              })
           } else {
             message.error('This user already has maximum lvl of this badge')
           }
         } else {
-          setData(PERSONAL_BADGES, newId, {
+          const personalBadgeData = {
             userId: userId,
             id: newId,
             badgeId: selectedBadge.id,
@@ -85,14 +118,24 @@ const PersonalBadgeSimpleForm = (props) => {
             maxLvl: selectedBadge.maxLvl,
             currentLvl: 1,
             description: selectedBadge.description
-          })
+          }
+          selectedBadge.nextLvl &&
+            (personalBadgeData.nextLvl = selectedBadge.nextLvl)
+          setData(PERSONAL_BADGES, newId, personalBadgeData)
           setData(USERS, userId, {
-            currentExp: currentExp + selectedBadge.experience
+            currentExp: Number(currentExp) + Number(selectedBadge.experience)
           })
+
+          setAddBadgeState(!addBadgeState)
+          setTimeout(() => {
+            setIsModalVisible(false)
+
+            setAddBadgeState(false)
+          }, 900)
+
           message.success('Badge was successfully assigned to user')
         }
       })
-    setIsModalVisible(false)
   }
 
   const handleCancel = () => {
@@ -132,6 +175,7 @@ const PersonalBadgeSimpleForm = (props) => {
             setSelected={setSelectedBadge}
             selected={selectedBadge}
             onScroll={onScroll}
+            addBadgeState={addBadgeState}
           />
           {loadingBatch && (
             <Row h="center">

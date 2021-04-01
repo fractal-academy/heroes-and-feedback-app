@@ -1,4 +1,5 @@
 import './Card.styles.css'
+import { useEffect } from 'react'
 import moment from 'moment'
 import useMedia from 'use-media'
 import { useHistory } from 'react-router-dom'
@@ -26,6 +27,12 @@ const Card = (props) => {
   const session = useUserAuthContext()
   const history = useHistory()
 
+  const itemIndex = history.location?.state?.itemLinks.findIndex(
+    (item) => item === history.location.pathname
+  )
+  const previousItem = history.location?.state?.itemLinks?.[itemIndex - 1]
+  const nextItem = history.location?.state?.itemLinks?.[itemIndex + 1]
+
   const editButtonRule = userId && userId === session.uid
   const prizeButtonRule =
     session.userDBData.role === 'User' &&
@@ -43,6 +50,18 @@ const Card = (props) => {
   const badgeProgress = (100 / data.maxLvl) * data.currentLvl
   const badgeStatus = (data.receiveData && 'Unlocked!') || 'Locked.'
 
+  const redirectToNextHop = (event) => {
+    if (event.which === 37 && previousItem) {
+      history.push(previousItem, {
+        itemLinks: history.location?.state?.itemLinks
+      })
+    } else if (event.which === 39 && nextItem) {
+      history.push(nextItem, {
+        itemLinks: history.location?.state?.itemLinks
+      })
+    }
+  }
+
   const cardTypeMap = {
     user: {
       name: `${data.firstName} ${data.surname}`,
@@ -50,7 +69,7 @@ const Card = (props) => {
       path: ROUTES_PATHS.USER_EDIT.replace(':id', data.id),
       shape: 'user',
       layout: (
-        <Col mb={4}>
+        <Col>
           <Box display="grid" textAlign="center">
             <Text type="success">{data.role}</Text>
             <Text type="secondary">{data.email}</Text>
@@ -60,8 +79,11 @@ const Card = (props) => {
           <Progress
             className="progress"
             strokeColor={{
-              '0%': '#108ee9',
-              '100%': '#87d068'
+              '0%': '#3bc0c7',
+              '20%': '#6149ff',
+              '40%': '#A940AB',
+              '80%': '#FFB393',
+              '100%': '#88FDC4'
             }}
             percent={userExperience}
             format={() => (
@@ -159,6 +181,13 @@ const Card = (props) => {
   const shape = cardTypeMap[type].shape
   const path = cardTypeMap[type].path
   const collection = cardTypeMap[type].collection
+
+  useEffect(() => {
+    window.document.addEventListener('keydown', redirectToNextHop, false)
+    return () => {
+      window.document.removeEventListener('keydown', redirectToNextHop, false)
+    }
+  }, [])
 
   return (
     <>

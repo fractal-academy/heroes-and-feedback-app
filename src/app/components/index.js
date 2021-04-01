@@ -10,6 +10,7 @@ import { ImageUploader } from './ImageUploader'
 import { AddressSelect, CustomSelect } from './select'
 import { Header, Navbar, Sidebar } from './navigation'
 import { DesktopLayout, MobileLayout } from './layout'
+import { ItemHotkeyNavigation } from './itemHotkeyNavigation'
 
 export {
   Card,
@@ -27,5 +28,6 @@ export {
   CustomSelect,
   GallerySelect,
   MobileLayout,
-  DesktopLayout
+  DesktopLayout,
+  ItemHotkeyNavigation
 }

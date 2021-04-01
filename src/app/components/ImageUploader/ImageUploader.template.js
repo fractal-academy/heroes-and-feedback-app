@@ -1,5 +1,5 @@
 import { Upload, message } from 'antd'
-import { LoadingOutlined } from '@ant-design/icons'
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import { storage } from 'app/services'
 import { CustomAvatar } from 'app/components'
@@ -57,6 +57,23 @@ const ImageUploader = (props) => {
     }
   }
 
+  const PlusButton = (
+    <Row
+      h="center"
+      v="center"
+      height="100px"
+      width="100px"
+      backgroundColor="gray">
+      <Col cw="auto">
+        {loading ? (
+          <LoadingOutlined />
+        ) : (
+          <PlusOutlined style={{ fontSize: '30px' }} />
+        )}
+      </Col>
+    </Row>
+  )
+
   // TEMPLATE
   return (
     <Row h="center">
@@ -67,16 +84,22 @@ const ImageUploader = (props) => {
           customRequest={upload}
           beforeUpload={beforeUpload}
           showUploadList={false}>
-          {loading ? (
-            <LoadingOutlined />
+          {currentSource ? (
+            <>
+              {loading ? (
+                <LoadingOutlined />
+              ) : (
+                <CustomAvatar
+                  shape={shape}
+                  src={currentSource}
+                  size={size}
+                  name={name}
+                  className="image-component"
+                />
+              )}
+            </>
           ) : (
-            <CustomAvatar
-              shape={shape}
-              src={currentSource}
-              size={size}
-              name={name}
-              className="image-component"
-            />
+            PlusButton
           )}
         </Upload>
       </Col>

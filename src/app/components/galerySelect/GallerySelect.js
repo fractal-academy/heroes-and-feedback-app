@@ -2,9 +2,23 @@ import { Row, Col, Container, Box } from '@qonsoll/react-design'
 import Fuse from 'fuse.js'
 import { useEffect, useRef, useState } from 'react'
 import { Input, Spin } from 'antd'
+import styled, { keyframes } from 'styled-components'
+import ZoomOutUp from '@bit/formidablelabs.react-animations.zoom-out-up'
+const ZoomOutUpAnimation = keyframes`${ZoomOutUp}`
+const ZoomOutUpDiv = styled.div`
+  animation: infinite 1s ${ZoomOutUpAnimation};
+`
 
 const GallerySelect = (props) => {
-  const { data, Component, setSelected, selected, onScroll, className } = props
+  const {
+    data,
+    Component,
+    setSelected,
+    selected,
+    onScroll,
+    className,
+    addBadgeState
+  } = props
 
   const [loading, setLoading] = useState(false)
   const [currentData, setCurrentData] = useState(data)
@@ -63,11 +77,21 @@ const GallerySelect = (props) => {
                   handleSelect(item)
                 }}
                 mb={1}>
-                <Component
-                  data={item}
-                  selected={selected?.id === item.id}
-                  size={badgeImageSize}
-                />
+                {addBadgeState && selected?.id === item.id ? (
+                  <ZoomOutUpDiv>
+                    <Component
+                      data={item}
+                      selected={selected?.id === item.id}
+                      size={badgeImageSize}
+                    />
+                  </ZoomOutUpDiv>
+                ) : (
+                  <Component
+                    data={item}
+                    selected={selected?.id === item.id}
+                    size={badgeImageSize}
+                  />
+                )}
               </Col>
             ))}
           </Row>

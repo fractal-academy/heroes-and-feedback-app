@@ -24,7 +24,11 @@ const CompanyShow = (props) => {
       <Row noGutters h="center">
         <Col>
           {companyData && (
-            <CompanyCombined data={companyData} subdata={projectsData} />
+            <CompanyCombined
+              data={companyData}
+              subdata={projectsData}
+              companyId={id}
+            />
           )}
         </Col>
       </Row>

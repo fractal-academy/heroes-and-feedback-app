@@ -19,8 +19,8 @@ const CustomSelect = (props) => {
   }
 
   const handleNewOptionSelected = (value, key) => {
-    setSelectedOption(value)
-    triggerChange({ id: key.key, selectedOption: value })
+    setSelectedOption(key.value)
+    triggerChange({ id: key.key, selectedOption: key.children })
   }
 
   return (
@@ -34,14 +34,12 @@ const CustomSelect = (props) => {
         <Option
           value={
             typeof item === 'object'
-              ? item.name || `${item.firstName} ${item.surname}`
+              ? item.name ||
+                `${item.email}` ||
+                `${item.firstName} ${item.surname}`
               : item
           }
-          key={
-            typeof item === 'object'
-              ? item.id || `${item.firstName} ${item.surname}`
-              : item
-          }>
+          key={typeof item === 'object' ? item.id : item}>
           {typeof item === 'object'
             ? item.name || `${item.firstName} ${item.surname}`
             : item}

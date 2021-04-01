@@ -13,8 +13,11 @@ const imageMap = {
       }}>
       <img
         alt=" "
-        src={src || './assets/image-placeholder.png'}
-        style={{ width: `${size * 2}px`, height: `${size * 2}px` }}
+        src={src || './assets/treasure.jpg'}
+        style={{
+          width: `${size * 2}px`,
+          height: `${size * 2}px`
+        }}
         className={`avatar ${className}`}
       />
     </div>

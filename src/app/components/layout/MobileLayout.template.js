@@ -15,7 +15,7 @@ const MobileLayout = () => {
           </Col>
         </Row>
       )}
-      <Row className="scroll" height="inherit">
+      <Row className="scroll" height={user ? '85%' : 'inherit'}>
         <Col height="inherit">
           <Content />
         </Col>

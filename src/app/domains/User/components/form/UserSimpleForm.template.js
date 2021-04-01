@@ -42,10 +42,12 @@ const UserSimpleForm = (props) => {
     }
     setData(USERS, userId, userData)
       .then(() => {
-        dispatch({
-          type: 'SET_DATA',
-          data: { ...session, userDBData: userData }
-        })
+        if (session.uid === userId) {
+          dispatch({
+            type: 'SET_DATA',
+            data: { ...session, userDBData: userData }
+          })
+        }
         message.success(
           (id && 'User was edited successfully!') ||
             'User was created successfully!'
@@ -141,17 +143,15 @@ const UserSimpleForm = (props) => {
 
           <Box display="flex" mb={2}>
             <Box mr={1}>
-              <Button type="primary" htmlType="submit">
-                Submit
+              <Button
+                onClick={() => {
+                  history.goBack()
+                }}>
+                Cancel
               </Button>
             </Box>
-            <Button
-              type="primary"
-              danger
-              onClick={() => {
-                history.goBack()
-              }}>
-              Cancel
+            <Button type="primary" htmlType="submit">
+              Submit
             </Button>
           </Box>
         </Form>

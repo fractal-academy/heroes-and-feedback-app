@@ -34,11 +34,14 @@ const Content = () => {
           .where('id', '==', user.uid)
           .onSnapshot((snapshot) => {
             const userDocChanges = snapshot.docChanges()[0]
-            if (userDocChanges.type === 'modified') {
-              dispatch({
-                type: 'SET_DATA',
-                data: { ...user, userDBData: snapshot.docs[0].data() }
-              })
+            dispatch({
+              type: 'SET_DATA',
+              data: { ...user, userDBData: snapshot.docs[0].data() }
+            })
+            if (
+              userDocChanges.type === 'modified' &&
+              user.userDBData.role !== snapshot.docs[0].data().role
+            ) {
               message.success(
                 `Your role was changed to: ${snapshot.docs[0].data().role}`
               )
