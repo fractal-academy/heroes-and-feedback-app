@@ -10,6 +10,7 @@ const CustomList = (props) => {
   const {
     type,
     data,
+    subdata,
     currentUserId,
     onProjectMemberDelete,
     className,
@@ -50,17 +51,15 @@ const CustomList = (props) => {
           itemLayout="horizontal"
           dataSource={currentData}
           renderItem={(item) => (
-            <>
-              <Item
-                itemIds={currentData.map((item) => item.id)}
-                type={type}
-                data={item}
-                currentUserId={currentUserId}
-                onProjectMemberDelete={onProjectMemberDelete}
-                onPersonalBadgeDelete={onPersonalBadgeDelete}
-              />
-              <Divider style={{ margin: '0' }} />
-            </>
+            <Item
+              itemIds={currentData.map((item) => item.id)}
+              type={type}
+              data={item}
+              subdata={subdata}
+              currentUserId={currentUserId}
+              onProjectMemberDelete={onProjectMemberDelete}
+              onPersonalBadgeDelete={onPersonalBadgeDelete}
+            />
           )}
         />
       </Col>

@@ -2,7 +2,7 @@ import { useUserAuthContext } from 'app/context'
 import { List } from 'app/components'
 
 const UserList = (props) => {
-  const { data } = props
+  const { data, subdata } = props
   const session = useUserAuthContext()
 
   const message = 'Enter user name...'
@@ -12,6 +12,7 @@ const UserList = (props) => {
       type="user"
       data={data}
       message={message}
+      subdata={subdata}
       currentUserId={session.uid}
     />
   )

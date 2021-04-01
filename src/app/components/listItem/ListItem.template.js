@@ -5,7 +5,7 @@ import { ROUTES_PATHS } from 'app/constants'
 import { CustomAvatar } from 'app/components'
 import { useHistory } from 'react-router-dom'
 import { useUserAuthContext } from 'app/context'
-import { Progress, Typography, Button, Popconfirm } from 'antd'
+import { Progress, Typography, Button, Popconfirm, Avatar } from 'antd'
 import { PersonalBadgeSimpleForm } from 'app/domains/PersonalBadge/components/form'
 import {
   RightOutlined,
@@ -20,6 +20,7 @@ const ListItem = (props) => {
   const {
     type,
     data,
+    subdata,
     currentUserId,
     onProjectMemberDelete,
     onPersonalBadgeDelete,
@@ -92,7 +93,11 @@ const ListItem = (props) => {
   const progressBarValue = ItemTypeMap[type]?.personalBadgeProgress
 
   return (
-    <Row display="flex" v="center">
+    <Row
+      display="flex"
+      v="center"
+      style={{ backgroundColor: '#332E59', borderRadius: '10px' }}
+      mb={2}>
       <Col cw="auto" m={2}>
         <CustomAvatar
           shape={image}
@@ -111,12 +116,28 @@ const ListItem = (props) => {
               style={{ alignItems: 'center' }}
               className="progressBar"
               strokeColor={{
-                '0%': '#108ee9',
-                '100%': '#87d068'
+                '0%': '#3bc0c7',
+                '20%': '#6149ff',
+                '40%': '#A940AB',
+                '80%': '#FFB393',
+                '100%': '#88FDC4'
               }}
               percent={progressBarValue}
               format={() => <Col mb={1}>{personalBadgeValue}</Col>}
             />
+          ) : type === 'user' ? (
+            <Avatar.Group>
+              {subdata
+                ?.filter((item) => item.userId === data.id)
+                .map((item) => (
+                  <CustomAvatar
+                    shape="badge"
+                    name={name}
+                    src={item.image}
+                    size={18}
+                  />
+                ))}
+            </Avatar.Group>
           ) : (
             <Box className={style}>
               <Text type="secondary">{info || 'No information.'}</Text>

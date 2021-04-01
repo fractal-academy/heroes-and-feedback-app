@@ -9,3 +9,7 @@
 .avatar {
   max-width: -webkit-fill-available;
 }
+
+img {
+  border: 5px solid #555;
+}

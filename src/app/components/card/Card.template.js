@@ -79,8 +79,11 @@ const Card = (props) => {
           <Progress
             className="progress"
             strokeColor={{
-              '0%': '#108ee9',
-              '100%': '#87d068'
+              '0%': '#3bc0c7',
+              '20%': '#6149ff',
+              '40%': '#A940AB',
+              '80%': '#FFB393',
+              '100%': '#88FDC4'
             }}
             percent={userExperience}
             format={() => (

@@ -93,17 +93,15 @@ const CompanySimpleForm = (props) => {
 
           <Box display="flex" mb={2}>
             <Box mr={1}>
-              <Button type="primary" htmlType="submit">
-                Submit
+              <Button
+                onClick={() => {
+                  history.goBack()
+                }}>
+                Cancel
               </Button>
             </Box>
-            <Button
-              type="primary"
-              danger
-              onClick={() => {
-                history.goBack()
-              }}>
-              Cancel
+            <Button type="primary" htmlType="submit">
+              Submit
             </Button>
           </Box>
         </Form>
