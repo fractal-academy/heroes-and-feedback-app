@@ -3,7 +3,7 @@ import './CustomAvatar.styles.css'
 
 // CONSTANTS
 const imageMap = {
-  badge: (src, size, name, className) => (
+  badge: (src, size, className) => (
     <div
       className="polygon"
       style={{

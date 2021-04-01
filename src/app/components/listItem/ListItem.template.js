@@ -21,6 +21,7 @@ const ListItem = (props) => {
     type,
     data,
     subdata,
+    secondaryList,
     currentUserId,
     onProjectMemberDelete,
     onPersonalBadgeDelete,
@@ -40,7 +41,7 @@ const ListItem = (props) => {
       imgSize: (isNarrow && 60) || 40,
       style: 'info',
       name: `${data.firstName} ${data.surname}`,
-      info: data.email || data.role,
+      info: data.role || data.email,
       path: ROUTES_PATHS.USER_SHOW
     },
     badge: {
@@ -94,17 +95,14 @@ const ListItem = (props) => {
   const progressBarValue = ItemTypeMap[type]?.personalBadgeProgress
 
   return (
-    <Row
-      display="flex"
-      v="center"
-      style={{ backgroundColor: '#332E59', borderRadius: '10px' }}
-      mb={2}>
+    <Row display="flex" v="center" mb={2} className="itemCard">
       <Col cw="auto" m={2}>
-        {type === 'user' ? (
+        {type === 'user' && !secondaryList ? (
           <Badge
             count={userLvl}
-            offset={[-10, 50]}
-            style={{ backgroundColor: '#47B0B0' }}>
+            offset={(!isNarrow && [-10, 35]) || [-10, 50]}
+            style={{ backgroundColor: '#47b0b0' }}
+            className={!isNarrow && 'badgeNarrow'}>
             <CustomAvatar
               shape={image}
               name={name}
@@ -116,7 +114,7 @@ const ListItem = (props) => {
           <CustomAvatar
             shape={image}
             name={name}
-            src={data.image}
+            src={data?.image}
             size={imgSize}
           />
         )}
@@ -140,18 +138,24 @@ const ListItem = (props) => {
               percent={progressBarValue}
               format={() => <Col mb={1}>{personalBadgeValue}</Col>}
             />
-          ) : type === 'user' ? (
-            <Avatar.Group>
+          ) : type === 'user' && !secondaryList ? (
+            <Avatar.Group
+              maxCount={4}
+              maxStyle={{
+                backgroundImage: `url(./assets/treasure.jpg)`
+              }}>
               {subdata
                 ?.filter((item) => item.userId === data.id)
                 .map((item) => (
-                  <CustomAvatar
-                    key={item.id}
-                    shape="badge"
-                    name={name}
-                    src={item.image}
-                    size={18}
-                  />
+                  <Box className="group">
+                    <CustomAvatar
+                      key={item.id}
+                      shape="badge"
+                      name={name}
+                      src={item.image}
+                      size={18}
+                    />
+                  </Box>
                 ))}
             </Avatar.Group>
           ) : (

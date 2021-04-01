@@ -17,7 +17,9 @@ const CompanyCombined = (props) => {
   return (
     <Row>
       <Col>
-        <CompanyAdvancedView data={data} />
+        <Box mb={4}>
+          <CompanyAdvancedView data={data} />
+        </Box>
         <Typography.Title level={4}>Company projects:</Typography.Title>
         {subdata?.length > 0 ? (
           <ProjectList data={subdata} />

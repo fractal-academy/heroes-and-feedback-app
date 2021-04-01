@@ -10,10 +10,16 @@ const ProjectCombined = (props) => {
 
   return (
     <>
-      <ProjectAdvancedView data={data} />
+      <Box mb={4}>
+        <ProjectAdvancedView data={data} />
+      </Box>
       <Typography.Title level={4}>Project team:</Typography.Title>
       {subdata?.length > 0 ? (
-        <ProjectMemberList data={subdata} currentUserId={currentUserId} />
+        <ProjectMemberList
+          secondaryList
+          data={subdata}
+          currentUserId={currentUserId}
+        />
       ) : (
         <Box textAlign="center" mt={4}>
           <Typography.Text type="secondary">

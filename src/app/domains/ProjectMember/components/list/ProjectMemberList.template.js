@@ -4,7 +4,7 @@ import { message } from 'antd'
 import { PROJECT_MEMBER } from 'app/constants/collections'
 
 const ProjectMemberList = (props) => {
-  const { data, currentUserId } = props
+  const { data, currentUserId, secondaryList } = props
 
   const placeholderMessage = 'Enter member name...'
   const editedData =
@@ -25,6 +25,7 @@ const ProjectMemberList = (props) => {
     <List
       type="user"
       data={editedData}
+      secondaryList={secondaryList}
       message={placeholderMessage}
       currentUserId={currentUserId}
       onProjectMemberDelete={onProjectMemberDelete}></List>

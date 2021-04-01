@@ -45,7 +45,7 @@ const Card = (props) => {
   const isNarrow = useMedia({ minWidth: '425px' })
   const birthday =
     data.birthday && moment(data.birthday.toDate()).format('Do MMMM YYYY')
-  const userLvl = Math.floor(data.currentExp / 1000)
+  const userLvl = `${Math.floor(data.currentExp / 1000)} lvl`
   const userExperience = (data.currentExp % 1000) * 0.1
   const badgeProgress = (100 / data.maxLvl) * data.currentLvl
   const badgeStatus = (data.receiveData && 'Unlocked!') || 'Locked.'
@@ -75,23 +75,6 @@ const Card = (props) => {
             <Text type="secondary">{data.email}</Text>
             {birthday && <Text type="secondary">{birthday}</Text>}
           </Box>
-
-          <Progress
-            className="progress"
-            strokeColor={{
-              '0%': '#3bc0c7',
-              '20%': '#6149ff',
-              '40%': '#A940AB',
-              '80%': '#FFB393',
-              '100%': '#88FDC4'
-            }}
-            percent={userExperience}
-            format={() => (
-              <Title level={4} type="secondary" style={{ marginBottom: 0 }}>
-                {userLvl} lvl
-              </Title>
-            )}
-          />
         </Col>
       )
     },
@@ -190,10 +173,10 @@ const Card = (props) => {
   }, [])
 
   return (
-    <>
+    <Box className="card">
       <Row h="center" mb={3} style={{ position: 'relative' }}>
         <Col cw="auto">
-          <Box display="flex" position="absolute" right="0">
+          <Box display="flex" className="childContainer">
             {editButtonRule && (
               <Button
                 type="primary"
@@ -217,15 +200,43 @@ const Card = (props) => {
               />
             )}
           </Box>
-
-          <Box width="auto">
-            <CustomAvatar
-              shape={shape}
-              size={(isNarrow && 125) || 85}
-              src={data.image}
-              name={name}
+          <Box position="relative" display="inline-flex">
+            <Progress
+              type="circle"
+              strokeColor={{
+                '0%': '#3bc0c7',
+                '20%': '#6149ff',
+                '40%': '#A940AB',
+                '80%': '#FFB393',
+                '100%': '#88FDC4'
+              }}
+              percent={userExperience}
             />
+
+            <Box
+              width="auto"
+              top={0}
+              left={0}
+              bottom={0}
+              right={0}
+              position="absolute"
+              display="flex"
+              alignItems="center"
+              justifyContent="center">
+              <CustomAvatar
+                shape={shape}
+                size={(isNarrow && 106) || 85}
+                src={data.image}
+                name={name}
+              />
+            </Box>
           </Box>
+        </Col>
+      </Row>
+
+      <Row h="center">
+        <Col cw="auto">
+          <Title style={{ color: '#d89951', marginBottom: 0 }}>{userLvl}</Title>
         </Col>
       </Row>
 
@@ -246,8 +257,8 @@ const Card = (props) => {
         </Col>
       </Row>
 
-      <Row>{cardTypeMap[type].layout}</Row>
-    </>
+      <Row mb={2}>{cardTypeMap[type].layout}</Row>
+    </Box>
   )
 }
 

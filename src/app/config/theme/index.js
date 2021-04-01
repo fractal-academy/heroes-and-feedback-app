@@ -16,6 +16,8 @@ module.exports = {
 
   'divider-color': theme.colors.textSecondary,
 
+  'progress-remaining-color': theme.colors.progressRemaining,
+
   'menu-item-active-bg': theme.colors.selectedItemBackground,
   'item-hover-bg': theme.colors.selectedItemBackground,
   'border-color-split': 'transparent',

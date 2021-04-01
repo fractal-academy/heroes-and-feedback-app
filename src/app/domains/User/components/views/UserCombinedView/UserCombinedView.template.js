@@ -1,14 +1,17 @@
 import { Typography } from 'antd'
+import { Box } from '@qonsoll/react-design'
+import { ItemHotkeyNavigation } from 'app/components'
 import { UserAdvancedView } from 'app/domains/User/components/views'
 import { PersonalBadgeList } from 'app/domains/PersonalBadge/components/list'
-import { ItemHotkeyNavigation } from 'app/components'
 
 const UserCombinedView = (props) => {
   const { data, id, currentUser } = props
 
   return (
     <>
-      <UserAdvancedView data={data} id={id} />
+      <Box mb={4}>
+        <UserAdvancedView data={data} id={id} />
+      </Box>
 
       <Typography.Title level={4}>Personal badges:</Typography.Title>
 

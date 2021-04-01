@@ -2,7 +2,7 @@ import Fuse from 'fuse.js'
 import { Item } from 'app/components'
 import { PropTypes } from 'prop-types'
 import { useEffect, useState } from 'react'
-import { List, Divider, Input } from 'antd'
+import { List, Input } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 
 const CustomList = (props) => {
@@ -14,6 +14,7 @@ const CustomList = (props) => {
     currentUserId,
     onProjectMemberDelete,
     className,
+    secondaryList,
     onScroll,
     message,
     onPersonalBadgeDelete
@@ -56,6 +57,7 @@ const CustomList = (props) => {
               type={type}
               data={item}
               subdata={subdata}
+              secondaryList={secondaryList}
               currentUserId={currentUserId}
               onProjectMemberDelete={onProjectMemberDelete}
               onPersonalBadgeDelete={onPersonalBadgeDelete}
