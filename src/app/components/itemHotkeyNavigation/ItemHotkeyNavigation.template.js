@@ -1,5 +1,5 @@
 import { Row, Col } from '@qonsoll/react-design'
-import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons'
+import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import { useHistory } from 'react-router-dom'
 
@@ -13,13 +13,13 @@ const ItemHotkeyNavigation = () => {
   const nextItem = history.location?.state?.itemLinks?.[itemIndex + 1]
 
   return (
-    <Row h="center" v="bottom">
+    <Row h="center" v="bottom" my={2}>
       <Col cw="auto">
         <Button
           disabled={!Boolean(previousItem)}
           shape="circle"
           type="text"
-          icon={<CaretLeftOutlined />}
+          icon={<ArrowLeftOutlined />}
           onClick={() =>
             history.push(previousItem, {
               itemLinks: history.location?.state?.itemLinks
@@ -30,7 +30,7 @@ const ItemHotkeyNavigation = () => {
           disabled={!Boolean(nextItem)}
           shape="circle"
           type="text"
-          icon={<CaretRightOutlined />}
+          icon={<ArrowRightOutlined />}
           onClick={() =>
             history.push(nextItem, {
               itemLinks: history.location?.state?.itemLinks
