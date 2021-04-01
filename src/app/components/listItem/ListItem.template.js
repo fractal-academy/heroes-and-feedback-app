@@ -131,6 +131,7 @@ const ListItem = (props) => {
                 ?.filter((item) => item.userId === data.id)
                 .map((item) => (
                   <CustomAvatar
+                    key={item.id}
                     shape="badge"
                     name={name}
                     src={item.image}
