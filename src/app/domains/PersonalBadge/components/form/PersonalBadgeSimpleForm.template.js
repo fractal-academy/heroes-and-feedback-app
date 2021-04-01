@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useMedia } from 'use-media'
 import { Button, Modal, message, Spin, Typography } from 'antd'
 import { GallerySelect } from 'app/components'
-import { getCollectionRef, setData, firestore } from 'app/services'
+import { getCollectionRef, setData, firestore, deleteData } from 'app/services'
 import { BADGES, PERSONAL_BADGES, USERS } from 'app/constants/collections'
 import { BadgeSimpleView } from 'app/domains/Badge/components/views'
 import { TrophyOutlined } from '@ant-design/icons'
@@ -80,11 +80,36 @@ const PersonalBadgeSimpleForm = (props) => {
               setAddBadgeState(false)
             }, 900)
             message.success('Badge lvl was successfully upgraded')
+          } else if (badgeToLvlUp.nextLvl) {
+            deleteData(PERSONAL_BADGES, badgeToLvlUp.id)
+            getCollectionRef(BADGES)
+              .doc(badgeToLvlUp.nextLvl)
+              .get()
+              .then((res) => {
+                setData(PERSONAL_BADGES, newId, {
+                  ...res.data(),
+                  userId: userId,
+                  id: newId,
+                  currentLvl: 1
+                })
+                setData(USERS, userId, {
+                  currentExp: Number(currentExp) + Number(res.data().experience)
+                })
+                setAddBadgeState(!addBadgeState)
+                setTimeout(() => {
+                  setIsModalVisible(false)
+
+                  setAddBadgeState(false)
+                }, 900)
+                message.success(
+                  `Badge evolved to next stage: ${res.data().name}`
+                )
+              })
           } else {
             message.error('This user already has maximum lvl of this badge')
           }
         } else {
-          setData(PERSONAL_BADGES, newId, {
+          const personalBadgeData = {
             userId: userId,
             id: newId,
             badgeId: selectedBadge.id,
@@ -93,7 +118,10 @@ const PersonalBadgeSimpleForm = (props) => {
             maxLvl: selectedBadge.maxLvl,
             currentLvl: 1,
             description: selectedBadge.description
-          })
+          }
+          selectedBadge.nextLvl &&
+            (personalBadgeData.nextLvl = selectedBadge.nextLvl)
+          setData(PERSONAL_BADGES, newId, personalBadgeData)
           setData(USERS, userId, {
             currentExp: Number(currentExp) + Number(selectedBadge.experience)
           })

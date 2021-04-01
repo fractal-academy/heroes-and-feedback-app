@@ -33,15 +33,16 @@ const BadgeSimpleForm = (props) => {
   const badgeId = id || firestore.collection(BADGES).doc().id
 
   const onFormSubmitFinish = (values) => {
-    console.log(values)
-    setData(BADGES, badgeId, {
+    const badgeData = {
       id: badgeId,
       image: values.image || '',
       name: values.badgeName,
       description: values.badgeDescription || '',
       experience: values.badgeExperience || 0,
       maxLvl: values.badgeMaxLvl || 1
-    }).then(() => {
+    }
+    values.badgeNextLvl && (badgeData.nextLvl = values.badgeNextLvl.id)
+    setData(BADGES, badgeId, badgeData).then(() => {
       getCollectionRef(PERSONAL_BADGES)
         .where('badgeId', '==', badgeId)
         .get()
