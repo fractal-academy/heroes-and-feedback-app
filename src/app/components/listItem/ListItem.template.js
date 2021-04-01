@@ -5,7 +5,7 @@ import { ROUTES_PATHS } from 'app/constants'
 import { CustomAvatar } from 'app/components'
 import { useHistory } from 'react-router-dom'
 import { useUserAuthContext } from 'app/context'
-import { Progress, Typography, Button, Popconfirm, Avatar } from 'antd'
+import { Progress, Typography, Button, Popconfirm, Avatar, Badge } from 'antd'
 import { PersonalBadgeSimpleForm } from 'app/domains/PersonalBadge/components/form'
 import {
   RightOutlined,
@@ -88,6 +88,7 @@ const ListItem = (props) => {
   const itemLinks = itemIds.map((item) =>
     ItemTypeMap[type].path.replace(':id', item)
   )
+  const userLvl = `${Math.round(data?.currentExp / 1000)} lvl`
   const accessRules = session.userDBData.role === 'Superadmin'
   const personalBadgeValue = ItemTypeMap[type]?.personalBadgeValue
   const progressBarValue = ItemTypeMap[type]?.personalBadgeProgress
@@ -99,12 +100,26 @@ const ListItem = (props) => {
       style={{ backgroundColor: '#332E59', borderRadius: '10px' }}
       mb={2}>
       <Col cw="auto" m={2}>
-        <CustomAvatar
-          shape={image}
-          name={name}
-          src={data.image}
-          size={imgSize}
-        />
+        {type === 'user' ? (
+          <Badge
+            count={userLvl}
+            offset={[-10, 50]}
+            style={{ backgroundColor: '#47B0B0' }}>
+            <CustomAvatar
+              shape={image}
+              name={name}
+              src={data.image}
+              size={imgSize}
+            />
+          </Badge>
+        ) : (
+          <CustomAvatar
+            shape={image}
+            name={name}
+            src={data.image}
+            size={imgSize}
+          />
+        )}
       </Col>
       <Col m={2}>
         <Box textAlign="left">
