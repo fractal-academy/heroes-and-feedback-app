@@ -200,7 +200,8 @@ const Card = (props) => {
               />
             )}
           </Box>
-          <Box position="relative" display="inline-flex">
+
+          <Box position="relative" display="inline-flex" mt={-5}>
             <Progress
               type="circle"
               strokeColor={{
@@ -212,7 +213,6 @@ const Card = (props) => {
               }}
               percent={userExperience}
             />
-
             <Box
               width="auto"
               top={0}
@@ -233,12 +233,15 @@ const Card = (props) => {
           </Box>
         </Col>
       </Row>
-
-      <Row h="center">
-        <Col cw="auto">
-          <Title style={{ color: '#d89951', marginBottom: 0 }}>{userLvl}</Title>
-        </Col>
-      </Row>
+      {type === 'user' && (
+        <Row h="center">
+          <Col cw="auto">
+            <Title style={{ color: '#d89951', marginBottom: 0 }}>
+              {userLvl}
+            </Title>
+          </Col>
+        </Row>
+      )}
 
       <Row mb={2}>
         <Col>
