@@ -28,7 +28,7 @@ const CustomList = (props) => {
     data && setCurrentData(data)
   }, [data])
 
-  const fuse = new Fuse(data, { keys: ['name'] })
+  const fuse = new Fuse(data, { keys: ['name', 'firstName', 'surname'] })
 
   const searchData = (input) => {
     if (input) {
